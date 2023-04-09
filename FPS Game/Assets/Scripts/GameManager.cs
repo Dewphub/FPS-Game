@@ -78,4 +78,7 @@ public class GameManager : MonoBehaviour
             PauseState();
         }
     }
+
+    //TODO: Create Fail State
+    //public void LoseGame(){}
 }
