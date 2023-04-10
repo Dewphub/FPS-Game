@@ -111,9 +111,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3713326304394695064}
+  - component: {fileID: -1946278743257943375}
   - component: {fileID: 3732879922894751482}
   - component: {fileID: 5888585033900223709}
-  - component: {fileID: -1946278743257943375}
   - component: {fileID: 2444942938180526624}
   m_Layer: 3
   m_Name: Player
@@ -138,6 +138,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-1946278743257943375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3423316177575975185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 811508994e98e654ea5156e7a705e191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 2444942938180526624}
+  HP: 10
+  playerSpeed: 5
+  jumpHeight: 12
+  gravityValue: 25
+  jumpsMax: 2
+  shootDamage: 1
+  shootRate: 0.5
+  shootDist: 20
 --- !u!33 &3732879922894751482
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -188,27 +209,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-1946278743257943375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3423316177575975185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 811508994e98e654ea5156e7a705e191, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 2444942938180526624}
-  HP: 10
-  playerSpeed: 5
-  jumpHeight: 12
-  gravityValue: 25
-  jumpsMax: 2
-  shootDamage: 1
-  shootRate: 0.5
-  shootDist: 20
 --- !u!143 &2444942938180526624
 CharacterController:
   m_ObjectHideFlags: 0

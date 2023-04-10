@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         TIME_SCALE_DEFAULT = Time.timeScale;
     }
+
+    private void Start()
+    {
+        PlayerController.hasDied += LoseGame;
+    }
     void Update()
     {
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
@@ -78,7 +83,11 @@ public class GameManager : MonoBehaviour
             PauseState();
         }
     }
-
-    //TODO: Create Fail State
-    //public void LoseGame(){}
+    public void LoseGame()
+    {
+        activeMenu = loseMenu;
+        activeMenu.SetActive(true);
+        PlayerController.hasDied -= LoseGame;
+        PauseState();
+    }
 }

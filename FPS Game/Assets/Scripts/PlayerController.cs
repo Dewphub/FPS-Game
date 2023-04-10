@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour, IDamage
     Vector3 move;
     int HPOrig;
 
+    public static event Action hasDied;
     private void Start()
     {
         HPOrig = HP;
@@ -85,5 +87,9 @@ public class PlayerController : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+        if(HP <= 0) 
+        {
+            hasDied?.Invoke();
+        }
     }
 }
