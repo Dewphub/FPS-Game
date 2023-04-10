@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 8476344485024657230}
   - component: {fileID: 8476344485024657229}
   m_Layer: 6
-  m_Name: Enemy 1
+  m_Name: Enemy 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -266,13 +266,13 @@ MonoBehaviour:
   agent: {fileID: 8476344485024657224}
   headPos: {fileID: 8476344485015116193}
   shootPos: {fileID: 7598755405579220693}
-  HP: 3
+  HP: 1
   playerFaceSpeed: 5
   sightAngle: 90
   shootDamage: 0
   shootRate: 0.5
-  shootDist: 1
-  bulletSpeed: 30
+  shootDist: 5
+  bulletSpeed: 10
   bullet: {fileID: 2328479212586331206, guid: 6f16797373de87e4a90e08af89b585eb, type: 3}
 --- !u!195 &8476344485024657224
 NavMeshAgent:
