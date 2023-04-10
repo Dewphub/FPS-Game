@@ -14,6 +14,7 @@ public class cameraControls : MonoBehaviour
     [SerializeField] bool invertY;
 
     float xRotation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class cameraControls : MonoBehaviour
         //Get Input
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensVer;
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensHor;
+
         //Input -> rotation float
         if (invertY)
             xRotation += mouseY;
@@ -35,6 +37,7 @@ public class cameraControls : MonoBehaviour
 
         //Clamp camera rotation
         xRotation = Mathf.Clamp(xRotation, lockVerMin, lockVerMax);
+
         //rotate on x-axis
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         //Rotate on y-axis
