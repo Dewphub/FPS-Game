@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private void Start()
     {
         HPOrig = HP;
+        UIUpdate();
     }
 
     void Update()
@@ -89,6 +90,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+        UIUpdate();
 
         if(HP <= 0) 
         {

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject loseMenu;
     public Image HPBar;
+    public Image towerHPBar;
     public TextMeshProUGUI enemiesRemainingText;
 
     public bool isPaused;

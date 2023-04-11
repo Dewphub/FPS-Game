@@ -9,9 +9,19 @@ public class Tower : MonoBehaviour, IDamage
 
     [Header("----- Stats -----")]
     [SerializeField] int towerHP;
+
+    int HPOriginal;
+
+    private void Start()
+    {
+        HPOriginal = towerHP;
+        UIUpdate();
+    }
     public void TakeDamage(int amount)
     {
         towerHP -= 1;
+        UIUpdate();
+
         if (towerHP <= 0)
         {
             Destroy(gameObject);
@@ -28,5 +38,10 @@ public class Tower : MonoBehaviour, IDamage
         tower.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         tower.material.color = Color.white;
+    }
+
+    public void UIUpdate()
+    {
+        GameManager.Instance.towerHPBar.fillAmount = (float)towerHP / HPOriginal;
     }
 }
