@@ -27,8 +27,6 @@ public class PlayerController : MonoBehaviour, IDamage
     bool isShooting;
     Vector3 move;
     int HPOrig;
-
-    public static event Action hasDied;
     private void Start()
     {
         HPOrig = HP;
@@ -36,8 +34,12 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void Update()
     {
-        Movement();
-        if (!isShooting && Input.GetButton("Shoot")) StartCoroutine(Shoot());
+        if (GameManager.Instance.activeMenu == null)
+        {
+            Movement();
+            if (!isShooting && Input.GetButton("Shoot")) StartCoroutine(Shoot());
+        }
+
     }
 
     void Movement()
@@ -87,9 +89,15 @@ public class PlayerController : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+
         if(HP <= 0) 
         {
-            hasDied?.Invoke();
+            GameManager.Instance.OnDead();
         }
+    }
+
+    public void UIUpdate()
+    {
+        GameManager.Instance.HPBar.fillAmount = (float) HP / HPOrig;
     }
 }

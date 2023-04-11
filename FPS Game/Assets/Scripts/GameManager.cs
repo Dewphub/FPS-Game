@@ -1,4 +1,7 @@
+using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +16,8 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
+    public Image HPBar;
+    public TextMeshProUGUI enemiesRemainingText;
 
     public bool isPaused;
     public int enemiesRemaining;
@@ -31,11 +36,6 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         TIME_SCALE_DEFAULT = Time.timeScale;
-    }
-
-    private void Start()
-    {
-        PlayerController.hasDied += LoseGame;
     }
     void Update()
     {
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
     public void UpdateGameGoal(int amount)
     {
         enemiesRemaining += amount;
-
+        enemiesRemainingText.text = enemiesRemaining.ToString("F0");
         if (enemiesRemaining <= 0)
         {
             activeMenu = winMenu;
@@ -83,11 +83,11 @@ public class GameManager : MonoBehaviour
             PauseState();
         }
     }
-    public void LoseGame()
+
+    public void OnDead()
     {
         activeMenu = loseMenu;
         activeMenu.SetActive(true);
-        PlayerController.hasDied -= LoseGame;
         PauseState();
     }
 }
