@@ -90,4 +90,11 @@ public class GameManager : MonoBehaviour
         activeMenu.SetActive(true);
         PauseState();
     }
+
+    public void TowerDestroyed()
+    {
+        activeMenu = winMenu;
+        activeMenu.SetActive(true);
+        PauseState();
+    }
 }
