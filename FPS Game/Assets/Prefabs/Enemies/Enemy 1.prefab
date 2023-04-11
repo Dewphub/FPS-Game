@@ -271,7 +271,7 @@ MonoBehaviour:
   sightAngle: 90
   shootDamage: 0
   shootRate: 0.5
-  shootDist: 1
+  shootDist: 15
   bulletSpeed: 30
   bullet: {fileID: 2328479212586331206, guid: 6f16797373de87e4a90e08af89b585eb, type: 3}
 --- !u!195 &8476344485024657224

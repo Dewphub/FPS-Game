@@ -77,12 +77,12 @@ public class GameManager : MonoBehaviour
     {
         enemiesRemaining += amount;
         enemiesRemainingText.text = enemiesRemaining.ToString("F0");
-        if (enemiesRemaining <= 0)
+/*        if (enemiesRemaining <= 0)
         {
             activeMenu = winMenu;
             activeMenu.SetActive(true);
             PauseState();
-        }
+        }*/
     }
 
     public void OnDead()
