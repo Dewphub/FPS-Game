@@ -100,6 +100,6 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void UIUpdate()
     {
-        GameManager.Instance.HPBar.fillAmount = (float) HP / HPOrig;
+        GameManager.Instance.HPBar.fillAmount = (float) HP / (float)HPOrig;
     }
 }
