@@ -1002,7 +1002,7 @@ PrefabInstance:
     - target: {fileID: 8476344485024657231, guid: ac1afcbb38a181641903264885f5cc77, type: 3}
       propertyPath: bullet
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2328479212586331206, guid: 6f16797373de87e4a90e08af89b585eb, type: 3}
     - target: {fileID: 8476344485024657231, guid: ac1afcbb38a181641903264885f5cc77, type: 3}
       propertyPath: shootDist
       value: 100
@@ -1921,7 +1921,7 @@ PrefabInstance:
     - target: {fileID: 8476344485024657231, guid: ac1afcbb38a181641903264885f5cc77, type: 3}
       propertyPath: bullet
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2328479212586331206, guid: 6f16797373de87e4a90e08af89b585eb, type: 3}
     - target: {fileID: 8476344485024657231, guid: ac1afcbb38a181641903264885f5cc77, type: 3}
       propertyPath: shootDist
       value: 100
@@ -2144,7 +2144,7 @@ PrefabInstance:
     - target: {fileID: 8476344485024657231, guid: 206868c07146b624583bceff9e15548a, type: 3}
       propertyPath: bullet
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2328479212586331206, guid: 6f16797373de87e4a90e08af89b585eb, type: 3}
     - target: {fileID: 8476344485024657231, guid: 206868c07146b624583bceff9e15548a, type: 3}
       propertyPath: shootDist
       value: 10
@@ -2217,7 +2217,7 @@ PrefabInstance:
     - target: {fileID: 8476344485024657231, guid: 206868c07146b624583bceff9e15548a, type: 3}
       propertyPath: bullet
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2328479212586331206, guid: 6f16797373de87e4a90e08af89b585eb, type: 3}
     - target: {fileID: 8476344485024657231, guid: 206868c07146b624583bceff9e15548a, type: 3}
       propertyPath: shootDist
       value: 10
