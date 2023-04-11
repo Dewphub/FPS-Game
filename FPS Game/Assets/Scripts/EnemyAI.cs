@@ -76,7 +76,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         isShooting = true;
         GameObject bulletClone = Instantiate(bullet, shootPos.position, bullet.transform.rotation);
-        bulletClone.GetComponent<Rigidbody>().velocity = (playerDir - transform.forward) * bulletSpeed;
+        bulletClone.GetComponent<Rigidbody>().velocity = (playerDir - transform.forward) * bulletSpeed; //Always shoots toward player
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
