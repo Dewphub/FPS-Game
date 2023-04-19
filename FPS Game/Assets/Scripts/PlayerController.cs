@@ -16,9 +16,13 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(1, 3)][SerializeField] int jumpsMax;
 
     [Header("----- Gun Stats -----")]
+    public List<gunStats> gunList = new List<gunStats>();
     [Range(1, 10)][SerializeField] int shootDamage;
     [Range(0.5f, 5)][SerializeField] float shootRate;
     [Range(1, 100)][SerializeField] int shootDist;
+    public MeshRenderer gunMaterial;
+    public MeshFilter gunModel;
+    public int selectedGun;
 
     int jumpedTimes;
     private Vector3 playerVelocity;
@@ -31,6 +35,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         HPOrig = HP;
         UIUpdate();
+        Respawn();
     }
 
     void Update()
@@ -38,6 +43,8 @@ public class PlayerController : MonoBehaviour, IDamage
         if (GameManager.Instance.activeMenu == null)
         {
             Movement();
+            SelectGun();
+
             if (!isShooting && Input.GetButton("Shoot")) StartCoroutine(Shoot());
         }
 
@@ -101,5 +108,54 @@ public class PlayerController : MonoBehaviour, IDamage
     public void UIUpdate()
     {
         GameManager.Instance.HPBar.fillAmount = (float) HP / (float)HPOrig;
+    }
+
+    public void Respawn()
+    {
+        HP = HPOrig; 
+        UIUpdate();
+        controller.enabled = false;
+        transform.position = GameManager.Instance.playerSpawnPos.transform.position;
+        controller.enabled = true;
+    }
+
+    public void GunPickup(gunStats gunStat)
+    {
+        gunList.Add(gunStat);
+
+        shootDamage = gunStat.shootDamage;
+        shootDist = gunStat.shootDist;
+        shootRate = gunStat.shootRate;
+
+        gunModel.mesh = gunStat.model.GetComponent<MeshFilter>().sharedMesh;
+        gunMaterial.material = gunStat.model.GetComponent<MeshRenderer>().sharedMaterial;
+
+        selectedGun = gunList.Count - 1;
+    }
+
+    void SelectGun()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
+        {
+            selectedGun++;
+            ChangeGun();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
+        {
+            selectedGun--;
+            ChangeGun();
+        }
+    }
+
+    void ChangeGun()
+    {
+        shootDamage = gunList[selectedGun].shootDamage;
+        shootDist = gunList[selectedGun].shootDist;
+        shootRate = gunList[selectedGun].shootRate;
+
+        gunModel.mesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
+        gunMaterial.material = gunList[selectedGun].model.GetComponent<MeshRenderer>().sharedMaterial;
+
+        StopCoroutine(Shoot());
     }
 }
