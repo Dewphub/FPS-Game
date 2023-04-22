@@ -28,13 +28,12 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
 
     Vector3 playerDir;
-    bool playerInRange;
-    float angleToPlayer;
-    bool isShooting;
-    float stoppingDistOrig;
-    bool destinationChosen;
     Vector3 startingPos;
-
+    bool playerInRange;
+    bool isShooting;
+    bool destinationChosen;
+    float angleToPlayer;
+    float stoppingDistOrig;
     float speed;
 
     // Start is called before the first frame update
@@ -132,6 +131,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            agent.stoppingDistance = 0;
         }
     }
 
@@ -156,6 +156,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
         else
         {
+            HP -= amount;
             anim.SetTrigger("Damage");
             agent.SetDestination(GameManager.Instance.player.transform.position);
             agent.stoppingDistance = 0;

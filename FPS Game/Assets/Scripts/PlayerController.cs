@@ -16,21 +16,20 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(1, 3)][SerializeField] int jumpsMax;
 
     [Header("----- Gun Stats -----")]
-    public List<gunStats> gunList = new List<gunStats>();
+    public List<gunStats> gunList = new();
+    public MeshRenderer gunMaterial;
+    public MeshFilter gunModel;
     [Range(1, 10)][SerializeField] int shootDamage;
     [Range(0.5f, 5)][SerializeField] float shootRate;
     [Range(1, 100)][SerializeField] int shootDist;
-    public MeshRenderer gunMaterial;
-    public MeshFilter gunModel;
-    public int selectedGun;
 
+    int selectedGun;
     int jumpedTimes;
-    private Vector3 playerVelocity;
-    private bool groundedPlayer;
-
+    int HPOrig;
+    bool groundedPlayer;
     bool isShooting;
     Vector3 move;
-    int HPOrig;
+    Vector3 playerVelocity;
     private void Start()
     {
         HPOrig = HP;
@@ -45,7 +44,10 @@ public class PlayerController : MonoBehaviour, IDamage
             Movement();
             SelectGun();
 
-            if (!isShooting && Input.GetButton("Shoot")) StartCoroutine(Shoot());
+            if (gunList.Count > 0 && !isShooting && Input.GetButton("Shoot"))
+            {
+                StartCoroutine(Shoot());
+            }
         }
 
     }
@@ -62,7 +64,7 @@ public class PlayerController : MonoBehaviour, IDamage
         move = (transform.right * Input.GetAxis("Horizontal")) +
             (transform.forward * Input.GetAxis("Vertical"));
 
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        controller.Move(playerSpeed * Time.deltaTime * move);
 
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && jumpedTimes < jumpsMax)
@@ -79,15 +81,10 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         isShooting = true;
 
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
+        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out RaycastHit hit, shootDist))
         {
             IDamage damageable = hit.collider.GetComponent<IDamage>();
-
-            if (damageable != null)
-            {
-                damageable.TakeDamage(shootDamage);
-            }
+            damageable?.TakeDamage(shootDamage);
         }
 
         yield return new WaitForSeconds(shootRate);
@@ -97,6 +94,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+        Debug.Log("TakeDamage called");
         UIUpdate();
 
         if(HP <= 0) 

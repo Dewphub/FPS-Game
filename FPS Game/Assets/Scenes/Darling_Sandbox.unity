@@ -134,10 +134,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor
       objectReference: {fileID: 0}
-    - target: {fileID: 3355699590541301150, guid: ae19aeb8467b1f24dbebd330a9c747d1, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 7864721170231439469, guid: ae19aeb8467b1f24dbebd330a9c747d1, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -781,10 +777,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -1946278743257943375, guid: aabce7efdf769e844b4f6252791f0387, type: 3}
-      propertyPath: shootDist
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3423316177575975185, guid: aabce7efdf769e844b4f6252791f0387, type: 3}
       propertyPath: m_Name
       value: Player

@@ -16,11 +16,8 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         IDamage damageable = other.GetComponent<IDamage>();
-
-        if (damageable != null)
-        {
-            damageable.TakeDamage(damage);
-        }
+        Debug.Log("Bullet OnTriggerEnter entered, collision with: " + other.gameObject.name);
+        damageable?.TakeDamage(damage);
 
         Destroy(gameObject);
     }

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7598755405579220694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.533, y: -0.187, z: 0.181}
+  m_LocalPosition: {x: -1.562, y: -0.1904, z: 0.178}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -272,11 +272,11 @@ MonoBehaviour:
   sightAngle: 90
   roamPauseTime: 1
   roamDist: 20
-  animTransSpeed: 8
+  animTransSpeed: 3
   shootDamage: 0
   shootRate: 0.5
-  shootDist: 15
-  bulletSpeed: 30
+  shootDist: 1
+  bulletSpeed: 50
   bullet: {fileID: 2328479212586331206, guid: 6f16797373de87e4a90e08af89b585eb, type: 3}
 --- !u!195 &8476344485024657224
 NavMeshAgent:
