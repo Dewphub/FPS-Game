@@ -239,10 +239,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8476344485024657231, guid: 206868c07146b624583bceff9e15548a, type: 3}
-      propertyPath: HP
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 206868c07146b624583bceff9e15548a, type: 3}
 --- !u!1001 &878729363
@@ -366,14 +362,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8476344485015150869, guid: ac1afcbb38a181641903264885f5cc77, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.6646334
-      objectReference: {fileID: 0}
-    - target: {fileID: 8476344485015150869, guid: ac1afcbb38a181641903264885f5cc77, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.7451423
-      objectReference: {fileID: 0}
     - target: {fileID: 8476344485015178725, guid: ac1afcbb38a181641903264885f5cc77, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -421,10 +409,6 @@ PrefabInstance:
     - target: {fileID: 8476344485015250735, guid: ac1afcbb38a181641903264885f5cc77, type: 3}
       propertyPath: m_Name
       value: Enemy 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8476344485015250735, guid: ac1afcbb38a181641903264885f5cc77, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac1afcbb38a181641903264885f5cc77, type: 3}
@@ -730,10 +714,6 @@ PrefabInstance:
     - target: {fileID: 8476344485015250735, guid: 399eea2a9bdfbf24f91cd872143e7b23, type: 3}
       propertyPath: m_Name
       value: Enemy 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8476344485024657231, guid: 399eea2a9bdfbf24f91cd872143e7b23, type: 3}
-      propertyPath: HP
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 399eea2a9bdfbf24f91cd872143e7b23, type: 3}

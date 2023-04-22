@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator anim;
     [SerializeField] Transform headPos;
     [SerializeField] Transform shootPos;
 
@@ -15,6 +16,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Range(1, 10)][SerializeField] int HP;
     [Range(1, 10)][SerializeField] int playerFaceSpeed;
     [Range(0, 179)][SerializeField] int sightAngle;
+    [SerializeField] int roamPauseTime;
+    [SerializeField] int roamDist;
+    [SerializeField] float animTransSpeed;
 
     [Header("----- Gun Stats -----")]
     [Range(1, 10)][SerializeField] int shootDamage;
@@ -28,20 +32,53 @@ public class EnemyAI : MonoBehaviour, IDamage
     float angleToPlayer;
     bool isShooting;
     float stoppingDistOrig;
+    bool destinationChosen;
+    Vector3 startingPos;
+
+    float speed;
 
     // Start is called before the first frame update
     void Start()
     {
         GameManager.Instance.UpdateGameGoal(1);
         stoppingDistOrig = agent.stoppingDistance;
+        startingPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerInRange)
+        if (agent.isActiveAndEnabled) 
         {
-            CanSeePlayer();
+            speed = Mathf.Lerp(speed, agent.velocity.normalized.magnitude, Time.deltaTime * animTransSpeed);
+            anim.SetFloat("Speed", speed);
+
+            if (playerInRange && !CanSeePlayer())
+            {
+                StartCoroutine(Roam());
+            }
+            else if (agent.destination != GameManager.Instance.player.transform.position)
+                StartCoroutine(Roam());
+        }
+    }
+
+    IEnumerator Roam()
+    {
+        if (!destinationChosen && agent.remainingDistance < 0.05f)
+        {
+            destinationChosen = true;
+            agent.stoppingDistance = 0;
+
+            yield return new WaitForSeconds(roamPauseTime);
+
+            Vector3 ranPos = Random.insideUnitSphere * roamDist;
+            ranPos += startingPos;
+
+            NavMeshHit hit;
+            NavMesh.SamplePosition(ranPos, out hit, roamDist, 1);
+
+            agent.SetDestination(hit.position);
+            destinationChosen = false;
         }
     }
 
@@ -75,6 +112,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     IEnumerator Shoot()
     {
         isShooting = true;
+        anim.SetTrigger("Shoot");
         GameObject bulletClone = Instantiate(bullet, shootPos.position, bullet.transform.rotation);
         bulletClone.GetComponent<Rigidbody>().velocity = (playerDir - transform.forward) * bulletSpeed; //Always shoots toward player
         yield return new WaitForSeconds(shootRate);
@@ -107,15 +145,21 @@ public class EnemyAI : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-        agent.SetDestination(GameManager.Instance.player.transform.position);
-        agent.stoppingDistance = 0;
-
-        StartCoroutine(FlashColor());
 
         if (HP <= 0)
         {
+            StopAllCoroutines();
             GameManager.Instance.UpdateGameGoal(-1);
-            Destroy(gameObject);
+            anim.SetBool("Dead", true);
+            GetComponent<CapsuleCollider>().enabled = false;
+            agent.enabled = false;
+        }
+        else
+        {
+            anim.SetTrigger("Damage");
+            agent.SetDestination(GameManager.Instance.player.transform.position);
+            agent.stoppingDistance = 0;
+            StartCoroutine(FlashColor());
         }
     }
 
