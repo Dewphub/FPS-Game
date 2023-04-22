@@ -271,11 +271,12 @@ MonoBehaviour:
   playerFaceSpeed: 5
   sightAngle: 90
   roamPauseTime: 1
-  roamDist: 20
+  roamDist: 10
   animTransSpeed: 3
+  rotationSpeed: 0
   shootDamage: 0
   shootRate: 0.5
-  shootDist: 1
+  shootDist: 10
   bulletSpeed: 50
   bullet: {fileID: 2328479212586331206, guid: 6f16797373de87e4a90e08af89b585eb, type: 3}
 --- !u!195 &8476344485024657224
@@ -292,7 +293,7 @@ NavMeshAgent:
   m_Acceleration: 60
   avoidancePriority: 50
   m_AngularSpeed: 600
-  m_StoppingDistance: 10
+  m_StoppingDistance: 30
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1

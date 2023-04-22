@@ -19,6 +19,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int roamPauseTime;
     [SerializeField] int roamDist;
     [SerializeField] float animTransSpeed;
+    [SerializeField] float rotationSpeed;
 
     [Header("----- Gun Stats -----")]
     [Range(1, 10)][SerializeField] int shootDamage;
@@ -113,7 +114,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         isShooting = true;
         anim.SetTrigger("Shoot");
         GameObject bulletClone = Instantiate(bullet, shootPos.position, bullet.transform.rotation);
-        bulletClone.GetComponent<Rigidbody>().velocity = (playerDir - transform.forward) * bulletSpeed; //Always shoots toward player
+        bulletClone.GetComponent<Rigidbody>().velocity = playerDir * bulletSpeed; //Always shoots toward player
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
