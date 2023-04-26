@@ -10,5 +10,6 @@ public class gunStats : ScriptableObject
     public float shootRate;
     public int shootDist;
     public GameObject model;
-    public AudioClip gunShootAud;
+    public AudioClip gunShotAud;
+    [Range(0, 1)] public float gunShotAudVol;
 }

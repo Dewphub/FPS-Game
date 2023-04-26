@@ -2,15 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour, IDamage
 {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
+    [SerializeField] AudioSource aud;
 
     [Header("----- Player Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
     [Range(3, 8)][SerializeField] float playerSpeed;
+    [Range(1.5f, 5)][SerializeField] float sprintMod;
     [Range(8, 25)][SerializeField] float jumpHeight;
     [Range(10, 50)][SerializeField] float gravityValue;
     [Range(1, 3)][SerializeField] int jumpsMax;
@@ -23,13 +26,25 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(0.5f, 5)][SerializeField] float shootRate;
     [Range(1, 100)][SerializeField] int shootDist;
 
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audSteps;
+    [SerializeField][Range(0, 1)] float audStepsVol;
+    [SerializeField] AudioClip[] audJump;
+    [SerializeField][Range(0, 1)] float audJumpVol;
+    [SerializeField] AudioClip[] audDamage;
+    [SerializeField][Range(0, 1)] float audDamageVol;
+
     int selectedGun;
     int jumpedTimes;
-    int HPOrig;
+    Vector3 playerVelocity;
     bool groundedPlayer;
+
+    bool isSprinting;
+    bool isPlayingSteps;
     bool isShooting;
     Vector3 move;
-    Vector3 playerVelocity;
+    int HPOrig;
+
     private void Start()
     {
         HPOrig = HP;
@@ -39,6 +54,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void Update()
     {
+        Sprint();
+
         if (GameManager.Instance.activeMenu == null)
         {
             Movement();
@@ -55,10 +72,18 @@ public class PlayerController : MonoBehaviour, IDamage
     void Movement()
     {
         groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
+        if (groundedPlayer)
         {
-            playerVelocity.y = 0f;
-            jumpedTimes = 0;
+            if (!isPlayingSteps && move.normalized.magnitude > 0.5f)
+            {
+                StartCoroutine(PlaySteps());
+            }
+
+            if (playerVelocity.y < 0)
+            {
+                playerVelocity.y = 0f;
+                jumpedTimes = 0;
+            }
         }
 
         move = (transform.right * Input.GetAxis("Horizontal")) +
@@ -69,6 +94,7 @@ public class PlayerController : MonoBehaviour, IDamage
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && jumpedTimes < jumpsMax)
         {
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
             playerVelocity.y = jumpHeight;
             jumpedTimes++;
         }
@@ -77,9 +103,39 @@ public class PlayerController : MonoBehaviour, IDamage
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
+    void Sprint()
+    {
+        if(Input.GetButtonDown("Sprint"))
+        {
+            isSprinting = true;
+            playerSpeed *= sprintMod;
+        }
+        else if (Input.GetButtonUp("Sprint"))
+        {
+            isSprinting = false;
+            playerSpeed /= sprintMod;
+        }
+    }
+
+    IEnumerator PlaySteps()
+    {
+        isPlayingSteps = true;
+
+        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+
+        if (!isSprinting)
+            yield return new WaitForSeconds(0.5f);
+        else
+            yield return new WaitForSeconds(0.3f);
+
+        isPlayingSteps = false;
+    }
+
     IEnumerator Shoot()
     {
         isShooting = true;
+
+        aud.PlayOneShot(gunList[selectedGun].gunShotAud, gunList[selectedGun].gunShotAudVol);
 
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out RaycastHit hit, shootDist))
         {
@@ -93,6 +149,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void TakeDamage(int amount)
     {
+        aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
         HP -= amount;
         Debug.Log("TakeDamage called");
         UIUpdate();
