@@ -147,6 +147,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         HP -= amount;
 
+        StartCoroutine(FlashColor());
         if (HP <= 0)
         {
             StopAllCoroutines();
@@ -157,11 +158,9 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
         else
         {
-            HP -= amount;
             anim.SetTrigger("Damage");
             agent.SetDestination(GameManager.Instance.player.transform.position);
             agent.stoppingDistance = 0;
-            StartCoroutine(FlashColor());
         }
     }
 
