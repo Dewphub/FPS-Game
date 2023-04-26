@@ -267,17 +267,17 @@ MonoBehaviour:
   anim: {fileID: 8476344485024657225}
   headPos: {fileID: 8476344485015116193}
   shootPos: {fileID: 7598755405579220693}
-  HP: 4
+  HP: 10
   playerFaceSpeed: 5
   sightAngle: 90
   roamPauseTime: 1
   roamDist: 10
   animTransSpeed: 8
   rotationSpeed: 0
-  shootDamage: 0
+  shootDamage: 2
   shootRate: 1
   shootDist: 10
-  bulletSpeed: 60
+  bulletSpeed: 10
   bullet: {fileID: 2328479212586331206, guid: 6f16797373de87e4a90e08af89b585eb, type: 3}
 --- !u!195 &8476344485024657224
 NavMeshAgent:

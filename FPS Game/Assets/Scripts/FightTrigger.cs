@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class FightTrigger: MonoBehaviour
 {
-    [SerializeField] GameObject prefab;
+    [SerializeField] Renderer model;
+    [SerializeField] GameObject trigger;
     [SerializeField] int intervalTime;
     [SerializeField] Transform[] spawnPos;
     [SerializeField] int prefabMaxNum;
@@ -18,7 +19,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.UpdateGameGoal(prefabMaxNum);
+        //GameManager.Instance.UpdateGameGoal(prefabMaxNum);
     }
 
     // Update is called once per frame
@@ -32,7 +33,7 @@ public class Spawner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             playerInRange = true;
         }
@@ -41,7 +42,7 @@ public class Spawner : MonoBehaviour
     IEnumerator Spawn()
     {
         isSpawning = true;
-        GameObject prefabClone = Instantiate(prefab, spawnPos[Random.Range(0, spawnPos.Length)].position, prefab.transform.rotation);
+        GameObject prefabClone = Instantiate(trigger, spawnPos[Random.Range(0, spawnPos.Length)].position, trigger.transform.rotation);
         prefabList.Add(prefabClone);
         prefabsSpawnCount++;
         yield return new WaitForSeconds(intervalTime);
