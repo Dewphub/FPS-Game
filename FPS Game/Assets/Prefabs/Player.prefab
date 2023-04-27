@@ -286,6 +286,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ceac4a078b52af249b41594012ad79c0, type: 3}
   - {fileID: 8300000, guid: 4ed025fb176b1354eab4f3aeb0ba4b1d, type: 3}
   audDamageVol: 0.5
+  replenishHP: {fileID: 8300000, guid: 00aadc28e899ebc4985b3f2f64b7ca07, type: 3}
+  replenishHPVol: 0.524
+  gunPickupSFX: {fileID: 8300000, guid: d0b8120f8c87e9b4aa238c0bd1482e64, type: 3}
+  gunPickupSFXVolume: 0.529
 --- !u!33 &3732879922894751482
 MeshFilter:
   m_ObjectHideFlags: 0
