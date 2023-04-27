@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(1, 3)][SerializeField] int jumpsMax;
 
     [Header("----- Gun Stats -----")]
-    public List<gunStats> gunList = new();
+    public List<gunStats> gunList = new List<gunStats>();
     public MeshRenderer gunMaterial;
     public MeshFilter gunModel;
     [Range(1, 10)][SerializeField] int shootDamage;
