@@ -20,4 +20,10 @@ public class ButtonFunctions : MonoBehaviour
         Debug.Log("Quit is being called");
         Application.Quit();
     }
+
+    public void RespawnPlayer()
+    {
+        GameManager.Instance.ResumeState();
+        GameManager.Instance.playerScript.Respawn();
+    }
 }
