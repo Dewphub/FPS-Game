@@ -15,6 +15,9 @@ public class Spawner : MonoBehaviour
     bool playerInRange;
     bool isSpawning;
 
+    public GameObject entrance;
+    public GameObject exit;
+
     // Start is called before the first frame update
     void Start()
     {

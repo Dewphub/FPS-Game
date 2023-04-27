@@ -274,8 +274,8 @@ MonoBehaviour:
   roamDist: 10
   animTransSpeed: 8
   rotationSpeed: 0
-  shootDamage: 2
-  shootRate: 1
+  shootDamage: 5
+  shootRate: 3
   shootDist: 10
   bulletSpeed: 10
   bullet: {fileID: 2328479212586331206, guid: 6f16797373de87e4a90e08af89b585eb, type: 3}
