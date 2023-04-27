@@ -252,7 +252,7 @@ MonoBehaviour:
   aud: {fileID: -847100614589714909}
   HP: 10
   playerSpeed: 5
-  sprintMod: 0
+  sprintMod: 3
   jumpHeight: 12
   gravityValue: 25
   jumpsMax: 2
