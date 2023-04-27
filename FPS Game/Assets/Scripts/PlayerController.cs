@@ -33,6 +33,10 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField][Range(0, 1)] float audJumpVol;
     [SerializeField] AudioClip[] audDamage;
     [SerializeField][Range(0, 1)] float audDamageVol;
+    [SerializeField] AudioClip replenishHP;
+    [SerializeField] [Range(0, 1)] float replenishHPVol;
+    [SerializeField] AudioClip gunPickupSFX;
+    [SerializeField] [Range(0, 1)] float gunPickupSFXVolume;
 
     int selectedGun;
     int jumpedTimes;
@@ -67,6 +71,21 @@ public class PlayerController : MonoBehaviour, IDamage
             }
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        String triggerTag = other.tag;
+
+        switch(triggerTag)
+        {
+            case "Health":
+            aud.PlayOneShot(replenishHP, replenishHPVol);
+            HP = HPOrig;
+            UIUpdate();
+            Destroy(other.gameObject);
+                break;
+        }
     }
 
     void Movement()
@@ -177,6 +196,8 @@ public class PlayerController : MonoBehaviour, IDamage
     public void GunPickup(gunStats gunStat)
     {
         gunList.Add(gunStat);
+
+        aud.PlayOneShot(gunPickupSFX, gunPickupSFXVolume);
 
         shootDamage = gunStat.shootDamage;
         shootDist = gunStat.shootDist;

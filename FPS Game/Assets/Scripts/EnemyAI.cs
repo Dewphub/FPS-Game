@@ -11,6 +11,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Animator anim;
     [SerializeField] Transform headPos;
     [SerializeField] Transform shootPos;
+    [SerializeField] AudioSource audioSource;
 
     [Header("----- Enemy Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
@@ -27,6 +28,12 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Range(1, 100)][SerializeField] int shootDist;
     [Range(1, 100)][SerializeField] int bulletSpeed;
     [SerializeField] GameObject bullet;
+
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] takeDamageSFX;
+    [Range(0, 1)] [SerializeField] float takeDamageSFXVolume;
+    [SerializeField] AudioClip shootSFX;
+    [Range(0, 1)][SerializeField] float shootSFXVolume;
 
     Vector3 playerDir;
     Vector3 startingPos;
@@ -113,6 +120,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         isShooting = true;
         anim.SetTrigger("Shoot");
+        audioSource.PlayOneShot(shootSFX, shootSFXVolume);
         GameObject bulletClone = Instantiate(bullet, shootPos.position, bullet.transform.rotation);
         bulletClone.GetComponent<Rigidbody>().velocity = playerDir * bulletSpeed; //Always shoots toward player
         yield return new WaitForSeconds(shootRate);
@@ -146,6 +154,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+        audioSource.PlayOneShot(takeDamageSFX[Random.Range(0, takeDamageSFX.Length)], takeDamageSFXVolume);
 
         StartCoroutine(FlashColor());
         if (HP <= 0)
