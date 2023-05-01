@@ -273,7 +273,7 @@ MonoBehaviour:
   playerFaceSpeed: 5
   sightAngle: 90
   roamPauseTime: 1
-  roamDist: 10
+  roamDist: 45
   animTransSpeed: 8
   rotationSpeed: 0
   shootDamage: 5
@@ -338,7 +338,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 300
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &1566342285190129746
 AudioSource:
