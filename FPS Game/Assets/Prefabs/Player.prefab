@@ -112,8 +112,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3713326304394695064}
-  - component: {fileID: -847100614589714909}
   - component: {fileID: -1946278743257943375}
+  - component: {fileID: -847100614589714909}
   - component: {fileID: 3732879922894751482}
   - component: {fileID: 5888585033900223709}
   - component: {fileID: 2444942938180526624}
@@ -140,6 +140,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-1946278743257943375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3423316177575975185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 811508994e98e654ea5156e7a705e191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 2444942938180526624}
+  aud: {fileID: -847100614589714909}
+  HP: 10
+  playerSpeed: 5
+  sprintMod: 3
+  jumpHeight: 12
+  gravityValue: 25
+  jumpsMax: 2
+  gunList: []
+  gunMaterial: {fileID: 3638952754250616019}
+  gunModel: {fileID: 3006044350857170451}
+  shootDamage: 1
+  shootRate: 0.5
+  shootDist: 1
+  audSteps:
+  - {fileID: 8300000, guid: a33305fa6e6a4b640ad7c2ec2c7a5bec, type: 3}
+  - {fileID: 8300000, guid: 5f79e8346f1c4a34e9be8ecbd06a8acf, type: 3}
+  - {fileID: 8300000, guid: 947a8144d45426146a671e909dfe7f03, type: 3}
+  - {fileID: 8300000, guid: 596439084a99118489ecb2f544e2dd29, type: 3}
+  - {fileID: 8300000, guid: dd6e2b45d2534284983e9369e85a490f, type: 3}
+  - {fileID: 8300000, guid: d5e277f1cbbd909498f20bfa067178d5, type: 3}
+  - {fileID: 8300000, guid: 754cfe79ee9665f438bf0432568e3e9a, type: 3}
+  - {fileID: 8300000, guid: d6ddb20739ec915478ea83eb0e551ccb, type: 3}
+  - {fileID: 8300000, guid: 2ae598435ee6ac54b94c4499bc8c348c, type: 3}
+  audStepsVol: 0.5
+  audJump:
+  - {fileID: 8300000, guid: 53073bb2ec304f445a7cd9aa7c368286, type: 3}
+  - {fileID: 8300000, guid: 4120c5b3d181c9d45afbab2f0be69966, type: 3}
+  - {fileID: 8300000, guid: 916b03d5c4a48b24aa411093fd877975, type: 3}
+  audJumpVol: 0.5
+  audDamage:
+  - {fileID: 8300000, guid: 67679ebf91655924097f4edaab03b013, type: 3}
+  - {fileID: 8300000, guid: 4141e1daa16b4404ab9dc1afec974bbd, type: 3}
+  - {fileID: 8300000, guid: ef0afeb2b27c31b408be4c8c812967a7, type: 3}
+  - {fileID: 8300000, guid: f1897845fbdc52146bd2fcd1b57b3fa9, type: 3}
+  - {fileID: 8300000, guid: ceac4a078b52af249b41594012ad79c0, type: 3}
+  - {fileID: 8300000, guid: 4ed025fb176b1354eab4f3aeb0ba4b1d, type: 3}
+  audDamageVol: 0.5
+  replenishHP: {fileID: 8300000, guid: 00aadc28e899ebc4985b3f2f64b7ca07, type: 3}
+  replenishHPVol: 0.524
+  gunPickupSFX: {fileID: 8300000, guid: d0b8120f8c87e9b4aa238c0bd1482e64, type: 3}
+  gunPickupSFXVolume: 0.529
 --- !u!82 &-847100614589714909
 AudioSource:
   m_ObjectHideFlags: 0
@@ -236,60 +290,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-1946278743257943375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3423316177575975185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 811508994e98e654ea5156e7a705e191, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 2444942938180526624}
-  aud: {fileID: -847100614589714909}
-  HP: 10
-  playerSpeed: 5
-  sprintMod: 3
-  jumpHeight: 12
-  gravityValue: 25
-  jumpsMax: 2
-  gunList: []
-  gunMaterial: {fileID: 3638952754250616019}
-  gunModel: {fileID: 3006044350857170451}
-  shootDamage: 1
-  shootRate: 0.5
-  shootDist: 1
-  audSteps:
-  - {fileID: 8300000, guid: a33305fa6e6a4b640ad7c2ec2c7a5bec, type: 3}
-  - {fileID: 8300000, guid: 5f79e8346f1c4a34e9be8ecbd06a8acf, type: 3}
-  - {fileID: 8300000, guid: 947a8144d45426146a671e909dfe7f03, type: 3}
-  - {fileID: 8300000, guid: 596439084a99118489ecb2f544e2dd29, type: 3}
-  - {fileID: 8300000, guid: dd6e2b45d2534284983e9369e85a490f, type: 3}
-  - {fileID: 8300000, guid: d5e277f1cbbd909498f20bfa067178d5, type: 3}
-  - {fileID: 8300000, guid: 754cfe79ee9665f438bf0432568e3e9a, type: 3}
-  - {fileID: 8300000, guid: d6ddb20739ec915478ea83eb0e551ccb, type: 3}
-  - {fileID: 8300000, guid: 2ae598435ee6ac54b94c4499bc8c348c, type: 3}
-  audStepsVol: 0.5
-  audJump:
-  - {fileID: 8300000, guid: 53073bb2ec304f445a7cd9aa7c368286, type: 3}
-  - {fileID: 8300000, guid: 4120c5b3d181c9d45afbab2f0be69966, type: 3}
-  - {fileID: 8300000, guid: 916b03d5c4a48b24aa411093fd877975, type: 3}
-  audJumpVol: 0.5
-  audDamage:
-  - {fileID: 8300000, guid: 67679ebf91655924097f4edaab03b013, type: 3}
-  - {fileID: 8300000, guid: 4141e1daa16b4404ab9dc1afec974bbd, type: 3}
-  - {fileID: 8300000, guid: ef0afeb2b27c31b408be4c8c812967a7, type: 3}
-  - {fileID: 8300000, guid: f1897845fbdc52146bd2fcd1b57b3fa9, type: 3}
-  - {fileID: 8300000, guid: ceac4a078b52af249b41594012ad79c0, type: 3}
-  - {fileID: 8300000, guid: 4ed025fb176b1354eab4f3aeb0ba4b1d, type: 3}
-  audDamageVol: 0.5
-  replenishHP: {fileID: 8300000, guid: 00aadc28e899ebc4985b3f2f64b7ca07, type: 3}
-  replenishHPVol: 0.524
-  gunPickupSFX: {fileID: 8300000, guid: d0b8120f8c87e9b4aa238c0bd1482e64, type: 3}
-  gunPickupSFXVolume: 0.529
 --- !u!33 &3732879922894751482
 MeshFilter:
   m_ObjectHideFlags: 0
