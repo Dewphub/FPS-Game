@@ -18,13 +18,6 @@ public class Spawner : MonoBehaviour
     public GameObject entrance;
     public GameObject exit;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        GameManager.Instance.UpdateGameGoal(prefabMaxNum);
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (playerInRange && !isSpawning && prefabsSpawnCount < prefabMaxNum)
@@ -47,6 +40,7 @@ public class Spawner : MonoBehaviour
         GameObject prefabClone = Instantiate(prefab, spawnPos[Random.Range(0, spawnPos.Length)].position, prefab.transform.rotation);
         prefabList.Add(prefabClone);
         prefabsSpawnCount++;
+        GameManager.Instance.UpdateGameGoal(1);
         yield return new WaitForSeconds(intervalTime);
         isSpawning = false;
     }

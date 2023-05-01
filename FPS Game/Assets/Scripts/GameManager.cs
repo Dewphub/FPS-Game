@@ -81,7 +81,8 @@ public class GameManager : MonoBehaviour
     public void UpdateGameGoal(int amount)
     {
         enemiesRemaining += amount;
-        enemiesRemainingText.text = enemiesRemaining.ToString("F0");
+        Debug.Log("Enemies Remaining: " + enemiesRemaining);
+        //enemiesRemainingText.text = enemiesRemaining.ToString("F0");
 /*        if (enemiesRemaining <= 0)
         {
             activeMenu = winMenu;
@@ -102,5 +103,10 @@ public class GameManager : MonoBehaviour
         activeMenu = winMenu;
         activeMenu.SetActive(true);
         PauseState();
+    }
+
+    public int GetEnemiesRemaining()
+    {
+        return enemiesRemaining;
     }
 }

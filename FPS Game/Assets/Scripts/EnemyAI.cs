@@ -43,16 +43,11 @@ public class EnemyAI : MonoBehaviour, IDamage
     float angleToPlayer;
     float stoppingDistOrig;
     float speed;
-
-    // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.UpdateGameGoal(1);
         stoppingDistOrig = agent.stoppingDistance;
         startingPos = transform.position;
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (agent.isActiveAndEnabled) 
