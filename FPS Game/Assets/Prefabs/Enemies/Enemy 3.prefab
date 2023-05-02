@@ -271,9 +271,9 @@ MonoBehaviour:
   audioSource: {fileID: -390413764135091351}
   HP: 1
   playerFaceSpeed: 5
-  sightAngle: 90
+  sightAngle: 179
   roamPauseTime: 1
-  roamDist: 45
+  roamDist: 50
   animTransSpeed: 8
   rotationSpeed: 0
   shootDamage: 1
