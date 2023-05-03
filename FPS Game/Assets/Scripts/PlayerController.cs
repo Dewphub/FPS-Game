@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
     [SerializeField] AudioSource aud;
+    [SerializeField] Recoil recoil;
 
     [Header("----- Player Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
@@ -160,6 +161,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             IDamage damageable = hit.collider.GetComponent<IDamage>();
             damageable?.TakeDamage(shootDamage);
+            recoil.RecoilFire();
         }
 
         yield return new WaitForSeconds(shootRate);
@@ -208,6 +210,7 @@ public class PlayerController : MonoBehaviour, IDamage
         gunMaterial.material = gunStat.model.GetComponent<MeshRenderer>().sharedMaterial;
 
         selectedGun = gunList.Count - 1;
+        recoil.UpdateGun(gunList[selectedGun]);
     }
 
     void SelectGun()
@@ -215,11 +218,13 @@ public class PlayerController : MonoBehaviour, IDamage
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
         {
             selectedGun++;
+            recoil.UpdateGun(gunList[selectedGun]);
             ChangeGun();
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
         {
             selectedGun--;
+            recoil.UpdateGun(gunList[selectedGun]);
             ChangeGun();
         }
     }
@@ -234,5 +239,10 @@ public class PlayerController : MonoBehaviour, IDamage
         gunMaterial.material = gunList[selectedGun].model.GetComponent<MeshRenderer>().sharedMaterial;
 
         StopCoroutine(Shoot());
+    }
+
+    public bool GetIsShooting()
+    {
+        return isShooting;
     }
 }
