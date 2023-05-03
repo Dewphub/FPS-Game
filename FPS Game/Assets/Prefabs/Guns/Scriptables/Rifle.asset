@@ -15,6 +15,11 @@ MonoBehaviour:
   shootDamage: 5
   shootRate: 1
   shootDist: 200
+  recoilX: -20
+  recoilY: 0.05
+  recoilZ: 3
+  snappiness: 20
+  returnSpeed: 5
   model: {fileID: 919132149155446097, guid: c8573db8e30e916479a705831bd5040c, type: 3}
   gunShotAud: {fileID: 8300000, guid: ed7dba530783cf249a8cb66ebabe636f, type: 3}
   gunShotAudVol: 0.5
