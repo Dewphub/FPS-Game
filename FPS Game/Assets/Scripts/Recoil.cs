@@ -3,7 +3,9 @@ using UnityEngine;
 public class Recoil : MonoBehaviour
 {
     [SerializeField] PlayerController player;
-
+    [SerializeField] Aim aim;
+    [SerializeField] Transform aimingPos;
+    [SerializeField] Transform hipPos;
     Vector3 currentRotation;
     Vector3 targetRotation;
 
@@ -13,16 +15,11 @@ public class Recoil : MonoBehaviour
 
     float snappiness;
     float returnSpeed;
-    
-
     void Update()
     {
-        if(player.GetIsShooting())
-        {
-        targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, returnSpeed * Time.deltaTime);
-        currentRotation = Vector3.Slerp(currentRotation, targetRotation, snappiness * Time.fixedDeltaTime);
-        transform.localRotation = Quaternion.Euler(currentRotation);
-        }
+         targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, returnSpeed * Time.deltaTime);
+         currentRotation = Vector3.Slerp(currentRotation, targetRotation, snappiness * Time.fixedDeltaTime);
+         transform.localRotation = Quaternion.Euler(currentRotation);
     }
 
     public void RecoilFire()

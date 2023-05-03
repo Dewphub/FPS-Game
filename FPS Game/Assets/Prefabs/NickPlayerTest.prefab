@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &395247267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 395247268}
+  m_Layer: 0
+  m_Name: GunAimPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &395247268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395247267}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.0070000896, y: -0.273, z: 0.7539998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2030736345909665476}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1999668268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1999668269}
+  m_Layer: 0
+  m_Name: GunHipPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1999668269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999668268}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.45499986, y: -0.64, z: 1.1700003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2030736345909665476}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2030736345909665473
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,6 +93,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 395247268}
+  - {fileID: 1999668269}
   - {fileID: 6692697111218254168}
   m_Father: {fileID: 3433710403455780490}
   m_RootOrder: 0
@@ -155,15 +219,19 @@ MonoBehaviour:
   controller: {fileID: 4449751419756311858}
   aud: {fileID: 7498741355906709809}
   recoil: {fileID: 5394859266962844145}
+  gunAimTransform: {fileID: 395247268}
+  gunHipTransform: {fileID: 1999668269}
   HP: 10
   playerSpeed: 5
   sprintMod: 3
   jumpHeight: 12
   gravityValue: 25
   jumpsMax: 2
+  aimSnap: 0.01
   gunList: []
   gunMaterial: {fileID: 3363828063468870593}
   gunModel: {fileID: 3862121023829547265}
+  gunPos: {fileID: 6692697111218254168}
   shootDamage: 1
   shootRate: 0.5
   shootDist: 1
@@ -372,7 +440,7 @@ GameObject:
   - component: {fileID: 3363828063468870593}
   - component: {fileID: 5394859266962844145}
   m_Layer: 0
-  m_Name: Gun Pos
+  m_Name: GunPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,12 +454,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5394859266962844144}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.007, y: -0.273, z: 0.754}
+  m_LocalPosition: {x: 0.45499986, y: -0.64, z: 1.1700003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2030736345909665476}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3862121023829547265
 MeshFilter:

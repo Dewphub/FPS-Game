@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(8, 25)][SerializeField] float jumpHeight;
     [Range(10, 50)][SerializeField] float gravityValue;
     [Range(1, 3)][SerializeField] int jumpsMax;
+    [Range(0, 1)][SerializeField] float aimSnap;
 
     [Header("----- Gun Stats -----")]
     public List<gunStats> gunList = new List<gunStats>();
@@ -41,20 +42,25 @@ public class PlayerController : MonoBehaviour, IDamage
 
     int selectedGun;
     int jumpedTimes;
-    Vector3 playerVelocity;
-    bool groundedPlayer;
+    int HPOrig; 
+    float aimTimeElapsed;
+    float gunResetTimeElapsed;
 
+
+    bool groundedPlayer;
     bool isSprinting;
     bool isPlayingSteps;
     bool isShooting;
+
+    Vector3 playerVelocity;
     Vector3 move;
-    int HPOrig;
 
     private void Start()
     {
         HPOrig = HP;
         UIUpdate();
         Respawn();
+        //Testing Aim
     }
 
     void Update()
@@ -154,6 +160,7 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator Shoot()
     {
         isShooting = true;
+        recoil.RecoilFire();
 
         aud.PlayOneShot(gunList[selectedGun].gunShotAud, gunList[selectedGun].gunShotAudVol);
 
@@ -161,7 +168,6 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             IDamage damageable = hit.collider.GetComponent<IDamage>();
             damageable?.TakeDamage(shootDamage);
-            recoil.RecoilFire();
         }
 
         yield return new WaitForSeconds(shootRate);
@@ -245,4 +251,6 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         return isShooting;
     }
+
+
 }
