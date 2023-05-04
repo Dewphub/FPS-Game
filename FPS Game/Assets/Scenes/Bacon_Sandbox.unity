@@ -349,6 +349,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteriorWall_Var1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7651777352075055682, guid: a86dcf813d5b4a94ab9cdb8006ebeab2, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651777352075055682, guid: a86dcf813d5b4a94ab9cdb8006ebeab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a86dcf813d5b4a94ab9cdb8006ebeab2, type: 3}
 --- !u!1001 &321250891
@@ -519,6 +527,14 @@ PrefabInstance:
     - target: {fileID: 5424717638539778142, guid: a86dcf813d5b4a94ab9cdb8006ebeab2, type: 3}
       propertyPath: m_Name
       value: InteriorWall_Var1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651777352075055682, guid: a86dcf813d5b4a94ab9cdb8006ebeab2, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651777352075055682, guid: a86dcf813d5b4a94ab9cdb8006ebeab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a86dcf813d5b4a94ab9cdb8006ebeab2, type: 3}
@@ -841,6 +857,14 @@ PrefabInstance:
     - target: {fileID: 5424717638539778142, guid: a86dcf813d5b4a94ab9cdb8006ebeab2, type: 3}
       propertyPath: m_Name
       value: InteriorWall_Var1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651777352075055682, guid: a86dcf813d5b4a94ab9cdb8006ebeab2, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651777352075055682, guid: a86dcf813d5b4a94ab9cdb8006ebeab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a86dcf813d5b4a94ab9cdb8006ebeab2, type: 3}
@@ -1301,6 +1325,14 @@ PrefabInstance:
     - target: {fileID: 5424717638539778142, guid: a86dcf813d5b4a94ab9cdb8006ebeab2, type: 3}
       propertyPath: m_Name
       value: InteriorWall_Var1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651777352075055682, guid: a86dcf813d5b4a94ab9cdb8006ebeab2, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651777352075055682, guid: a86dcf813d5b4a94ab9cdb8006ebeab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a86dcf813d5b4a94ab9cdb8006ebeab2, type: 3}

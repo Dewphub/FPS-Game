@@ -21,7 +21,7 @@ MonoBehaviour:
   snappiness: 15
   returnSpeed: 5
   model: {fileID: 919132149155446097, guid: 8f9696fb6017be144a307b6586855ac0, type: 3}
-  gunShotAud: {fileID: 8300000, guid: ed7dba530783cf249a8cb66ebabe636f, type: 3}
+  gunShotAud: {fileID: 8300000, guid: 2e428236543fa2641ad67d50cea6999c, type: 3}
   gunShotAudVol: 0.251
   gunAimPos: {x: -0.007, y: -0.261, z: 0.884}
   muzzleFlashPos: {x: 0, y: 0.188, z: 0.367}
