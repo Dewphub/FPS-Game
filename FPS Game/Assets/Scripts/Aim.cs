@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Aim : MonoBehaviour
@@ -8,6 +6,7 @@ public class Aim : MonoBehaviour
     [SerializeField] Transform gunHipPosTransform;
     [SerializeField] Transform gunAimPosTransform;
     [SerializeField] float aimSnap;
+
 
     float aimTimeElapsed;
     float resetTimeElapsed;
@@ -67,5 +66,10 @@ public class Aim : MonoBehaviour
     public bool GetIsAiming()
     {
         return isAiming;
+    }
+
+    public void SetGunAimPos(Vector3 _gunAimPos)
+    {
+        gunAimPos = _gunAimPos;
     }
 }

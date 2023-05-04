@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController controller;
     [SerializeField] AudioSource aud;
     [SerializeField] Recoil recoil;
+    [SerializeField] Aim newAimPos;
 
     [Header("----- Player Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
@@ -216,7 +217,9 @@ public class PlayerController : MonoBehaviour, IDamage
         gunMaterial.material = gunStat.model.GetComponent<MeshRenderer>().sharedMaterial;
 
         selectedGun = gunList.Count - 1;
+        newAimPos.SetGunAimPos(gunList[selectedGun].gunAimPos);
         recoil.UpdateGun(gunList[selectedGun]);
+
     }
 
     void SelectGun()
@@ -224,12 +227,14 @@ public class PlayerController : MonoBehaviour, IDamage
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
         {
             selectedGun++;
+            newAimPos.SetGunAimPos((gunList[selectedGun].gunAimPos));
             recoil.UpdateGun(gunList[selectedGun]);
             ChangeGun();
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
         {
             selectedGun--;
+            newAimPos.SetGunAimPos((gunList[selectedGun].gunAimPos));
             recoil.UpdateGun(gunList[selectedGun]);
             ChangeGun();
         }

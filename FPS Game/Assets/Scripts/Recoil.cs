@@ -3,7 +3,6 @@ using UnityEngine;
 public class Recoil : MonoBehaviour
 {
     [SerializeField] PlayerController player;
-    [SerializeField] Aim aim;
     [SerializeField] Transform aimingPos;
     [SerializeField] Transform hipPos;
     Vector3 currentRotation;
