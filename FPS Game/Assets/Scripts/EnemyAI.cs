@@ -12,6 +12,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform headPos;
     [SerializeField] Transform shootPos;
     [SerializeField] AudioSource audioSource;
+    [SerializeField] ParticleSystem spawnFX;
+    [SerializeField] ParticleSystem bloodFX;
 
     [Header("----- Enemy Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
@@ -47,6 +49,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         stoppingDistOrig = agent.stoppingDistance;
         startingPos = transform.position;
+        spawnFX.Play();
     }
     void Update()
     {
@@ -150,7 +153,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         HP -= amount;
         audioSource.PlayOneShot(takeDamageSFX[Random.Range(0, takeDamageSFX.Length)], takeDamageSFXVolume);
-
+        bloodFX.Play();
         StartCoroutine(FlashColor());
         if (HP <= 0)
         {
@@ -159,6 +162,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             anim.SetBool("Dead", true);
             GetComponent<CapsuleCollider>().enabled = false;
             agent.enabled = false;
+            StartCoroutine(OnDead());
         }
         else
         {
@@ -172,5 +176,11 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
+    }
+
+    IEnumerator OnDead()
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
     }
 }

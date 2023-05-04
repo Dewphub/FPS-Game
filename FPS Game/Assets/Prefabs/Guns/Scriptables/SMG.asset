@@ -24,3 +24,4 @@ MonoBehaviour:
   gunShotAud: {fileID: 8300000, guid: d033b2246273a964d9628a3195599f51, type: 3}
   gunShotAudVol: 0.5
   gunAimPos: {x: -0.007, y: -0.4, z: 0.884}
+  muzzleFlashPos: {x: 0, y: 0.26, z: 0.79}
