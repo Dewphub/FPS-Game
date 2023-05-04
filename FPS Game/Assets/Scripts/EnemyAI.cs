@@ -120,7 +120,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         anim.SetTrigger("Shoot");
         audioSource.PlayOneShot(shootSFX, shootSFXVolume);
         GameObject bulletClone = Instantiate(bullet, shootPos.position, bullet.transform.rotation);
-        bulletClone.GetComponent<Rigidbody>().velocity = playerDir * bulletSpeed; //Always shoots toward player
+        bulletClone.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed; //Always shoots toward player
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }

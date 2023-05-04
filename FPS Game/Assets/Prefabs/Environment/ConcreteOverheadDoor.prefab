@@ -14,8 +14,8 @@ GameObject:
   m_Name: Collider1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3010145524668009317
 Transform:
@@ -43,8 +43,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.50835073, y: 2.9829853, z: 0.17180654}
-  m_Center: {x: 0.24582379, y: 1.4831392, z: 0.04828674}
+  m_Size: {x: 0.50835073, y: 2.9829853, z: 0.13961525}
+  m_Center: {x: 0.24582379, y: 1.4831392, z: 0.032191083}
 --- !u!1 &2045536094066134915
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,8 +93,8 @@ GameObject:
   m_Name: BeautyCap (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8470697022325328839
 Transform:
@@ -191,8 +191,8 @@ GameObject:
   m_Name: BeautyCap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3112074121686529141
 Transform:
@@ -287,8 +287,8 @@ GameObject:
   m_Name: Collider2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5359081946618718455
 Transform:
@@ -331,8 +331,8 @@ GameObject:
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7477179924905139936
 Transform:
@@ -367,8 +367,8 @@ GameObject:
   m_Name: BeautyCap (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2535246299917665722
 Transform:
@@ -464,8 +464,8 @@ GameObject:
   m_Name: ArchwayDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &6645328926312252607
 Transform:
@@ -555,8 +555,8 @@ GameObject:
   m_Name: Door
   m_TagString: BlockOff
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &6750957029222409571
 Transform:
@@ -665,8 +665,8 @@ GameObject:
   m_Name: BeautyCap (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &6100615675329112744
 Transform:
