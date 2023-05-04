@@ -18,4 +18,6 @@ public class gunStats : ScriptableObject
     public AudioClip gunShotAud;
     [Range(0, 1)] public float gunShotAudVol;
     public Vector3 gunAimPos;
+    public Vector3 muzzleFlashPos;
+
 }

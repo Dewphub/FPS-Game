@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08790dfb696e024d80a689c408caf3a, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  shootDamage: 3
+  shootDamage: 8
   shootRate: 1
-  shootDist: 45
+  shootDist: 20
+  recoilX: -50
+  recoilY: 3
+  recoilZ: 3
+  snappiness: 20
+  returnSpeed: 12
   model: {fileID: 919132149155446097, guid: f62f7dc06bd890d4aab43b8fd635fe02, type: 3}
   gunShotAud: {fileID: 8300000, guid: 6165d457a78dd1142a2676f657dcb620, type: 3}
-  gunShotAudVol: 0.53
+  gunShotAudVol: 0.301
+  gunAimPos: {x: -0.007, y: -0.324, z: 0.909}

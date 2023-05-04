@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] AudioSource aud;
     [SerializeField] Recoil recoil;
     [SerializeField] Aim newAimPos;
+    [SerializeField] GameObject muzzleFlashObject;
 
     [Header("----- Player Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(1, 10)][SerializeField] int shootDamage;
     [Range(0.5f, 5)][SerializeField] float shootRate;
     [Range(1, 100)][SerializeField] int shootDist;
+    [Range(0, 0.5f)][SerializeField] float muzzleFlashFX;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audSteps;
@@ -161,10 +163,9 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator Shoot()
     {
         isShooting = true;
+        StartCoroutine(MuzzleFlash());
         recoil.RecoilFire();
-
         aud.PlayOneShot(gunList[selectedGun].gunShotAud, gunList[selectedGun].gunShotAudVol);
-
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out RaycastHit hit, shootDist))
         {
             IDamage damageable = hit.collider.GetComponent<IDamage>();
@@ -175,6 +176,12 @@ public class PlayerController : MonoBehaviour, IDamage
         isShooting = false;
     }
 
+    IEnumerator MuzzleFlash()
+    {
+        muzzleFlashObject.SetActive(true);
+        yield return new WaitForSeconds(muzzleFlashFX);
+        muzzleFlashObject.SetActive(false);
+    }
     public void TakeDamage(int amount)
     {
         aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
@@ -217,9 +224,15 @@ public class PlayerController : MonoBehaviour, IDamage
         gunMaterial.material = gunStat.model.GetComponent<MeshRenderer>().sharedMaterial;
 
         selectedGun = gunList.Count - 1;
+        UpdateMuzzleFlashLocation(gunList[selectedGun]);
         newAimPos.SetGunAimPos(gunList[selectedGun].gunAimPos);
         recoil.UpdateGun(gunList[selectedGun]);
 
+    }
+
+    private void UpdateMuzzleFlashLocation(gunStats gun)
+    {
+        muzzleFlashObject.transform.localPosition = gunList[selectedGun].muzzleFlashPos;
     }
 
     void SelectGun()
@@ -230,6 +243,7 @@ public class PlayerController : MonoBehaviour, IDamage
             newAimPos.SetGunAimPos((gunList[selectedGun].gunAimPos));
             recoil.UpdateGun(gunList[selectedGun]);
             ChangeGun();
+            
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
         {
@@ -249,6 +263,7 @@ public class PlayerController : MonoBehaviour, IDamage
         gunModel.mesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
         gunMaterial.material = gunList[selectedGun].model.GetComponent<MeshRenderer>().sharedMaterial;
 
+        UpdateMuzzleFlashLocation(gunList[selectedGun]);
         StopCoroutine(Shoot());
     }
 

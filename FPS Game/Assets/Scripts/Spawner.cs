@@ -37,10 +37,13 @@ public class Spawner : MonoBehaviour
     IEnumerator Spawn()
     {
         isSpawning = true;
-        GameObject prefabClone = Instantiate(prefab, spawnPos[Random.Range(0, spawnPos.Length)].position, prefab.transform.rotation);
-        prefabList.Add(prefabClone);
-        prefabsSpawnCount++;
-        GameManager.Instance.UpdateGameGoal(1);
+        for(int i = 0; i < spawnPos.Length; i++)
+        {
+            GameObject prefabClone = Instantiate(prefab, spawnPos[i].position, prefab.transform.rotation);
+            prefabList.Add(prefabClone);
+            prefabsSpawnCount++;
+            GameManager.Instance.UpdateGameGoal(1);
+        }
         yield return new WaitForSeconds(intervalTime);
         isSpawning = false;
     }
