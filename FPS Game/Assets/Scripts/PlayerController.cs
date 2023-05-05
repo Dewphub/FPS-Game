@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] GameObject muzzleFlashObject;
 
     [Header("----- Player Stats -----")]
-    [Range(1, 10)][SerializeField] int HP;
+    [Range(1, 10)] public int HP;
     [Range(3, 8)][SerializeField] float playerSpeed;
     [Range(1.5f, 5)][SerializeField] float sprintMod;
     [Range(8, 25)][SerializeField] float jumpHeight;
@@ -169,7 +169,7 @@ public class PlayerController : MonoBehaviour, IDamage
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out RaycastHit hit, shootDist))
         {
             IDamage damageable = hit.collider.GetComponent<IDamage>();
-            damageable?.TakeDamage(shootDamage);
+            damageable.TakeDamage(shootDamage);
         }
 
         yield return new WaitForSeconds(shootRate);
