@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PlayerController : MonoBehaviour, IDamage
+public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
@@ -205,7 +205,7 @@ public class PlayerController : MonoBehaviour, IDamage
         HP = HPOrig; 
         UIUpdate();
         controller.enabled = false;
-        transform.position = GameManager.Instance.playerSpawnPos.transform.position;
+        DataPersitenceManager.Instance.LoadGame();
         controller.enabled = true;
     }
 
@@ -272,5 +272,19 @@ public class PlayerController : MonoBehaviour, IDamage
         return isShooting;
     }
 
+    public void LoadData(GameData data)
+    {
+        this.gunList = data.gunList;
+        this.selectedGun = data.selectedGun;
+        GameManager.Instance.playerSpawnPos.transform.position = data.playerPos;
+        transform.position = data.playerPos;
+        ChangeGun();
+    }
 
+    public void SaveData(ref GameData data)
+    {
+        data.gunList = this.gunList;
+        data.selectedGun = this.selectedGun;
+        data.playerPos = GameManager.Instance.playerSpawnPos.transform.position;
+    }
 }

@@ -11,6 +11,7 @@ public class Checkpoint : MonoBehaviour
         if (other.CompareTag("Player") && GameManager.Instance.playerSpawnPos.transform.position != transform.position)
         {
             GameManager.Instance.playerSpawnPos.transform.position = transform.position;
+            DataPersitenceManager.Instance.SaveGame();
 
             if (triggerEffect)
                 Instantiate(triggerEffect, transform.position, triggerEffect.transform.rotation);
