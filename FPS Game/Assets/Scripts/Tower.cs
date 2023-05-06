@@ -42,6 +42,6 @@ public class Tower : MonoBehaviour, IDamage
 
     public void UIUpdate()
     {
-        GameManager.Instance.towerHPBar.fillAmount = (float)towerHP / HPOriginal;
+        GameManager.Instance.towerHPBar.fillAmount = (float)towerHP / (float) HPOriginal;
     }
 }

@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         HPOrig = HP;
         UIUpdate();
         Respawn();
+        controller.enabled = true;
         //Testing Aim
     }
 
