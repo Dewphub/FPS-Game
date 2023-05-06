@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public PlayerController playerScript;
     public GameObject playerSpawnPos;
+    public Aim aim;
 
     [Header("----- UI Information -----")]
     public GameObject activeMenu;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI enemiesRemainingText;
 
     public bool isPaused;
+    public bool playerIsAiming;
     public int enemiesRemaining;
 
    
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         TIME_SCALE_DEFAULT = Time.timeScale;
+        aim = player.GetComponentInChildren<Aim>();
     }
     void Update()
     {
@@ -109,4 +112,6 @@ public class GameManager : MonoBehaviour
     {
         return enemiesRemaining;
     }
+
+    public bool PlayerIsAiming() => aim.GetIsAiming();
 }

@@ -272,9 +272,13 @@ MonoBehaviour:
   audioSource: {fileID: -6454043489592429110}
   spawnFX: {fileID: 7366665087011001597}
   bloodFX: {fileID: 2068261387431096921}
-  HP: 1
+  coverChecker: {fileID: 8476344485024657229}
+  hideLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  HP: 10
   playerFaceSpeed: 5
-  sightAngle: 179
+  sightAngle: 90
   roamPauseTime: 5
   roamDist: 5
   animTransSpeed: 3
@@ -294,6 +298,17 @@ MonoBehaviour:
   takeDamageSFXVolume: 0.452
   shootSFX: {fileID: 8300000, guid: 6165d457a78dd1142a2676f657dcb620, type: 3}
   shootSFXVolume: 0.095
+  colliders:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!195 &8476344485024657224
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -341,7 +356,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 300
+  m_Radius: 50
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &-6454043489592429110
 AudioSource:

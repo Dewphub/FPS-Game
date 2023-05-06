@@ -1,3 +1,4 @@
+using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] AudioSource audioSource;
     [SerializeField] ParticleSystem spawnFX;
     [SerializeField] ParticleSystem bloodFX;
+    [SerializeField] SphereCollider coverChecker;
+    [SerializeField] LayerMask hideLayer;
 
     [Header("----- Enemy Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
@@ -39,6 +42,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     Vector3 playerDir;
     Vector3 startingPos;
+    public Collider[] colliders = new Collider[10];
     bool playerInRange;
     bool isShooting;
     bool destinationChosen;
@@ -67,64 +71,6 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator Roam()
-    {
-        if (!destinationChosen && agent.remainingDistance < 0.05f)
-        {
-            destinationChosen = true;
-            agent.stoppingDistance = 0;
-
-            yield return new WaitForSeconds(roamPauseTime);
-
-            Vector3 ranPos = Random.insideUnitSphere * roamDist;
-            ranPos += startingPos;
-
-            NavMeshHit hit;
-            NavMesh.SamplePosition(ranPos, out hit, roamDist, 1);
-
-            agent.SetDestination(hit.position);
-            destinationChosen = false;
-        }
-    }
-
-    bool CanSeePlayer()
-    {
-        playerDir = (GameManager.Instance.player.transform.position - headPos.position);
-        angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
-
-        Debug.DrawRay(headPos.position, playerDir);
-
-        RaycastHit hit;
-        if (Physics.Raycast(headPos.position, playerDir, out hit))
-        {
-            if (hit.collider.CompareTag("Player") && angleToPlayer <= sightAngle)
-            {
-                agent.stoppingDistance = stoppingDistOrig;
-                agent.SetDestination(GameManager.Instance.player.transform.position);
-
-                if (agent.remainingDistance < agent.stoppingDistance)
-                    FacePlayer();
-
-                if (!isShooting)
-                    StartCoroutine(Shoot());
-
-                return true;
-            }
-        }
-        return false;
-    }
-
-    IEnumerator Shoot()
-    {
-        isShooting = true;
-        anim.SetTrigger("Shoot");
-        audioSource.PlayOneShot(shootSFX, shootSFXVolume);
-        GameObject bulletClone = Instantiate(bullet, shootPos.position, bullet.transform.rotation);
-        bulletClone.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed; //Always shoots toward player
-        yield return new WaitForSeconds(shootRate);
-        isShooting = false;
-    }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -141,14 +87,47 @@ public class EnemyAI : MonoBehaviour, IDamage
             agent.stoppingDistance = 0;
         }
     }
-
-    IEnumerator FlashColor()
+    void FacePlayer()
     {
-        model.material.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        model.material.color = Color.white;
+        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
     }
+    bool CanSeePlayer()
+    {
+        playerDir = (GameManager.Instance.player.transform.position - headPos.position);
+        angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
+        Debug.DrawRay(headPos.position, playerDir);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(headPos.position, playerDir, out hit))
+        {
+            if (hit.collider.CompareTag("Player") && angleToPlayer <= sightAngle)
+            {
+                if(!GameManager.Instance.PlayerIsAiming())
+                {
+                    agent.stoppingDistance = stoppingDistOrig;
+                    agent.SetDestination(GameManager.Instance.player.transform.position);
+
+                    if (agent.remainingDistance < agent.stoppingDistance)
+                    { FacePlayer(); }
+
+                    if (Mathf.Abs(angleToPlayer) <= 5f)
+                    {
+                        if (!isShooting)
+                            StartCoroutine(Shoot());
+                    }
+                }
+                else
+                {
+                    StartCoroutine(Hide(GameManager.Instance.player.transform));
+                }
+                return true;
+            }
+        }
+        return false;
+    }
     public void TakeDamage(int amount)
     {
         HP -= amount;
@@ -171,16 +150,91 @@ public class EnemyAI : MonoBehaviour, IDamage
             agent.stoppingDistance = 0;
         }
     }
-
-    void FacePlayer()
+    IEnumerator Roam()
     {
-        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
+        if (!destinationChosen && agent.remainingDistance < 0.05f)
+        {
+            destinationChosen = true;
+            agent.stoppingDistance = 0;
+
+            yield return new WaitForSeconds(roamPauseTime);
+
+            Vector3 ranPos = Random.insideUnitSphere * roamDist;
+            ranPos += startingPos;
+
+            NavMeshHit hit;
+            NavMesh.SamplePosition(ranPos, out hit, roamDist, 1);
+
+            agent.SetDestination(hit.position);
+            destinationChosen = false;
+        }
+    }
+    IEnumerator Shoot()
+    {
+        isShooting = true;
+        anim.SetTrigger("Shoot");
+        audioSource.PlayOneShot(shootSFX, shootSFXVolume);
+        GameObject bulletClone = Instantiate(bullet, shootPos.position, bullet.transform.rotation);
+        bulletClone.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed; //Always shoots toward player
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
+    }
+    IEnumerator FlashColor()
+    {
+        model.material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        model.material.color = Color.white;
     }
 
     IEnumerator OnDead()
     {
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
+    }
+
+    IEnumerator Hide(Transform _player)
+    {
+        if(!destinationChosen)
+        {
+            int hits = Physics.OverlapSphereNonAlloc(agent.transform.position, coverChecker.radius, colliders, hideLayer);
+
+            for(int i = 0; i < hits; i++)
+            {
+                if (NavMesh.SamplePosition(colliders[i].transform.position, out NavMeshHit hit, 2f, agent.areaMask))
+                {
+                    Vector3 hitNormal = (transform.position - hit.position).normalized;
+                    Debug.Log("Attempt 1 position 1 is: " + hit.position);
+                    Debug.Log("The normal of the first attempt is " + hitNormal);
+                    Debug.Log("Dot product for attempt 1 is " + Vector3.Dot(hitNormal, (GameManager.Instance.player.transform.position - hit.position).normalized));
+                    if (Vector3.Dot(hitNormal, (GameManager.Instance.player.transform.position - hit.position).normalized) <= 0f)
+                    {
+                        destinationChosen = true;
+                        agent.stoppingDistance = 1f;
+                        yield return new WaitForSeconds(0.5f);
+                        agent.SetDestination(hit.position);
+                        destinationChosen = false;
+                    }
+                    else
+                    {
+                        if (NavMesh.SamplePosition(colliders[i].transform.position - (GameManager.Instance.player.transform.position - hit.position).normalized * 2f,
+                            out NavMeshHit hit2, 2f, agent.areaMask))
+                        {
+                            Vector3 hit2Normal = -(transform.position - hit2.position).normalized;
+                            Debug.Log("Attempt 2 position 1 is: " + hit2.position);
+                            Debug.Log("The normal of the second attempt is " + hit2Normal);
+                            Debug.Log("Dot product for attempt 2 is " + Vector3.Dot(hit2Normal, (GameManager.Instance.player.transform.position - hit2.position).normalized));
+                            if (Vector3.Dot(hit2Normal, (GameManager.Instance.player.transform.position - hit2.position).normalized) <= 0f)
+                            {
+                                destinationChosen = true;
+                                agent.stoppingDistance = 1f;
+                                yield return new WaitForSeconds(0.5f);
+                                agent.SetDestination(hit2.position);
+                                destinationChosen = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
