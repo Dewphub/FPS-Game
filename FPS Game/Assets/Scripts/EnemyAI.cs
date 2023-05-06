@@ -46,14 +46,17 @@ public class EnemyAI : MonoBehaviour, IDamage
     bool playerInRange;
     bool isShooting;
     bool destinationChosen;
+    bool coverTaken;
     float angleToPlayer;
     float stoppingDistOrig;
     float speed;
+    int originalHP;
     void Start()
     {
         stoppingDistOrig = agent.stoppingDistance;
         startingPos = transform.position;
         spawnFX.Play();
+        originalHP = HP;
     }
     void Update()
     {
@@ -105,7 +108,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer <= sightAngle)
             {
-                if(!GameManager.Instance.PlayerIsAiming())
+                if((float)HP / originalHP >= 0.5f || coverTaken)
                 {
                     agent.stoppingDistance = stoppingDistOrig;
                     agent.SetDestination(GameManager.Instance.player.transform.position);
@@ -202,16 +205,19 @@ public class EnemyAI : MonoBehaviour, IDamage
             {
                 if (NavMesh.SamplePosition(colliders[i].transform.position, out NavMeshHit hit, 2f, agent.areaMask))
                 {
-                    Vector3 hitNormal = (transform.position - hit.position).normalized;
-                    Debug.Log("Attempt 1 position 1 is: " + hit.position);
-                    Debug.Log("The normal of the first attempt is " + hitNormal);
-                    Debug.Log("Dot product for attempt 1 is " + Vector3.Dot(hitNormal, (GameManager.Instance.player.transform.position - hit.position).normalized));
-                    if (Vector3.Dot(hitNormal, (GameManager.Instance.player.transform.position - hit.position).normalized) <= 0f)
+                    if(!NavMesh.FindClosestEdge(hit.position, out hit, agent.areaMask))
+                    {
+                        Debug.LogError("Unable to find edge close to " + hit.position);
+                    }
+                    if (Vector3.Dot(hit.normal, (GameManager.Instance.player.transform.position - hit.position).normalized) <= 0f)
                     {
                         destinationChosen = true;
                         agent.stoppingDistance = 1f;
-                        yield return new WaitForSeconds(0.5f);
+                        animTransSpeed += 10f;
                         agent.SetDestination(hit.position);
+                        yield return new WaitForSeconds(3);
+                        coverTaken = true;
+                        Quaternion.LookRotation(playerDir);
                         destinationChosen = false;
                     }
                     else
@@ -219,16 +225,19 @@ public class EnemyAI : MonoBehaviour, IDamage
                         if (NavMesh.SamplePosition(colliders[i].transform.position - (GameManager.Instance.player.transform.position - hit.position).normalized * 2f,
                             out NavMeshHit hit2, 2f, agent.areaMask))
                         {
-                            Vector3 hit2Normal = -(transform.position - hit2.position).normalized;
-                            Debug.Log("Attempt 2 position 1 is: " + hit2.position);
-                            Debug.Log("The normal of the second attempt is " + hit2Normal);
-                            Debug.Log("Dot product for attempt 2 is " + Vector3.Dot(hit2Normal, (GameManager.Instance.player.transform.position - hit2.position).normalized));
-                            if (Vector3.Dot(hit2Normal, (GameManager.Instance.player.transform.position - hit2.position).normalized) <= 0f)
+                            if(!NavMesh.FindClosestEdge(hit2.position, out hit2, agent.areaMask))
+                            {
+                                Debug.LogError("Unable to find edge close to " + hit2.position + " (second attempt)");
+                            }
+                            if (Vector3.Dot(hit2.normal, (GameManager.Instance.player.transform.position - hit2.position).normalized) <= 0f)
                             {
                                 destinationChosen = true;
                                 agent.stoppingDistance = 1f;
-                                yield return new WaitForSeconds(0.5f);
+                                animTransSpeed += 10f;
                                 agent.SetDestination(hit2.position);
+                                yield return new WaitForSeconds(3f);
+                                Quaternion.LookRotation(playerDir);
+                                coverTaken = true;
                                 destinationChosen = false;
                             }
                         }

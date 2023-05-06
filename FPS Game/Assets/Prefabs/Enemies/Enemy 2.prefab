@@ -269,6 +269,12 @@ MonoBehaviour:
   headPos: {fileID: 8476344485015116193}
   shootPos: {fileID: 7598755405579220693}
   audioSource: {fileID: 1566342285190129746}
+  spawnFX: {fileID: 0}
+  bloodFX: {fileID: 0}
+  coverChecker: {fileID: 0}
+  hideLayer:
+    serializedVersion: 2
+    m_Bits: 512
   HP: 10
   playerFaceSpeed: 5
   sightAngle: 90
@@ -291,6 +297,17 @@ MonoBehaviour:
   takeDamageSFXVolume: 0.508
   shootSFX: {fileID: 8300000, guid: ed7dba530783cf249a8cb66ebabe636f, type: 3}
   shootSFXVolume: 0.524
+  colliders:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!195 &8476344485024657224
 NavMeshAgent:
   m_ObjectHideFlags: 0
