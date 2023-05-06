@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9620cd45cd1197243832dc6c92e45aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0a25d4c8-3f74-4bce-bbbe-656409a02376
   gun: {fileID: 11400000, guid: b00aad95dd3e65b4d925defb0ab18ba5, type: 2}
   model: {fileID: 244367134331026584}
   mat: {fileID: 2630346088317732946}
