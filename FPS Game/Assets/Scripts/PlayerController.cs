@@ -206,7 +206,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         HP = HPOrig; 
         UIUpdate();
         controller.enabled = false;
-        DataPersitenceManager.Instance.LoadGame();
+        transform.position = GameManager.Instance.playerSpawnPos.transform.position;
         controller.enabled = true;
     }
 
