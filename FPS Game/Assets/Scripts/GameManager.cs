@@ -1,6 +1,5 @@
-using System;
-using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +22,10 @@ public class GameManager : MonoBehaviour
     public Image HPBar;
     public Image towerHPBar;
     public TextMeshProUGUI enemiesRemainingText;
+    public RawImage previousGun;
+    public RawImage nextGun;
+    public RawImage currGun;
+    public Texture blankGun;
 
     public bool isPaused;
     public bool playerIsAiming;
@@ -45,7 +48,12 @@ public class GameManager : MonoBehaviour
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         TIME_SCALE_DEFAULT = Time.timeScale;
         aim = player.GetComponentInChildren<Aim>();
+        if(playerScript.gunList.Count > 0)
+        {
+            UpdateGunUI(playerScript.GetSelectedGun(), playerScript.gunList[playerScript.GetSelectedGun()]);
+        }
     }
+
     void Update()
     {
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
@@ -114,4 +122,70 @@ public class GameManager : MonoBehaviour
     }
 
     public bool PlayerIsAiming() => aim.GetIsAiming();
+
+    public void UpdateGunUI(int currentIndex, gunStats gun)
+    {
+
+        if (playerScript != null)
+        {
+            if (playerScript.gunList.Count > 0)
+            {
+                SetCurrentGun(gun);
+
+                if (currentIndex > 0)
+                {
+                    gunStats prevGun = playerScript.gunList[currentIndex - 1];
+                    SetDownGun(prevGun);
+                }
+                else
+                {
+                    ClearPrevGun();
+                }
+
+                if (currentIndex != playerScript.gunList.Count - 1)
+                {
+                    gunStats nextGun = playerScript.gunList[(currentIndex + 1)];
+                    SetUpGun(nextGun);
+                }
+                else
+                {
+                    ClearNextGun();
+                }
+            }
+            else
+            {
+                ClearPrevGun();
+                ClearCurrentGun();
+                ClearNextGun();
+            }
+        }
+    }
+
+    private void SetDownGun(gunStats _gun)
+    {
+        previousGun.enabled = true;
+        previousGun.texture = _gun.gunIcon;
+    }
+    private void SetCurrentGun(gunStats _gun)
+    {
+        currGun.enabled = true;
+        currGun.texture = _gun.gunIcon;
+    }
+    private void SetUpGun(gunStats _gun)
+    {
+        nextGun.enabled = true;
+        nextGun.texture = _gun.gunIcon;
+    }
+    public void ClearPrevGun()
+    {
+        previousGun.texture = blankGun;
+    }
+    public void ClearCurrentGun()
+    {
+        currGun.texture = blankGun;
+    }
+    public void ClearNextGun()
+    {
+        nextGun.texture = blankGun;
+    }
 }

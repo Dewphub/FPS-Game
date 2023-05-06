@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
@@ -64,7 +65,6 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         UIUpdate();
         Respawn();
         controller.enabled = true;
-        //Testing Aim
     }
 
     void Update()
@@ -81,7 +81,15 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
                 StartCoroutine(Shoot());
             }
         }
-
+        //Debugging GunList
+        //Will require start game playmode over immediately after use
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            gunList.Clear();
+            GameManager.Instance.ClearCurrentGun();
+            GameManager.Instance.ClearNextGun();
+            GameManager.Instance.ClearPrevGun();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -228,6 +236,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         UpdateMuzzleFlashLocation(gunList[selectedGun]);
         newAimPos.SetGunAimPos(gunList[selectedGun].gunAimPos);
         recoil.UpdateGun(gunList[selectedGun]);
+        GameManager.Instance.UpdateGunUI(selectedGun, gunList[selectedGun]);
 
     }
 
@@ -264,6 +273,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         gunModel.mesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
         gunMaterial.material = gunList[selectedGun].model.GetComponent<MeshRenderer>().sharedMaterial;
 
+        GameManager.Instance.UpdateGunUI(selectedGun, gunList[selectedGun]);
         UpdateMuzzleFlashLocation(gunList[selectedGun]);
         StopCoroutine(Shoot());
     }
@@ -287,5 +297,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         data.gunList = this.gunList;
         data.selectedGun = this.selectedGun;
         data.playerPos = GameManager.Instance.playerSpawnPos.transform.position;
+    }
+
+    public int GetSelectedGun()
+    {
+        return selectedGun;
     }
 }

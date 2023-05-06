@@ -14,7 +14,10 @@ public class GameData
     {
         this.gunList = new List<gunStats>();
         selectedGun = 0;
-        playerPos = GameManager.Instance.playerSpawnPos.transform.position;
+        if(playerPos != null)
+        {
+            playerPos = GameManager.Instance.playerSpawnPos.transform.position;
+        }
         gunsPickedUp = new SerializableDictionary<string, bool>();
     }
 }

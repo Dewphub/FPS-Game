@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu]
 
@@ -19,5 +18,5 @@ public class gunStats : ScriptableObject
     [Range(0, 1)] public float gunShotAudVol;
     public Vector3 gunAimPos;
     public Vector3 muzzleFlashPos;
-
+    public Texture gunIcon;
 }

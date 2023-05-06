@@ -25,3 +25,4 @@ MonoBehaviour:
   gunShotAudVol: 0.5
   gunAimPos: {x: 0, y: -0.259, z: 0.884}
   muzzleFlashPos: {x: 0, y: 0.159, z: 1.713}
+  gunIcon: {fileID: 2800000, guid: a638cc0840d457e45b239902fbd1b2d7, type: 3}
