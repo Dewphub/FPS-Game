@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-public class DataPersitenceManager : MonoBehaviour
+public class DataPersistenceManager : MonoBehaviour
 {
     [Header("File Storage Config")]
     [SerializeField] private string fileName;
@@ -13,7 +13,7 @@ public class DataPersitenceManager : MonoBehaviour
     private List<IDataPersistence> dataPersistenceObjects;
     private FileDataHandler dataHandler;
 
-    public static DataPersitenceManager Instance { get; private set; }
+    public static DataPersistenceManager Instance { get; private set; }
 
     private void Awake()
     {
