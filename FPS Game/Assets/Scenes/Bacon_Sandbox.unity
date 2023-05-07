@@ -873,6 +873,52 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c02d6b57b2371174a9079c7375eaa0f5, type: 3}
+--- !u!1 &937720666 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5394859266962844144, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
+  m_PrefabInstance: {fileID: 2030736346550561210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &937720672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937720666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f13bd23bb651b2649a56870c5c61e1d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 3.25
+  radius: 0.125
+  offsetCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 3.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  clippingLayerMask:
+    serializedVersion: 2
+    m_Bits: 513
 --- !u!1001 &1090316254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1555,6 +1601,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NickPlayerTest
       objectReference: {fileID: 0}
+    - target: {fileID: 6264784266582130764, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
+      propertyPath: noClip
+      value: 
+      objectReference: {fileID: 937720672}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
 --- !u!1001 &3069025143663064298

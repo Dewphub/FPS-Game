@@ -89,6 +89,8 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             GameManager.Instance.ClearCurrentGun();
             GameManager.Instance.ClearNextGun();
             GameManager.Instance.ClearPrevGun();
+            gunMaterial = null;
+            gunModel = null;
         }
     }
 

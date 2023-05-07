@@ -4,6 +4,7 @@ using UnityEngine;
 public class Aim : MonoBehaviour
 {
     [SerializeField] PlayerController controller;
+    [SerializeField] NoClip noClip;
     [SerializeField] Transform gunHipPosTransform;
     [SerializeField] Transform gunAimPosTransform;
     [SerializeField] float aimSnap;
@@ -44,6 +45,7 @@ public class Aim : MonoBehaviour
     }
     public void GunPosAim()
     {
+        noClip.enabled = false;
         if (aimTimeElapsed < aimSnap)
         {
             isAiming = true;
@@ -55,6 +57,7 @@ public class Aim : MonoBehaviour
 
     public void GunPosReset()
     {
+        noClip.enabled = true;
         if (resetTimeElapsed < aimSnap)
         {
             isAiming = false;
