@@ -440,6 +440,7 @@ GameObject:
   - component: {fileID: 3363828063468870593}
   - component: {fileID: 5394859266962844145}
   - component: {fileID: 6264784266582130764}
+  - component: {fileID: 937720672}
   m_Layer: 0
   m_Name: GunPos
   m_TagString: Untagged
@@ -541,9 +542,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 8706568834170201507}
+  noClip: {fileID: 937720672}
   gunHipPosTransform: {fileID: 1999668269}
   gunAimPosTransform: {fileID: 395247268}
   aimSnap: 0.075
+--- !u!114 &937720672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5394859266962844144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f13bd23bb651b2649a56870c5c61e1d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 3.25
+  radius: 0.125
+  offsetCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 3.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  clippingLayerMask:
+    serializedVersion: 2
+    m_Bits: 513
 --- !u!1001 &2030736347341139936
 PrefabInstance:
   m_ObjectHideFlags: 0
