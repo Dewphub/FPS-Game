@@ -214,8 +214,24 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     public void UIUpdate()
     {
         GameManager.Instance.HPBar.fillAmount = (float) HP / (float)HPOrig;
+        if(HP > (float)HPOrig/2)
+        {
+            GameManager.Instance.HPBar.color = GameManager.Instance.HPBarColorHealthy;
+        }
+        else if(HP > (float)HPOrig/4 && HP <= (float)HPOrig / 2)
+        {
+            GameManager.Instance.HPBar.color = Color.yellow;
+        }
+        else if (HP > 0 &&  HP <= (float)HPOrig/4)
+        {
+            GameManager.Instance.HPBar.color = Color.red;
+            Invoke("ShowDyingIndicator", 0.05f);
+        }
     }
-
+    public void ShowDyingIndicator()
+    {
+        GameManager.Instance.ShowDyingIndicator();
+    }
     public void Respawn()
     {
         HP = HPOrig; 

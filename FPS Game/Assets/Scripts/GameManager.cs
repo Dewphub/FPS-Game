@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -20,7 +21,9 @@ public class GameManager : MonoBehaviour
     public GameObject loseMenu;
     public GameObject checkpointMenu;
     public Image HPBar;
+    public Color HPBarColorHealthy;
     public Image towerHPBar;
+    public Image dyingIndicator;
     public TextMeshProUGUI enemiesRemainingText;
     public RawImage previousGun;
     public RawImage nextGun;
@@ -31,6 +34,8 @@ public class GameManager : MonoBehaviour
     public bool playerIsAiming;
     public int enemiesRemaining;
 
+    public bool fadeIn;
+    public bool fadeOut;
    
     float TIME_SCALE_DEFAULT;
     void Awake()
@@ -52,6 +57,7 @@ public class GameManager : MonoBehaviour
         {
             UpdateGunUI(playerScript.GetSelectedGun(), playerScript.gunList[playerScript.GetSelectedGun()]);
         }
+        HPBarColorHealthy = Color.green;
     }
 
     void Update()
@@ -71,6 +77,45 @@ public class GameManager : MonoBehaviour
                 ResumeState();
             }
         }
+        if (fadeIn)
+        {
+            if (dyingIndicator.color.a < 1)
+            {
+                dyingIndicator.color += new Color(0f, 0f, 0f, 0.7f) * Time.deltaTime;
+                if (dyingIndicator.color.a >= 1)
+                {
+                    fadeIn = false;
+                    HideDyingIndicator();
+                }
+            }
+        }
+        if (fadeOut)
+        {
+            if (dyingIndicator.color.a >= 0)
+            {
+                dyingIndicator.color -= new Color(0f, 0f, 0f, 0.7f) * Time.deltaTime;
+                if (dyingIndicator.color.a <= Mathf.Epsilon)
+                {
+                    Debug.Log("dyingindicator alpha reached min");
+                    fadeOut = false;
+                    if(HPBar.fillAmount <= 0.25f)
+                    {
+                        Debug.Log("Should be calling ShowDyingIndicator");
+                        ShowDyingIndicator();
+                    }
+                }
+            }
+        }
+    }
+
+    private void HideDyingIndicator()
+    {
+        fadeOut = true;
+    }
+
+    public void ShowDyingIndicator()
+    {
+        fadeIn = true;
     }
 
     public void PauseState()
