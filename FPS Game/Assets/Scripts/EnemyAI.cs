@@ -57,7 +57,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     float stoppingDistOrig;
     float speed;
     int originalHP;
-    Material alphaMaterial;
 
     public static event EventHandler TakingDamageFromPlayer;
     void Start()
@@ -67,7 +66,6 @@ public class EnemyAI : MonoBehaviour, IDamage
         spawnFX.Play();
         originalHP = HP;
         TakingDamageFromPlayer += OtherAI_TakingDamageFromPlayer;
-        alphaMaterial = model.material;
     }
 
     private void OtherAI_TakingDamageFromPlayer(object sender, EventArgs e)
@@ -200,7 +198,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         anim.SetTrigger("Shoot");
         audioSource.PlayOneShot(shootSFX, shootSFXVolume);
         GameObject bulletClone = Instantiate(bullet, shootPos.position, bullet.transform.rotation);
-        bulletClone.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed; //Always shoots toward player
+        bulletClone.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed; 
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
