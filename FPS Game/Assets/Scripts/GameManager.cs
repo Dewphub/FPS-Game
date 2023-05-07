@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject checkpointMenu;
+    public GameObject reticle;
     public Image HPBar;
     public Color HPBarColorHealthy;
     public Image towerHPBar;
@@ -230,5 +231,10 @@ public class GameManager : MonoBehaviour
     public void ClearNextGun()
     {
         nextGun.texture = blankGun;
+    }
+
+    public GameObject GetReticle()
+    {
+        return reticle;
     }
 }

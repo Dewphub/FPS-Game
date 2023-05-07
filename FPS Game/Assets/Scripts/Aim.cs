@@ -21,6 +21,7 @@ public class Aim : MonoBehaviour
     bool canAim;
     bool isAiming;
     Transform gunPos;
+    GameObject reticle;
 
     private void Start()
     {
@@ -29,6 +30,7 @@ public class Aim : MonoBehaviour
         gunHipRot = gunHipPosTransform.localRotation;
         gunAimRot = gunAimPosTransform.localRotation;
         gunPos = transform;
+        reticle = GameManager.Instance.GetReticle();
 
     }
     private void LateUpdate()
@@ -36,11 +38,13 @@ public class Aim : MonoBehaviour
         if(Input.GetMouseButton(1) && controller.gunList.Count > 0 && canAim)
         {
             resetTimeElapsed = 0;
+            reticle.SetActive(true);
             GunPosAim();
         }
         else if(controller.gunList.Count > 0)
         {
             aimTimeElapsed = 0;
+            reticle.SetActive(false);
             GunPosReset();
         }
     }

@@ -36,7 +36,7 @@ public class SeekerAI : MonoBehaviour, IDamage
         HP -= amount;
         if(HP <= 0)
         {
-            StartCoroutine(ProcessExplosion());
+            StartCoroutine(ProcessDeathExplosion());
         }
     }
 
@@ -55,11 +55,11 @@ public class SeekerAI : MonoBehaviour, IDamage
         {
             IDamage damageable = collision.gameObject.GetComponent<IDamage>();
             damageable?.TakeDamage(5);
-            StartCoroutine(ProcessExplosion());
+            StartCoroutine(ProcessHitExplosion());
         }
     }
 
-    IEnumerator ProcessExplosion()
+    IEnumerator ProcessDeathExplosion()
     {
         isExploding = true;
         if(isExploding)
@@ -69,6 +69,20 @@ public class SeekerAI : MonoBehaviour, IDamage
                 particles[i].SetActive(true);
             }
             yield return new WaitForSeconds(0.5f);
+            isExploding = false;
+        }
+        Destroy(gameObject);
+    }
+    IEnumerator ProcessHitExplosion()
+    {
+        isExploding = true;
+        if (isExploding)
+        {
+            for (int i = 0; i < particles.Length; i++)
+            {
+                particles[i].SetActive(true);
+            }
+            yield return new WaitForSeconds(0.01f);
             isExploding = false;
         }
         Destroy(gameObject);

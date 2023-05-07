@@ -15,7 +15,7 @@ MonoBehaviour:
   shootDamage: 5
   shootRate: 3
   shootDist: 200
-  recoilX: -30
+  recoilX: -20
   recoilY: 0.05
   recoilZ: 3
   snappiness: 20
