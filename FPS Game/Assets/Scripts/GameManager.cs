@@ -96,11 +96,9 @@ public class GameManager : MonoBehaviour
                 dyingIndicator.color -= new Color(0f, 0f, 0f, 0.7f) * Time.deltaTime;
                 if (dyingIndicator.color.a <= Mathf.Epsilon)
                 {
-                    Debug.Log("dyingindicator alpha reached min");
                     fadeOut = false;
                     if(HPBar.fillAmount <= 0.25f)
                     {
-                        Debug.Log("Should be calling ShowDyingIndicator");
                         ShowDyingIndicator();
                     }
                 }

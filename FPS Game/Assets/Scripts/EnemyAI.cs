@@ -41,6 +41,11 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] AudioClip shootSFX;
     [Range(0, 1)][SerializeField] float shootSFXVolume;
 
+    [Header("----- FadeIn/FadeOut -----")]
+    [SerializeField] float fadeDelay = 10f;
+    [SerializeField] float alphaValue = 0;
+
+
     Vector3 playerDir;
     Vector3 startingPos;
     public Collider[] colliders = new Collider[10];
@@ -52,6 +57,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     float stoppingDistOrig;
     float speed;
     int originalHP;
+    Material alphaMaterial;
 
     public static event EventHandler TakingDamageFromPlayer;
     void Start()
@@ -61,6 +67,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         spawnFX.Play();
         originalHP = HP;
         TakingDamageFromPlayer += OtherAI_TakingDamageFromPlayer;
+        alphaMaterial = model.material;
     }
 
     private void OtherAI_TakingDamageFromPlayer(object sender, EventArgs e)
@@ -162,7 +169,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
         else
         {
-            TakingDamageFromPlayer(this, EventArgs.Empty);
+            TakingDamageFromPlayer?.Invoke(this, EventArgs.Empty);
             anim.SetTrigger("Damage");
             agent.SetDestination(GameManager.Instance.player.transform.position);
             agent.stoppingDistance = 0;
@@ -207,7 +214,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     IEnumerator OnDead()
     {
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
+        StartCoroutine(FadeDeath(true));
     }
 
     IEnumerator Hide(Transform _player)
@@ -260,5 +267,23 @@ public class EnemyAI : MonoBehaviour, IDamage
                 }
             }
         }
+    }
+
+    IEnumerator FadeDeath(bool _toFade)
+    {
+        Vector3 deathPosition = transform.position - new Vector3(0, 2, 0);
+        while(_toFade)
+        {
+            if (transform.position.y >= deathPosition.y)
+            {
+                transform.position -= new Vector3(0, 0.5f * Time.deltaTime, 0);
+                yield return null;
+            }
+            else
+            {
+                _toFade = false;
+            }
+        }
+        Destroy(gameObject);
     }
 }
