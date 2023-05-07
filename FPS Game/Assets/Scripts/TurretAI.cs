@@ -31,13 +31,14 @@ public class TurretAI : MonoBehaviour, IDamage
     { 
 
         Vector3 attackDirection = playerTransform.position - transform.position;
-        if(Vector3.Distance(playerTransform.position, transform.position) <= attackDistance)
+        float angleToPlayerY = Vector3.Angle(new(0f, transform.position.y, 0f), new(0f, playerTransform.position.y, 0f));
+        if (Vector3.Distance(playerTransform.position, transform.position) <= attackDistance && angleToPlayerY <= 10f) 
         {
             transform.forward = Vector3.Lerp(transform.forward, new(attackDirection.x, 0, attackDirection.z), turnSpeed * Time.fixedDeltaTime); 
 
             if (!isShooting)
             {
-                StartCoroutine(Shoot());
+                StartCoroutine(ShootPlayer());
             }
             else
             {
@@ -47,7 +48,7 @@ public class TurretAI : MonoBehaviour, IDamage
         
     }
 
-    IEnumerator Shoot()
+    IEnumerator ShootPlayer()
     {
         isShooting = true;
         yield return new WaitForSeconds(shootRate);

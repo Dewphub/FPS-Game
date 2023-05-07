@@ -9807,7 +9807,7 @@ GameObject:
   - component: {fileID: 3901444080472738505}
   - component: {fileID: 3901444080472738504}
   - component: {fileID: 3901444080472738506}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TurretContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9849,7 +9849,7 @@ MonoBehaviour:
   bulletSpeed: 50
   shootRate: 0.2
   turnSpeed: 0.5
-  HP: 1
+  HP: 10
   animator: {fileID: 8086180146223537495}
   bullet: {fileID: 2328479212586331206, guid: 6f16797373de87e4a90e08af89b585eb, type: 3}
   shootPos: {fileID: 3901444079358745247}
