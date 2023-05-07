@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.SceneManagement;
 
 public class DataPersistenceManager : MonoBehaviour
 {
@@ -64,6 +65,7 @@ public class DataPersistenceManager : MonoBehaviour
         Debug.Log("Game saved successfully");
 
         dataHandler.Save(gameData);
+        dataHandler.SaveLevel(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnApplicationQuit()

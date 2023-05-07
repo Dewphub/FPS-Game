@@ -314,7 +314,8 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     {
         this.gunList = data.gunList;
         this.selectedGun = data.selectedGun;
-        GameManager.Instance.playerSpawnPos.transform.position = data.playerPos;
+        if (data.playerPos != Vector3.zero) 
+            GameManager.Instance.playerSpawnPos.transform.position = data.playerPos;
         transform.position = data.playerPos;
         ChangeGun();
     }
