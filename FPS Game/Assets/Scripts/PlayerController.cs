@@ -65,6 +65,11 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         UIUpdate();
         Respawn();
         controller.enabled = true;
+        if(gunList.Count > 0)
+        {
+            newAimPos.SetGunAimPos(gunList[selectedGun].gunAimPos);
+            ChangeGun();
+        }
     }
 
     void Update()
@@ -222,6 +227,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
     public void GunPickup(gunStats gunStat)
     {
+        StartCoroutine(RestrictAiming());
         Debug.Log("GunPickup Entered");
         gunList.Add(gunStat);
         Debug.Log("gunList added");
@@ -252,16 +258,12 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
         {
             selectedGun++;
-            newAimPos.SetGunAimPos((gunList[selectedGun].gunAimPos));
-            recoil.UpdateGun(gunList[selectedGun]);
             ChangeGun();
             
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
         {
             selectedGun--;
-            newAimPos.SetGunAimPos((gunList[selectedGun].gunAimPos));
-            recoil.UpdateGun(gunList[selectedGun]);
             ChangeGun();
         }
     }
@@ -276,8 +278,12 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         gunMaterial.material = gunList[selectedGun].model.GetComponent<MeshRenderer>().sharedMaterial;
 
         GameManager.Instance.UpdateGunUI(selectedGun, gunList[selectedGun]);
+        StartCoroutine(RestrictAiming());
+        newAimPos.SetGunAimPos((gunList[selectedGun].gunAimPos));
+        recoil.UpdateGun(gunList[selectedGun]);
         UpdateMuzzleFlashLocation(gunList[selectedGun]);
         StopCoroutine(Shoot());
+        isShooting = false;
     }
 
     public bool GetIsShooting()
@@ -304,5 +310,12 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     public int GetSelectedGun()
     {
         return selectedGun;
+    }
+
+    IEnumerator RestrictAiming()
+    {
+        newAimPos.SetCanAim(false);
+        yield return new WaitForSeconds(0.05f);
+        newAimPos.SetCanAim(true);
     }
 }

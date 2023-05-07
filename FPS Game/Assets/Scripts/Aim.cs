@@ -18,6 +18,7 @@ public class Aim : MonoBehaviour
     Quaternion gunHipRot;
     Quaternion gunAimRot;
 
+    bool canAim;
     bool isAiming;
     Transform gunPos;
 
@@ -30,9 +31,9 @@ public class Aim : MonoBehaviour
         gunPos = transform;
 
     }
-    private void Update()
+    private void LateUpdate()
     {
-        if(Input.GetMouseButton(1) && controller.gunList.Count > 0)
+        if(Input.GetMouseButton(1) && controller.gunList.Count > 0 && canAim)
         {
             resetTimeElapsed = 0;
             GunPosAim();
@@ -72,6 +73,10 @@ public class Aim : MonoBehaviour
         return isAiming;
     }
 
+    public void SetCanAim(bool _canAim)
+    {
+        canAim = _canAim;
+    }
     public void SetGunAimPos(Vector3 _gunAimPos)
     {
         gunAimPos = _gunAimPos;
