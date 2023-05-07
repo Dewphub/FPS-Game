@@ -1,4 +1,5 @@
 using Palmmedia.ReportGenerator.Core.CodeAnalysis;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,13 +52,26 @@ public class EnemyAI : MonoBehaviour, IDamage
     float stoppingDistOrig;
     float speed;
     int originalHP;
+
+    public static event EventHandler TakingDamageFromPlayer;
     void Start()
     {
         stoppingDistOrig = agent.stoppingDistance;
         startingPos = transform.position;
         spawnFX.Play();
         originalHP = HP;
+        TakingDamageFromPlayer += OtherAI_TakingDamageFromPlayer;
     }
+
+    private void OtherAI_TakingDamageFromPlayer(object sender, EventArgs e)
+    {
+        if (sender as GameObject != this)
+        {
+            agent.SetDestination(GameManager.Instance.player.transform.position);
+            agent.stoppingDistance = 0;
+        }
+    }
+
     void Update()
     {
         if (agent.isActiveAndEnabled) 
@@ -134,7 +148,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-        audioSource.PlayOneShot(takeDamageSFX[Random.Range(0, takeDamageSFX.Length)], takeDamageSFXVolume);
+        audioSource.PlayOneShot(takeDamageSFX[UnityEngine.Random.Range(0, takeDamageSFX.Length)], takeDamageSFXVolume);
         bloodFX.Play();
         StartCoroutine(FlashColor());
         if (HP <= 0)
@@ -148,6 +162,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
         else
         {
+            TakingDamageFromPlayer(this, EventArgs.Empty);
             anim.SetTrigger("Damage");
             agent.SetDestination(GameManager.Instance.player.transform.position);
             agent.stoppingDistance = 0;
@@ -162,7 +177,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
             yield return new WaitForSeconds(roamPauseTime);
 
-            Vector3 ranPos = Random.insideUnitSphere * roamDist;
+            Vector3 ranPos = UnityEngine.Random.insideUnitSphere * roamDist;
             ranPos += startingPos;
 
             NavMeshHit hit;

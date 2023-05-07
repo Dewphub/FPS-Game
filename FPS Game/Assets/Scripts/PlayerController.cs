@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     [SerializeField] GameObject muzzleFlashObject;
 
     [Header("----- Player Stats -----")]
-    [Range(1, 10)] [SerializeField] int HP;
+    [Range(1, 50)] [SerializeField] int HP;
     [Range(3, 8)][SerializeField] float playerSpeed;
     [Range(1.5f, 5)][SerializeField] float sprintMod;
     [Range(8, 25)][SerializeField] float jumpHeight;
@@ -47,8 +47,6 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     int selectedGun;
     int jumpedTimes;
     int HPOrig; 
-    float aimTimeElapsed;
-    float gunResetTimeElapsed;
 
 
     bool groundedPlayer;
@@ -107,6 +105,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         switch(triggerTag)
         {
             case "Health":
+            if(HP == HPOrig)
+            {
+                break;
+            }
             aud.PlayOneShot(replenishHP, replenishHPVol);
             HP = HPOrig;
             UIUpdate();
