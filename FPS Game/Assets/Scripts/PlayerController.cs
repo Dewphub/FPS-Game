@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     int jumpedTimes;
     int HPOrig; 
     float climbAmount;
+    float verticalInput;
 
 
     bool groundedPlayer;
