@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         aim = player.GetComponentInChildren<Aim>();
         if(playerScript.gunList.Count > 0)
         {
-            UpdateGunUI(playerScript.GetSelectedGun(), playerScript.gunList[playerScript.GetSelectedGun()]);
+            UpdateGunUI(playerScript.GetSelectedGunIndex(), playerScript.GetSelectedGun());
         }
         HPBarColorHealthy = Color.green;
     }
@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
+            aim.enabled = false;
             isPaused = !isPaused;
             activeMenu = pauseMenu;
             activeMenu.SetActive(isPaused);
@@ -75,6 +76,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                aim.enabled=true;
                 ResumeState();
             }
         }

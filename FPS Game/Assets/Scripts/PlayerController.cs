@@ -66,11 +66,6 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         UIUpdate();
         Respawn();
         controller.enabled = true;
-        if(gunList.Count > 0)
-        {
-            newAimPos.SetGunAimPos(gunList[selectedGun].gunAimPos);
-            ChangeGun();
-        }
     }
 
     void Update()
@@ -256,7 +251,6 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
     public void GunPickup(gunStats gunStat)
     {
-        StartCoroutine(RestrictAiming());
         Debug.Log("GunPickup Entered");
         gunList.Add(gunStat);
         Debug.Log("gunList added");
@@ -270,6 +264,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         gunMaterial.material = gunStat.model.GetComponent<MeshRenderer>().sharedMaterial;
 
         selectedGun = gunList.Count - 1;
+        StartCoroutine(RestrictAiming());
         UpdateMuzzleFlashLocation(gunList[selectedGun]);
         newAimPos.SetGunAimPos(gunList[selectedGun].gunAimPos);
         recoil.UpdateGun(gunList[selectedGun]);
@@ -327,6 +322,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         if (data.playerPos != Vector3.zero) 
             GameManager.Instance.playerSpawnPos.transform.position = data.playerPos;
         transform.position = data.playerPos;
+        this.gunList[selectedGun].gunAimPos = data.gunList[selectedGun].gunAimPos;
         ChangeGun();
     }
 
@@ -335,13 +331,23 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         data.gunList = this.gunList;
         data.selectedGun = this.selectedGun;
         data.playerPos = GameManager.Instance.playerSpawnPos.transform.position;
+        data.gunList[selectedGun].gunAimPos = this.gunList[selectedGun].gunAimPos;
     }
 
-    public int GetSelectedGun()
+    public gunStats GetSelectedGun()
+    {
+        return gunList[selectedGun];
+    }
+
+    public int GetSelectedGunIndex()
     {
         return selectedGun;
     }
 
+    public Vector3 GetAimPos()
+    {
+        return gunList[selectedGun].gunAimPos;
+    }
     IEnumerator RestrictAiming()
     {
         newAimPos.SetCanAim(false);

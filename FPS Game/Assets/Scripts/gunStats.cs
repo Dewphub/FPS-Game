@@ -19,4 +19,5 @@ public class gunStats : ScriptableObject
     public Vector3 gunAimPos;
     public Vector3 muzzleFlashPos;
     public Texture gunIcon;
+    public float fieldOfView;
 }

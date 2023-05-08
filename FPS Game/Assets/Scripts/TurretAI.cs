@@ -40,10 +40,6 @@ public class TurretAI : MonoBehaviour, IDamage
             {
                 StartCoroutine(ShootPlayer());
             }
-            else
-            {
-                animator.SetBool("isShooting", false);
-            }
         }
         
     }
@@ -51,11 +47,12 @@ public class TurretAI : MonoBehaviour, IDamage
     IEnumerator ShootPlayer()
     {
         isShooting = true;
-        yield return new WaitForSeconds(shootRate);
         animator.SetBool("isShooting", true);
+        yield return new WaitForSeconds(shootRate);
         GameObject bulletClone = Instantiate(bullet, shootPos.position, bullet.transform.rotation);
         bulletClone.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
         isShooting = false;
+        animator.SetBool("isShooting", false);
     }
 
     public void TakeDamage(int amount)

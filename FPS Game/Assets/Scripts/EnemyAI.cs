@@ -41,10 +41,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] AudioClip shootSFX;
     [Range(0, 1)][SerializeField] float shootSFXVolume;
 
-    [Header("----- FadeIn/FadeOut -----")]
-    [SerializeField] float fadeDelay = 10f;
-    [SerializeField] float alphaValue = 0;
-
 
     Vector3 playerDir;
     Vector3 startingPos;
