@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     [Range(10, 50)][SerializeField] float gravityValue;
     [Range(1, 3)][SerializeField] int jumpsMax;
     [Range(0, 1)][SerializeField] float aimSnap;
+    [SerializeField] float climbSpeed;
 
     [Header("----- Gun Stats -----")]
     public List<gunStats> gunList = new List<gunStats>();
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     int selectedGun;
     int jumpedTimes;
     int HPOrig; 
+    float climbAmount;
 
 
     bool groundedPlayer;
@@ -114,6 +116,13 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             UIUpdate();
             Destroy(other.gameObject);
                 break;
+        }
+
+        if(other.CompareTag("Ladder"))
+        {
+            climbAmount = verticalInput * climbSpeed * Time.deltaTime;
+
+            controller.transform.Translate(Vector3.up * climbAmount);
         }
     }
 
