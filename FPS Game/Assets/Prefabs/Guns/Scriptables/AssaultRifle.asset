@@ -23,7 +23,9 @@ MonoBehaviour:
   model: {fileID: 919132149155446097, guid: 33269b2b610f4c245a712795c1927939, type: 3}
   gunShotAud: {fileID: 8300000, guid: 7f384cd4ce4038f46952637943c39ed9, type: 3}
   gunShotAudVol: 0.2
-  gunAimPos: {x: 0, y: -0.41, z: 0.941}
+  gunAimPos: {x: -0.007, y: -0.4, z: 0.88}
   muzzleFlashPos: {x: 0, y: 0.26, z: 1.24}
   gunIcon: {fileID: 2800000, guid: 694985cff92d6f44baad7c71581245f7, type: 3}
   fieldOfView: 50
+  clipSize: 50
+  maxClips: 5

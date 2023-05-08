@@ -16,6 +16,8 @@ public class TurretAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject[] particles;
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip explosion;
 
 
     GameObject player;
@@ -73,6 +75,10 @@ public class TurretAI : MonoBehaviour, IDamage
             for (int i = 0; i < particles.Length; i++)
             {
                 particles[i].SetActive(true);
+            }
+            if(!aud.isPlaying)
+            {
+                aud.PlayOneShot(explosion);
             }
             yield return new WaitForSeconds(0.5f);
             isExploding = false;

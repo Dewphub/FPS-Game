@@ -10,6 +10,8 @@ public class SeekerAI : MonoBehaviour, IDamage
     [SerializeField] float lerpDuration;
     [SerializeField] int attackDistance;
     [SerializeField] GameObject[] particles;
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip explosion;
 
     GameObject player;
     Transform playerTransform;
@@ -68,6 +70,10 @@ public class SeekerAI : MonoBehaviour, IDamage
             {
                 particles[i].SetActive(true);
             }
+            if(!aud.isPlaying && explosion != null)
+            {
+                aud.PlayOneShot(explosion);
+            }
             yield return new WaitForSeconds(0.5f);
             isExploding = false;
         }
@@ -81,6 +87,10 @@ public class SeekerAI : MonoBehaviour, IDamage
             for (int i = 0; i < particles.Length; i++)
             {
                 particles[i].SetActive(true);
+            }
+            if (!aud.isPlaying && explosion != null)
+            {
+                aud.PlayOneShot(explosion);
             }
             yield return new WaitForSeconds(0.01f);
             isExploding = false;

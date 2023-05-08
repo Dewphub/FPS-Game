@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public RawImage nextGun;
     public RawImage currGun;
     public Texture blankGun;
+    public TextMeshProUGUI ammoPanelTMP;
 
     public bool isPaused;
     public bool playerIsAiming;
@@ -57,6 +58,10 @@ public class GameManager : MonoBehaviour
         if(playerScript.gunList.Count > 0)
         {
             UpdateGunUI(playerScript.GetSelectedGunIndex(), playerScript.GetSelectedGun());
+        }
+        else
+        {
+            ammoPanelTMP.text = "";
         }
         HPBarColorHealthy = Color.green;
     }
@@ -197,6 +202,7 @@ public class GameManager : MonoBehaviour
                 {
                     ClearNextGun();
                 }
+                ammoPanelTMP.text = gun.GetRemainingClipAmount().ToString() + " / " + gun.GetRemainingAmmo().ToString();
             }
             else
             {

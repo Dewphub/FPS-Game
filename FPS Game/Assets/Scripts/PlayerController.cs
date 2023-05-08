@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
     int selectedGun;
     int jumpedTimes;
-    int HPOrig; 
+    int HPOrig;
     float climbAmount;
     float verticalInput;
 
@@ -93,6 +93,15 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             GameManager.Instance.ClearPrevGun();
             gunMaterial = null;
             gunModel = null;
+        }
+        if(Input.GetKeyUp(KeyCode.R))
+        {
+            if(gunList.Count > 0)
+            {
+                //TODO create reload Coroutine
+                GetSelectedGun().CalcReload();
+                GameManager.Instance.UpdateGunUI(selectedGun, GetSelectedGun());
+            }
         }
     }
 
@@ -187,15 +196,35 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     IEnumerator Shoot()
     {
         isShooting = true;
-        StartCoroutine(MuzzleFlash());
-        recoil.RecoilFire();
-        aud.PlayOneShot(gunList[selectedGun].gunShotAud, gunList[selectedGun].gunShotAudVol);
-        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out RaycastHit hit, shootDist))
+        //Check to see if player has any ammo left in the clip
+        if (GetSelectedGun().GetRemainingClipAmount() > 0)
         {
-            IDamage damageable = hit.collider.GetComponent<IDamage>();
-            damageable?.TakeDamage(shootDamage);
+            //Use the ammo
+            GetSelectedGun().UseAmmo();
+            //MuzzleFlash FX
+            StartCoroutine(MuzzleFlash());
+            //Calculate the recoil
+            recoil.RecoilFire();
+            //Gun goes bang
+            aud.PlayOneShot(GetSelectedGun().gunShotAud, GetSelectedGun().gunShotAudVol);
+            //Check to see if the player hit a damageable thing
+            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out RaycastHit hit, shootDist))
+            {
+                IDamage damageable = hit.collider.GetComponent<IDamage>();
+                damageable?.TakeDamage(shootDamage);
+            }
+            //update remaining ammo on UI
+            GameManager.Instance.UpdateGunUI(selectedGun, GetSelectedGun());
         }
+        else if (GetSelectedGun().GetRemainingAmmo() > 0)
+        {
+            //TODO create reload Coroutine
 
+            //Player didn't have any ammo in the clip, but has leftover ammo
+
+            GetSelectedGun().CalcReload(); //fill the clip and subtract ammo used
+            GameManager.Instance.UpdateGunUI(selectedGun, GetSelectedGun()); //update the UI with current gun ammo situation
+        }
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
@@ -251,30 +280,43 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
     public void GunPickup(gunStats gunStat)
     {
-        Debug.Log("GunPickup Entered");
-        gunList.Add(gunStat);
-        Debug.Log("gunList added");
-        aud.PlayOneShot(gunPickupSFX, gunPickupSFXVolume);
+        if (gunList.Count > 0 && gunList.Contains(gunStat))
+        {
+            for (int i = 0; i < gunList.Count; i++)
+            {
+                if (gunList[i] == gunStat)
+                {
+                    gunStat.PickedUpGunAsAmmo();
+                    if(i == selectedGun)
+                    {
+                        aud.PlayOneShot(gunPickupSFX, gunPickupSFXVolume);
+                        GameManager.Instance.UpdateGunUI(i, gunStat);
+                    }
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("GunPickup Entered");
+            gunList.Add(gunStat);
+            Debug.Log("gunList added");
+            aud.PlayOneShot(gunPickupSFX, gunPickupSFXVolume);
 
-        shootDamage = gunStat.shootDamage;
-        shootDist = gunStat.shootDist;
-        shootRate = gunStat.shootRate;
+            shootDamage = gunStat.shootDamage;
+            shootDist = gunStat.shootDist;
+            shootRate = gunStat.shootRate;
 
-        gunModel.mesh = gunStat.model.GetComponent<MeshFilter>().sharedMesh;
-        gunMaterial.material = gunStat.model.GetComponent<MeshRenderer>().sharedMaterial;
+            gunModel.mesh = gunStat.model.GetComponent<MeshFilter>().sharedMesh;
+            gunMaterial.material = gunStat.model.GetComponent<MeshRenderer>().sharedMaterial;
 
-        selectedGun = gunList.Count - 1;
-        StartCoroutine(RestrictAiming());
-        UpdateMuzzleFlashLocation(gunList[selectedGun]);
-        newAimPos.SetGunAimPos(gunList[selectedGun].gunAimPos);
-        recoil.UpdateGun(gunList[selectedGun]);
-        GameManager.Instance.UpdateGunUI(selectedGun, gunList[selectedGun]);
-
-    }
-
-    private void UpdateMuzzleFlashLocation(gunStats gun)
-    {
-        muzzleFlashObject.transform.localPosition = gunList[selectedGun].muzzleFlashPos;
+            selectedGun = gunList.Count - 1;
+            gunStat.SetDefaultGunStats();
+            StartCoroutine(RestrictAiming());
+            UpdateMuzzleFlashLocation(gunStat);
+            newAimPos.SetGunAimPos(gunStat.gunAimPos);
+            recoil.UpdateGun(gunStat);
+            GameManager.Instance.UpdateGunUI(selectedGun, gunStat);
+        }
     }
 
     void SelectGun()
@@ -294,6 +336,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
     void ChangeGun()
     {
+        isShooting = false;
+        StopCoroutine(Shoot());
+        StartCoroutine(RestrictAiming());
+
         shootDamage = gunList[selectedGun].shootDamage;
         shootDist = gunList[selectedGun].shootDist;
         shootRate = gunList[selectedGun].shootRate;
@@ -301,18 +347,11 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         gunModel.mesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
         gunMaterial.material = gunList[selectedGun].model.GetComponent<MeshRenderer>().sharedMaterial;
 
+
         GameManager.Instance.UpdateGunUI(selectedGun, gunList[selectedGun]);
-        StartCoroutine(RestrictAiming());
         newAimPos.SetGunAimPos((gunList[selectedGun].gunAimPos));
         recoil.UpdateGun(gunList[selectedGun]);
         UpdateMuzzleFlashLocation(gunList[selectedGun]);
-        StopCoroutine(Shoot());
-        isShooting = false;
-    }
-
-    public bool GetIsShooting()
-    {
-        return isShooting;
     }
 
     public void LoadData(GameData data)
@@ -322,8 +361,16 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         if (data.playerPos != Vector3.zero) 
             GameManager.Instance.playerSpawnPos.transform.position = data.playerPos;
         transform.position = data.playerPos;
-        this.gunList[selectedGun].gunAimPos = data.gunList[selectedGun].gunAimPos;
         ChangeGun();
+    }
+    private void UpdateMuzzleFlashLocation(gunStats gun)
+    {
+        muzzleFlashObject.transform.localPosition = gunList[selectedGun].muzzleFlashPos;
+    }
+
+    public bool GetIsShooting()
+    {
+        return isShooting;
     }
 
     public void SaveData(ref GameData data)
@@ -331,7 +378,6 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         data.gunList = this.gunList;
         data.selectedGun = this.selectedGun;
         data.playerPos = GameManager.Instance.playerSpawnPos.transform.position;
-        data.gunList[selectedGun].gunAimPos = this.gunList[selectedGun].gunAimPos;
     }
 
     public gunStats GetSelectedGun()
@@ -354,4 +400,17 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         yield return new WaitForSeconds(0.05f);
         newAimPos.SetCanAim(true);
     }
+    
+    public void AmmoPickUp(AmmoStats ammo)
+    {
+        aud.PlayOneShot(gunPickupSFX, gunPickupSFXVolume);
+        ammo.gun.PickedUpAmmoBox(ammo);
+        if(ammo.gun == GetSelectedGun())
+        {
+            GameManager.Instance.UpdateGunUI(GetSelectedGunIndex(), GetSelectedGun());
+        }
+    }
+
+    public List<gunStats> GetGunList()
+    { return gunList; }
 }

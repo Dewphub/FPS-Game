@@ -16,6 +16,5 @@ public class GameData
         selectedGun = 0;
         playerPos = Vector3.zero;
         gunsPickedUp = new SerializableDictionary<string, bool>();
-
     }
 }

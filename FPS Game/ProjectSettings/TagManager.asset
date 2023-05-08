@@ -8,6 +8,11 @@ TagManager:
   - Health
   - BlockOff
   - Ladder
+  - PistolAmmo
+  - AssaultRifleAmmo
+  - ShotgunAmmo
+  - RifleAmmo
+  - SmgAmmo
   layers:
   - Default
   - TransparentFX
