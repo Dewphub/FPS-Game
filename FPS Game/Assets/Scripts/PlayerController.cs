@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
     void Update()
     {
-        Debug.Log(controller.isGrounded);
+        //Debug.Log(controller.isGrounded);
         Sprint();
 
         if (GameManager.Instance.activeMenu == null)
