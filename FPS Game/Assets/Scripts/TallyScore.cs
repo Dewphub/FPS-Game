@@ -54,20 +54,14 @@ public class TallyScore : MonoBehaviour, IDataPersistence
     IEnumerator countText(TMP_Text text, int number)
     {
         updating = true;
-        if (number == 0)
-            temp = 0;
-        else
-            temp = 1;
+        temp = 1;
         while (text.text != number.ToString())
         {
             if (UnityEngine.Input.GetButtonDown("Continue"))
                 temp = number;
             text.text = temp.ToString();
             temp++;
-            if (number == 0)
-                yield return null;
-            else
-                yield return new WaitForSeconds(5/number);
+            yield return new WaitForSeconds(5/number);
         }
         updating = false;
     }
