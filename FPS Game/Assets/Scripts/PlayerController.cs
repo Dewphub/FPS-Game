@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     [Range(0, 1)][SerializeField] float aimSnap;
     [SerializeField] float climbSpeed;
 
+
     [Header("----- Gun Stats -----")]
     public List<gunStats> gunList = new List<gunStats>();
     public MeshRenderer gunMaterial;
@@ -53,6 +54,9 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     int secrets;
     float climbAmount;
     float verticalInput;
+
+  [SerializeField] float coyoteTick;
+  [SerializeField] float coyoteTime;
 
 
     bool groundedPlayer;
@@ -107,6 +111,17 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
                 GameManager.Instance.UpdateGunUI(selectedGun, GetSelectedGun());
             }
         }
+
+        // CoyoteTime
+
+        if(groundedPlayer)
+        {
+            coyoteTime = coyoteTick;
+        }
+        else
+        {
+            coyoteTime -= Time.deltaTime;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -156,13 +171,16 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             (transform.forward * Input.GetAxis("Vertical"));
 
         controller.Move(playerSpeed * Time.deltaTime * move);
-
         // Changes the height position of the player..
-        if (Input.GetButtonDown("Jump") && jumpedTimes < jumpsMax)
+        if (Input.GetButtonDown("Jump") && coyoteTime > 0)
         {
-            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
-            playerVelocity.y = jumpHeight;
-            jumpedTimes++;
+            if (Input.GetButtonDown("Jump") && jumpedTimes < jumpsMax)
+            {
+                aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+                playerVelocity.y = jumpHeight;
+                jumpedTimes++;
+            }
+
         }
 
         playerVelocity.y -= gravityValue * Time.deltaTime;
