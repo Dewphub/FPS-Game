@@ -2373,7 +2373,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2906053783445841539}
         m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
-        m_MethodName: RespawnPlayer
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
