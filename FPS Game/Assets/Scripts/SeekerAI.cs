@@ -55,6 +55,7 @@ public class SeekerAI : MonoBehaviour, IDamage
     {
         if(collision.gameObject.CompareTag("Player"))
         {
+            Register();
             IDamage damageable = collision.gameObject.GetComponent<IDamage>();
             damageable?.TakeDamage(5);
             StartCoroutine(ProcessHitExplosion());
@@ -96,5 +97,13 @@ public class SeekerAI : MonoBehaviour, IDamage
             isExploding = false;
         }
         Destroy(gameObject);
+    }
+
+    void Register()
+    {
+        if (!DamageIndicatorSystem.CheckIfObjectInSight(transform))
+        {
+            DamageIndicatorSystem.CreateIndicator(transform);
+        }
     }
 }

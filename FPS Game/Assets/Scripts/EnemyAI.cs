@@ -18,6 +18,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] ParticleSystem bloodFX;
     [SerializeField] SphereCollider coverChecker;
     [SerializeField] LayerMask hideLayer;
+    [SerializeField] GameObject[] loot;
 
     [Header("----- Enemy Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
@@ -40,6 +41,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Range(0, 1)] [SerializeField] float takeDamageSFXVolume;
     [SerializeField] AudioClip shootSFX;
     [Range(0, 1)][SerializeField] float shootSFXVolume;
+    
 
 
     Vector3 playerDir;
@@ -210,6 +212,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     IEnumerator OnDead()
     {
         yield return new WaitForSeconds(1f);
+        Instantiate(loot[UnityEngine.Random.Range(0, loot.Length)], transform.position, Quaternion.identity);
         StartCoroutine(FadeDeath(true));
     }
 

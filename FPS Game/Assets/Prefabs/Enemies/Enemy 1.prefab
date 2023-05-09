@@ -276,6 +276,13 @@ MonoBehaviour:
   hideLayer:
     serializedVersion: 2
     m_Bits: 512
+  loot:
+  - {fileID: 3471551171481090378, guid: 97c5c163146fd4544a1f66a4cb444ed5, type: 3}
+  - {fileID: 3645066442843084280, guid: de73df49257245543a070c6d12cc5890, type: 3}
+  - {fileID: 5814982254567091138, guid: 41e5a232892ff4b4e8cfa303ccc579f1, type: 3}
+  - {fileID: 1402643857825159705, guid: c1a6b350a6a6cea4987241248ffde0e0, type: 3}
+  - {fileID: 1972479406941287409, guid: 10d84e8cf104d3d49b352b79da5732a5, type: 3}
+  - {fileID: 6030592366141475662, guid: 45b76562d70e8cb459e92925bf21feeb, type: 3}
   HP: 10
   playerFaceSpeed: 5
   sightAngle: 90

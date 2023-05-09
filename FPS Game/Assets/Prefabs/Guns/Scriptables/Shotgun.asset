@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   shootDamage: 8
-  shootRate: 2
+  shootRate: 0.8
   shootDist: 20
   recoilX: -50
   recoilY: 3
