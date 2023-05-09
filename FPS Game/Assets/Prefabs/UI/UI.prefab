@@ -665,6 +665,7 @@ GameObject:
   - component: {fileID: 1704623793520679005}
   - component: {fileID: 1704623793520679004}
   - component: {fileID: 2906053783445841539}
+  - component: {fileID: 1547780739}
   m_Layer: 5
   m_Name: Game Manager
   m_TagString: Untagged
@@ -724,6 +725,7 @@ MonoBehaviour:
   currGun: {fileID: 5144053691085774750}
   blankGun: {fileID: 2800000, guid: 8856b0845affc5e4f966d3ea3df42af0, type: 3}
   ammoPanelTMP: {fileID: 1627034865589454347}
+  levelLoader: {fileID: 1547780739}
   isPaused: 0
   playerIsAiming: 0
   enemiesRemaining: 0
@@ -741,6 +743,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f9eec055cba73459023dba3301305d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1547780739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704623793520679006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c99bff5c8331864caa41ab5a2e74151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingScreen: {fileID: 5512613971413791209}
+  loadingSlider: {fileID: 3411256593045004751}
 --- !u!1 &1704623793573520468
 GameObject:
   m_ObjectHideFlags: 0
@@ -4912,7 +4928,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.000061035156, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
