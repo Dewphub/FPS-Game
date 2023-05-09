@@ -48,6 +48,9 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     int selectedGun;
     int jumpedTimes;
     int HPOrig;
+    float time;
+    int playerDeaths;
+    int secrets;
     float climbAmount;
     float verticalInput;
 
@@ -75,6 +78,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
         if (GameManager.Instance.activeMenu == null)
         {
+            time = Time.deltaTime;
             Movement();
             SelectGun();
 
@@ -244,6 +248,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
         if(HP <= 0) 
         {
+            playerDeaths++;
             GameManager.Instance.OnDead();
         }
     }
@@ -317,6 +322,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             recoil.UpdateGun(gunStat);
             GameManager.Instance.UpdateGunUI(selectedGun, gunStat);
         }
+        secrets++;
     }
 
     void SelectGun()
@@ -356,8 +362,12 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        this.gunList = data.gunList;
-        this.selectedGun = data.selectedGun;
+        secrets = data.secretsFound;
+        time = data.time;
+        playerDeaths = data.deaths;
+        GameManager.Instance.enemiesKilled = data.enemiesKilled;
+        gunList = data.gunList;
+        selectedGun = data.selectedGun;
         if (data.playerPos != Vector3.zero) 
             GameManager.Instance.playerSpawnPos.transform.position = data.playerPos;
         transform.position = data.playerPos;
@@ -375,8 +385,12 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
-        data.gunList = this.gunList;
-        data.selectedGun = this.selectedGun;
+        data.enemiesKilled = GameManager.Instance.enemiesKilled;
+        data.time = time;
+        data.deaths = playerDeaths;
+        data.secretsFound = secrets;
+        data.gunList = gunList;
+        data.selectedGun = selectedGun;
         data.playerPos = GameManager.Instance.playerSpawnPos.transform.position;
     }
 

@@ -9,6 +9,10 @@ public class GameData
     public int selectedGun;
     public Vector3 playerPos;
     public SerializableDictionary<string, bool> gunsPickedUp;
+    public int enemiesKilled;
+    public float time;
+    public int secretsFound;
+    public int deaths;
 
     public GameData()
     {

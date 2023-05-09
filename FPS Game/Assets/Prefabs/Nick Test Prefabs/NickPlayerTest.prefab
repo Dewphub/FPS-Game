@@ -210,6 +210,7 @@ MonoBehaviour:
   gravityValue: 25
   jumpsMax: 2
   aimSnap: 0.01
+  climbSpeed: 0
   gunList: []
   gunMaterial: {fileID: 3363828063468870593}
   gunModel: {fileID: 3862121023829547265}
@@ -486,6 +487,9 @@ MonoBehaviour:
   gunHipPosTransform: {fileID: 1999668269}
   gunAimPosTransform: {fileID: 395247268}
   aimSnap: 0.075
+  cam: {fileID: 0}
+  weaponCam: {fileID: 0}
+  camAnimationSpeed: 0
 --- !u!114 &937720672
 MonoBehaviour:
   m_ObjectHideFlags: 0

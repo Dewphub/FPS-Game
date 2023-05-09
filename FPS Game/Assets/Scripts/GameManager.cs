@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     public bool playerIsAiming;
     public int enemiesRemaining;
+    public int enemiesKilled;
 
     public bool fadeIn;
     public bool fadeOut;
@@ -147,6 +148,10 @@ public class GameManager : MonoBehaviour
     public void UpdateGameGoal(int amount)
     {
         enemiesRemaining += amount;
+        if (amount < 0)
+        {
+            enemiesKilled -= amount;
+        }
         Debug.Log("Enemies Remaining: " + enemiesRemaining);
         //enemiesRemainingText.text = enemiesRemaining.ToString("F0");
 /*        if (enemiesRemaining <= 0)
