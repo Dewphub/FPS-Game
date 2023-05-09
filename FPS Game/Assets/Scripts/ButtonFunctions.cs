@@ -18,6 +18,7 @@ public class ButtonFunctions : MonoBehaviour
     public void Quit()
     {
         Debug.Log("Quit is being called");
+        DataPersistenceManager.Instance.SaveGame();
         Application.Quit();
     }
 
