@@ -13,6 +13,7 @@ public class GameData
     public float time;
     public int secretsFound;
     public int deaths;
+    public Aim aimPos;
 
     public GameData()
     {
@@ -20,5 +21,6 @@ public class GameData
         selectedGun = 0;
         playerPos = Vector3.zero;
         gunsPickedUp = new SerializableDictionary<string, bool>();
+        aimPos = new Aim();
     }
 }

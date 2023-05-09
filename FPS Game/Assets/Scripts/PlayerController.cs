@@ -380,6 +380,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
     public void LoadData(GameData data)
     {
+        newAimPos = data.aimPos;
         secrets = data.secretsFound;
         time = data.time;
         playerDeaths = data.deaths;
@@ -410,6 +411,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         data.gunList = gunList;
         data.selectedGun = selectedGun;
         data.playerPos = GameManager.Instance.playerSpawnPos.transform.position;
+        data.aimPos = newAimPos;
     }
 
     public gunStats GetSelectedGun()
