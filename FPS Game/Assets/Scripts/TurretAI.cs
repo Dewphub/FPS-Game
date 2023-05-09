@@ -53,6 +53,8 @@ public class TurretAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(shootRate);
         GameObject bulletClone = Instantiate(bullet, shootPos.position, bullet.transform.rotation);
         bulletClone.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
+        Bullet bulletInfo = bulletClone.GetComponent<Bullet>();
+        bulletInfo.SetShooter(transform);
         isShooting = false;
         animator.SetBool("isShooting", false);
     }
