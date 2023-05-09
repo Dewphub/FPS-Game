@@ -12,7 +12,7 @@ public class ButtonFunctions : MonoBehaviour
     public void Restart()
     {
         GameManager.Instance.ResumeState();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.Instance.ReloadLevelAsynchronously();
     }
 
     public void Quit()

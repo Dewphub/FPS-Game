@@ -250,9 +250,14 @@ public class GameManager : MonoBehaviour
         return reticle;
     }
 
-    public void LoadLevelAsynchronously()
+    public void LoadNextLevelAsynchronously()
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        levelLoader.LoadNextScene(sceneIndex);
+    }
+    public void ReloadLevelAsynchronously()
+    {
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         levelLoader.LoadNextScene(sceneIndex);
     }
 }
