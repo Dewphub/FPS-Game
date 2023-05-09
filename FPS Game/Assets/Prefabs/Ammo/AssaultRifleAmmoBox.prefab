@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3482360823446497224}
   - component: {fileID: 3492676837738113752}
   - component: {fileID: 5938519275608566364}
+  - component: {fileID: 2914309878736706710}
   m_Layer: 0
   m_Name: AssaultRifleAmmoBox
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3471551171481090378}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 25.642206, y: 0.08, z: 14.283292}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
@@ -111,3 +112,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1823368, y: 0.17054461, z: 0.27000004}
   m_Center: {x: -0.035586238, y: 0.08523748, z: 0}
+--- !u!114 &2914309878736706710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471551171481090378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee782402780cc574b8108171b1b208a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightChangeSpeed: 0.5
+  rotateSpeed: 50
+  height: 0.25

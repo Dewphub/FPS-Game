@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606430651860344616}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.48, y: 0, z: -7.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9620cd45cd1197243832dc6c92e45aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: c1edd6ba-19b0-4fe9-b85b-5a8df925ed92
+  id: 39a78809-2e40-43de-a47d-7386d07cea3f
   gun: {fileID: 11400000, guid: 8f04faca6314d2b438dcf8a148383a7c, type: 2}
   model: {fileID: 3787090019717745207}
   mat: {fileID: 1399076900296785661}

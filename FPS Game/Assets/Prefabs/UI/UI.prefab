@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 189f621fad34bd24a997e4a2429e315c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: saveData1.game
+  fileName: saveDataBacon.game
 --- !u!1 &25382756399900928
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,6 +730,7 @@ MonoBehaviour:
   isPaused: 0
   playerIsAiming: 0
   enemiesRemaining: 0
+  enemiesKilled: 0
   fadeIn: 0
   fadeOut: 0
 --- !u!114 &2906053783445841539
@@ -5329,7 +5330,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9013286419127987987
 RectTransform:
   m_ObjectHideFlags: 0
