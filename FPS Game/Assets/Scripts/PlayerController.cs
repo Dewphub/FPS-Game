@@ -362,15 +362,16 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        newAimPos = data.aimPos;
         secrets = data.secretsFound;
         time = data.time;
         playerDeaths = data.deaths;
         GameManager.Instance.enemiesKilled = data.enemiesKilled;
         gunList = data.gunList;
         selectedGun = data.selectedGun;
+        if (data.aimPos != Vector3.zero)
+            newAimPos.transform.position = data.aimPos;
         if (data.playerPos != Vector3.zero) 
-            GameManager.Instance.playerSpawnPos.transform.position = data.playerPos;
+            GameManager.Instance.playerSpawnPos.transform.localPosition = data.playerPos;
         transform.position = data.playerPos;
         ChangeGun();
     }
@@ -393,7 +394,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         data.gunList = gunList;
         data.selectedGun = selectedGun;
         data.playerPos = GameManager.Instance.playerSpawnPos.transform.position;
-        data.aimPos = newAimPos;
+        data.aimPos = newAimPos.transform.localPosition;
     }
 
     public gunStats GetSelectedGun()
