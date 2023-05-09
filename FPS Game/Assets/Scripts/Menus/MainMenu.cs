@@ -15,6 +15,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject loadingScreen;
     [SerializeField] GameObject startMenu;
     [SerializeField] Slider loadingBar;
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip[] menuAud;
 
     private void Start()
     {
@@ -23,6 +25,11 @@ public class MainMenu : MonoBehaviour
         {
             Destroy(continueButton);
         }
+    }
+
+    public void playSound(float volume)
+    {
+        aud.PlayOneShot(menuAud[Random.Range(0, menuAud.Length)], volume);
     }
 
     public void NewGame(int sceneIndex)

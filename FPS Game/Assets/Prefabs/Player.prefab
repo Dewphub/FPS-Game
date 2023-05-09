@@ -154,18 +154,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 2444942938180526624}
   aud: {fileID: -847100614589714909}
+  recoil: {fileID: 0}
+  newAimPos: {fileID: 0}
+  muzzleFlashObject: {fileID: 0}
   HP: 10
   playerSpeed: 5
   sprintMod: 3
   jumpHeight: 12
   gravityValue: 25
   jumpsMax: 2
+  aimSnap: 0
+  climbSpeed: 0
   gunList: []
   gunMaterial: {fileID: 3638952754250616019}
   gunModel: {fileID: 3006044350857170451}
   shootDamage: 1
   shootRate: 0.5
   shootDist: 1
+  muzzleFlashFX: 0
   audSteps:
   - {fileID: 8300000, guid: a33305fa6e6a4b640ad7c2ec2c7a5bec, type: 3}
   - {fileID: 8300000, guid: 5f79e8346f1c4a34e9be8ecbd06a8acf, type: 3}
@@ -203,7 +209,7 @@ AudioSource:
   m_GameObject: {fileID: 3423316177575975185}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: ba434cdd289acf349ba5e451c2616994, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
