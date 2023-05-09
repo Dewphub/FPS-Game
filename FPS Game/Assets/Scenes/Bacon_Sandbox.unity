@@ -1412,6 +1412,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3475032112387248123, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5512613971413791209, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6832259997045377129, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549451531439220975, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9110208141381241439, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9110208141381241439, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
 --- !u!1 &1549051206
@@ -1492,6 +1516,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1597565216 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6930625497967112546, guid: f5f214676ce37d54b9f3f29a260fbe1c, type: 3}
+  m_PrefabInstance: {fileID: 6058750466437219611}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1597565220
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597565216}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 112.8891, y: 110.058784, z: 160.0099}
+  m_Center: {x: 0, y: 0, z: 80.55576}
 --- !u!1001 &1600249296
 PrefabInstance:
   m_ObjectHideFlags: 0

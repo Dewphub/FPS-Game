@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -31,6 +32,9 @@ public class GameManager : MonoBehaviour
     public RawImage currGun;
     public Texture blankGun;
     public TextMeshProUGUI ammoPanelTMP;
+
+    [Header("Passthrough Objects")]
+    public LevelLoader levelLoader;
 
     public bool isPaused;
     public bool playerIsAiming;
@@ -244,5 +248,11 @@ public class GameManager : MonoBehaviour
     public GameObject GetReticle()
     {
         return reticle;
+    }
+
+    public void LoadLevelAsynchronously()
+    {
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        levelLoader.LoadNextScene(sceneIndex);
     }
 }

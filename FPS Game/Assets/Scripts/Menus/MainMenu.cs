@@ -12,6 +12,9 @@ public class MainMenu : MonoBehaviour
     private FileDataHandler dataHandler;
     private FileDataHandler curDataHandler;
     [SerializeField] GameObject continueButton;
+    [SerializeField] GameObject loadingScreen;
+    [SerializeField] GameObject startMenu;
+    [SerializeField] Slider loadingBar;
 
     private void Start()
     {
@@ -22,19 +25,32 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void NewGame()
+    public void NewGame(int sceneIndex)
     {
         dataHandler.Save(new GameData());
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        StartCoroutine(LoadSceneAsynchronously(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
     public void ContinueGame()
     {
-        SceneManager.LoadScene(dataHandler.LoadLevel());
+        StartCoroutine(LoadSceneAsynchronously(dataHandler.LoadLevel()));
+        //SceneManager.LoadScene(dataHandler.LoadLevel());
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    IEnumerator LoadSceneAsynchronously(int SceneIndex)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneIndex);
+        startMenu.SetActive(false);
+        loadingScreen.SetActive(true);
+        while(!operation.isDone)
+        {
+            loadingBar.value = operation.progress;
+            yield return null;
+        }
     }
 }
