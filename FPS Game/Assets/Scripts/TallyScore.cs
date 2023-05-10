@@ -26,7 +26,7 @@ public class TallyScore : MonoBehaviour, IDataPersistence
     {
         if (!updating)
         {
-            if (EnemiesKilled.text == "")
+            if (EnemiesKilled.text != enemiesKilled.ToString())
             {
                 StartCoroutine(countText(EnemiesKilled, enemiesKilled));
             }
