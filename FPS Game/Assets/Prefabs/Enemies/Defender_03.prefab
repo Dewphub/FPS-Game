@@ -910,7 +910,7 @@ MonoBehaviour:
     m_Bits: 512
   loot:
   - {fileID: 6030592366141475662, guid: 45b76562d70e8cb459e92925bf21feeb, type: 3}
-  HP: 10
+  HP: 1000
   playerFaceSpeed: 10
   sightAngle: 179
   roamPauseTime: 2
