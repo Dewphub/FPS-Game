@@ -1732,6 +1732,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6963500554195584125}
   - component: {fileID: 3548979075131201984}
+  - component: {fileID: 1135461116}
   m_Layer: 0
   m_Name: Ladder
   m_TagString: Ladder
@@ -1769,8 +1770,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6ae8751b9d38644ae747686bfd822c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  climber: {fileID: 0}
-  climbSpeed: 5
+--- !u!65 &1135461116
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6963500554196080733}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 4.62368, z: 0.63942146}
+  m_Center: {x: 0, y: 2.2531633, z: 0.42678165}
 --- !u!1 &6963500554196080735
 GameObject:
   m_ObjectHideFlags: 0

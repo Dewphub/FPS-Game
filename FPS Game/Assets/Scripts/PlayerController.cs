@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     bool isSprinting;
     bool isPlayingSteps;
     bool isShooting;
+    bool isOnLadder;
 
     Vector3 playerVelocity;
     Vector3 move;
@@ -79,7 +80,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         if (GameManager.Instance.activeMenu == null)
         {
             time = Time.deltaTime;
-            Movement();
+            Movement(isOnLadder);
             SelectGun();
 
             if (gunList.Count > 0 && !isShooting && Input.GetButton("Shoot"))
@@ -135,7 +136,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         }
     }
 
-    void Movement()
+    void Movement(bool _isOnLadder)
     {
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer)
@@ -152,10 +153,20 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             }
         }
 
-        move = (transform.right * Input.GetAxis("Horizontal")) +
-            (transform.forward * Input.GetAxis("Vertical"));
+        if(!isOnLadder)
+        {
+            move = (transform.right * Input.GetAxis("Horizontal")) +
+                (transform.forward * Input.GetAxis("Vertical"));
 
-        controller.Move(playerSpeed * Time.deltaTime * move);
+            controller.Move(playerSpeed * Time.deltaTime * move);
+            playerVelocity.y -= gravityValue * Time.deltaTime;
+            controller.Move(playerVelocity * Time.deltaTime);
+        }
+        else
+        {
+            move = (transform.up * Input.GetAxis("Vertical"));
+            controller.Move(playerSpeed * Time.deltaTime * move);
+        }
 
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && jumpedTimes < jumpsMax)
@@ -164,9 +175,6 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             playerVelocity.y = jumpHeight;
             jumpedTimes++;
         }
-
-        playerVelocity.y -= gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
     }
 
     void Sprint()
@@ -335,6 +343,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
         {
+            Debug.Log("Scroll wheel = " + Input.GetAxis("Mouse ScrollWheel") + " selectedGun = " + selectedGun);
             selectedGun--;
             ChangeGun();
         }
@@ -342,9 +351,9 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
     void ChangeGun()
     {
+        StartCoroutine(RestrictAiming());
         isShooting = false;
         StopCoroutine(Shoot());
-        StartCoroutine(RestrictAiming());
 
         shootDamage = gunList[selectedGun].shootDamage;
         shootDist = gunList[selectedGun].shootDist;
@@ -431,4 +440,14 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
     public List<gunStats> GetGunList()
     { return gunList; }
+
+    public void SetIsOnLadder(bool _isOnLadder)
+    {
+        isOnLadder = _isOnLadder;
+    }
+
+    public bool GetIsOnLadder()
+    {
+        return isOnLadder;
+    }
 }
