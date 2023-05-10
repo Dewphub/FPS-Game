@@ -160,7 +160,6 @@ public class DefenderBossAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             StopAllCoroutines();
-            GameManager.Instance.UpdateGameGoal(-1);
             anim.SetBool("Dead", true);
             GetComponent<CapsuleCollider>().enabled = false;
             agent.enabled = false;
