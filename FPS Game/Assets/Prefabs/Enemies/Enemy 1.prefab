@@ -285,9 +285,9 @@ MonoBehaviour:
   - {fileID: 6030592366141475662, guid: 45b76562d70e8cb459e92925bf21feeb, type: 3}
   HP: 10
   playerFaceSpeed: 5
-  sightAngle: 90
+  sightAngle: 179
   roamPauseTime: 5
-  roamDist: 5
+  roamDist: 15
   animTransSpeed: 3
   rotationSpeed: 20
   shootDamage: 2
@@ -364,7 +364,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 50
+  m_Radius: 100
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &-6454043489592429110
 AudioSource:
