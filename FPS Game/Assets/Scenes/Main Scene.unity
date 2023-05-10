@@ -294,6 +294,18 @@ PrefabInstance:
       propertyPath: fileName
       value: saveData1.game
       objectReference: {fileID: 0}
+    - target: {fileID: 1704623793682690555, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Continue
+      objectReference: {fileID: 0}
+    - target: {fileID: 1704623793682690557, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
+      propertyPath: m_Name
+      value: Continue
+      objectReference: {fileID: 0}
+    - target: {fileID: 1704623793767790459, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
+      propertyPath: m_text
+      value: Continue
+      objectReference: {fileID: 0}
     - target: {fileID: 1704623793783580833, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
       propertyPath: m_Name
       value: UI
