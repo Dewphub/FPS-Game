@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
         if (GameManager.Instance.activeMenu == null)
         {
-            time = Time.deltaTime;
+            time += Time.deltaTime;
             Movement(isOnLadder);
             SelectGun();
 
