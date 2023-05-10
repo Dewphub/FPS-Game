@@ -287,6 +287,6 @@ public class DefenderBossAI : MonoBehaviour, IDamage
             }
         }
         Dying?.Invoke();
-        Destroy(gameObject);
+        this.gameObject.SetActive(false);
     }
 }
