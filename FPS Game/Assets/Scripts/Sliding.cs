@@ -7,8 +7,8 @@ public class Sliding : MonoBehaviour
     [Header("References")]
     public Transform orientation;
     public Transform playerObj;
-    private Rigidbody rb;
-    private PlayerController controller;
+    public Rigidbody rb;
+    public PlayerController controller;
 
     [Header("Sliding")]
     public float maxSlideTime;
@@ -38,23 +38,22 @@ public class Sliding : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-
-        if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0))
-            StartSlide();
-
-        if (Input.GetKeyUp(slideKey) && controller.sliding)
-            StopSlide();
     }
 
     private void FixedUpdate()
     {
-        if (controller.sliding)
+        if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0))
+            StartSlide();
             SlidingMovement();
+
+        if (Input.GetKeyUp(slideKey) && !controller.sliding)
+            StopSlide();
     }
 
     private void StartSlide()
     {
         controller.sliding = true;
+
         if (Input.GetKeyDown(slideKey))
         {
             playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
@@ -67,6 +66,9 @@ public class Sliding : MonoBehaviour
     private void SlidingMovement()
     {
         Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        rb.AddForce(inputDirection * slideForce, ForceMode.Force);
+
+        slideTimer -= Time.deltaTime;
 
         if (slideTimer <= 0)
             StopSlide();

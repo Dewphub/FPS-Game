@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     [Range(8, 25)][SerializeField] float jumpHeight;
     [Range(10, 50)][SerializeField] float gravityValue;
     [Range(1, 3)][SerializeField] int jumpsMax;
+    [SerializeField] float maxJumpTime;
     [Range(0, 1)][SerializeField] float aimSnap;
     [SerializeField] float climbSpeed;
 
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     int secrets;
     float climbAmount;
     float verticalInput;
+    float jumpTime;
 
     [Header("---- Crouching ----")]
     public float crouchSpeed;
@@ -67,6 +69,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     bool isPlayingSteps;
     bool isShooting;
     bool isOnLadder;
+    bool isJumping;
 
     Vector3 playerVelocity;
     Vector3 move;
@@ -182,14 +185,31 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         }
 
         // Changes the height position of the player..
+        
         if (Input.GetButtonDown("Jump") && jumpedTimes < jumpsMax)
         {
             aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+            isJumping = true;
+            jumpTime = 0f;
             playerVelocity.y = jumpHeight;
             jumpedTimes++;
         }
-<<<<<<< Updated upstream
-=======
+        else if (Input.GetButton("Jump") && isJumping)
+        {
+            if (jumpTime < maxJumpTime)
+            {
+                jumpTime += Time.deltaTime;
+                playerVelocity.y = jumpHeight - (jumpTime / maxJumpTime) * jumpHeight;
+            }
+            else
+            {
+                isJumping = false;
+            }
+        }
+        else
+        {
+            isJumping = false;
+        }
 
 
         // start crouch
@@ -207,7 +227,6 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
         playerVelocity.y -= gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
->>>>>>> Stashed changes
     }
 
     void Sprint()
