@@ -156,6 +156,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
     void Movement(bool _isOnLadder)
     {
+
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer)
         {
@@ -186,6 +187,8 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             controller.Move(playerSpeed * Time.deltaTime * move);
         }
 
+        if (Input.GetAxis("Vertical") < 0 && controller.isGrounded)
+        { isOnLadder = false; }
         // Changes the height position of the player..
         
         if (Input.GetButtonDown("Jump") && jumpedTimes < jumpsMax)
