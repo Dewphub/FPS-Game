@@ -185,6 +185,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         {
             move = (transform.up * Input.GetAxis("Vertical"));
             controller.Move(playerSpeed * Time.deltaTime * move);
+            if(Input.GetAxis("Vertical") < 0 && controller.isGrounded)
+            {
+                isOnLadder = false;
+            }
         }
         // Changes the height position of the player..
         
