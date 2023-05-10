@@ -82,7 +82,7 @@ public class TallyScore : MonoBehaviour, IDataPersistence
         int hours = 0;
         while (temp < timeSpent)
         {
-            if (UnityEngine.Input.GetButtonDown("Continue"))
+            //if (UnityEngine.Input.GetButtonDown("Continue"))
                 temp = timeSpent;
             seconds = temp % 60;
             minutes = ((temp - seconds) / 60) % 60;
