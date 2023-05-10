@@ -5,8 +5,7 @@ using static UnityEngine.ParticleSystem;
 
 public class ExplosiveBarrel : MonoBehaviour, IDamage
 {
-    [SerializeField] private GameObject explosionTrigger;
-    [SerializeField] int damage;
+    [SerializeField] private SphereCollider explosionTrigger;
     [SerializeField] GameObject[] explosionFX;
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip explosionAudio;
@@ -33,7 +32,8 @@ public class ExplosiveBarrel : MonoBehaviour, IDamage
             yield return new WaitForSeconds(0.5f);
             isExploding = false;
         }
-        explosionTrigger.SetActive(true);
+        explosionTrigger.enabled = true;
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 }
