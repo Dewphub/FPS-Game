@@ -5,6 +5,7 @@ using TMPro;
 using System;
 using UnityEngine.Windows;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class TallyScore : MonoBehaviour, IDataPersistence
 {
@@ -45,8 +46,8 @@ public class TallyScore : MonoBehaviour, IDataPersistence
             {
                 ContinueText.SetActive(true);
                 ContinueText.transform.localPosition = new Vector3(0,Mathf.Sin(Time.time * 5),0) * 10;
-                if (UnityEngine.Input.GetButtonDown("Continue"))
-                    SceneLoader.SetActive(true);
+                if (UnityEngine.Input.GetButtonUp("Continue"))
+                    GameManager.Instance.LoadNextLevelAsynchronously();
             }
         }
     }
@@ -79,32 +80,24 @@ public class TallyScore : MonoBehaviour, IDataPersistence
         int seconds = 0;
         int minutes = 0;
         int hours = 0;
-        if (timeSpent <= 0)
+        while (temp < timeSpent)
         {
-            TimeSpent.text = "00:00:00";
-            yield return null;
-        }
-        else
-        {
-            while (temp <= timeSpent)
+            if (UnityEngine.Input.GetButtonDown("Continue"))
+                temp = timeSpent;
+            seconds = temp % 60;
+            minutes = ((temp - seconds) / 60) % 60;
+            hours = (((temp - seconds) / 60) - minutes) / 60;
+            if (hours < 24)
             {
-                if (UnityEngine.Input.GetButtonDown("Continue"))
-                    temp = timeSpent;
-                seconds = temp % 60;
-                minutes = ((temp - seconds) / 60) % 60;
-                hours = (((temp - seconds) / 60) - minutes) / 60;
-                if (hours < 24)
-                {
-                    TimeSpent.text = $"{hours.ToString()}:{minutes.ToString()}:{seconds.ToString()}";
-                    temp += timeSpent / 3600;
-                    yield return null;
-                }
-                else
-                {
-                    TimeSpent.text = $"{((hours - hours % 24) / 24).ToString()} days" + (hours % 24 != 0 ? $" and {hours % 24} hours" : "");
-                    temp += 3600;
-                    yield return new WaitForSeconds(0.5f);
-                }
+                TimeSpent.text = $"{hours.ToString()}:{minutes.ToString()}:{seconds.ToString()}";
+                temp += timeSpent / 3600;
+                yield return null;
+            }
+            else
+            {
+                TimeSpent.text = $"{((hours - hours % 24) / 24).ToString()} days" + (hours % 24 != 0 ? $" and {hours % 24} hours" : "");
+                temp += 3600;
+                yield return new WaitForSeconds(0.5f);
             }
         }
         updating = false;

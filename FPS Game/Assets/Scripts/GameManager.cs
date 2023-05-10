@@ -257,6 +257,7 @@ public class GameManager : MonoBehaviour
     public void LoadNextLevelAsynchronously()
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        Debug.Log(sceneIndex);
         levelLoader.LoadNextScene(sceneIndex);
     }
     public void ReloadLevelAsynchronously()
