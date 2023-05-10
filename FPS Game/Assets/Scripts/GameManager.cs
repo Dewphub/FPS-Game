@@ -69,6 +69,8 @@ public class GameManager : MonoBehaviour
             ammoPanelTMP.text = "";
         }
         HPBarColorHealthy = Color.green;
+
+        DefenderBossAI.Dying += BossHasDied;
     }
 
     void Update()
@@ -117,6 +119,13 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    void BossHasDied()
+    {
+        activeMenu = winMenu;
+        activeMenu.SetActive(true);
+        PauseState();
     }
 
     private void HideDyingIndicator()
