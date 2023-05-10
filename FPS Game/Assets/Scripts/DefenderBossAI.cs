@@ -21,7 +21,7 @@ public class DefenderBossAI : MonoBehaviour, IDamage
     [SerializeField] GameObject[] loot;
 
     [Header("----- Enemy Stats -----")]
-    [Range(1, 10)][SerializeField] int HP;
+    [Range(100, 1000)][SerializeField] int HP;
     [Range(1, 10)][SerializeField] int playerFaceSpeed;
     [Range(0, 179)][SerializeField] int sightAngle;
     [SerializeField] int roamPauseTime;

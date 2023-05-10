@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     [SerializeField] float maxJumpTime;
     [Range(0, 1)][SerializeField] float aimSnap;
     [SerializeField] float climbSpeed;
+    [SerializeField] float pushForce;
 
     [Header("----- Gun Stats -----")]
     public List<gunStats> gunList = new List<gunStats>();
@@ -161,6 +162,14 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Pushable"))
+        {
+            TryGetComponent<Rigidbody>(out rb);
+            rb.AddForce(collision.transform.forward * pushForce);
+        }
+    }
     void Movement(bool _isOnLadder)
     {
 
