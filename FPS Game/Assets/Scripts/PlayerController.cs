@@ -186,9 +186,6 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             move = (transform.up * Input.GetAxis("Vertical"));
             controller.Move(playerSpeed * Time.deltaTime * move);
         }
-
-        if (Input.GetAxis("Vertical") < 0 && controller.isGrounded)
-        { isOnLadder = false; }
         // Changes the height position of the player..
         
         if (Input.GetButtonDown("Jump") && jumpedTimes < jumpsMax)
@@ -229,9 +226,11 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         {
             transform.localScale = new Vector3(transform.localScale.x, startY, transform.localScale.z);
         }
-
-        playerVelocity.y -= gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        if(!isOnLadder)
+        {
+            playerVelocity.y -= gravityValue * Time.deltaTime;
+            controller.Move(playerVelocity * Time.deltaTime);
+        }
     }
 
     void Sprint()

@@ -45,7 +45,7 @@ public class Ladder : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+        if (other.CompareTag("Player"))
         {
             /*climber = other.gameObject;*/
             isClimbing = true;
