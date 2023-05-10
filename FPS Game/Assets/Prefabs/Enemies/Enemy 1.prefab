@@ -305,6 +305,7 @@ MonoBehaviour:
   takeDamageSFXVolume: 0.452
   shootSFX: {fileID: 8300000, guid: 6165d457a78dd1142a2676f657dcb620, type: 3}
   shootSFXVolume: 0.095
+  takeCoverEnabled: 1
   colliders:
   - {fileID: 0}
   - {fileID: 0}

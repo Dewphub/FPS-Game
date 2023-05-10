@@ -41,8 +41,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Range(0, 1)] [SerializeField] float takeDamageSFXVolume;
     [SerializeField] AudioClip shootSFX;
     [Range(0, 1)][SerializeField] float shootSFXVolume;
-    
 
+    [SerializeField] bool takeCoverEnabled;
 
     Vector3 playerDir;
     Vector3 startingPos;
@@ -114,7 +114,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
     bool CanSeePlayer()
     {
-        playerDir = (GameManager.Instance.player.transform.position - headPos.position);
+        playerDir = (GameManager.Instance.player.transform.position - headPos.position).normalized;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
         Debug.DrawRay(headPos.position, playerDir);
@@ -125,7 +125,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer <= sightAngle)
             {
-                if((float)HP / originalHP >= 0.5f || coverTaken)
+                if((float)HP / originalHP >= 0.5f || coverTaken || !takeCoverEnabled)
                 {
                     agent.stoppingDistance = stoppingDistOrig;
                     agent.SetDestination(GameManager.Instance.player.transform.position);
@@ -139,7 +139,7 @@ public class EnemyAI : MonoBehaviour, IDamage
                             StartCoroutine(Shoot());
                     }
                 }
-                else
+                else if(takeCoverEnabled)
                 {
                     StartCoroutine(Hide(GameManager.Instance.player.transform));
                 }
@@ -196,7 +196,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         anim.SetTrigger("Shoot");
         audioSource.PlayOneShot(shootSFX, shootSFXVolume);
         GameObject bulletClone = Instantiate(bullet, shootPos.position, bullet.transform.rotation);
-        bulletClone.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
+        bulletClone.GetComponent<Rigidbody>().velocity = bulletClone.transform.forward * bulletSpeed;
         Bullet bulletMessenger = bulletClone.GetComponent<Bullet>();
         bulletMessenger.SetShooter(transform);
         yield return new WaitForSeconds(shootRate);

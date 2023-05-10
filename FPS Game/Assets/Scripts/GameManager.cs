@@ -152,7 +152,6 @@ public class GameManager : MonoBehaviour
         {
             enemiesKilled -= amount;
         }
-        Debug.Log("Enemies Remaining: " + enemiesRemaining);
         //enemiesRemainingText.text = enemiesRemaining.ToString("F0");
 /*        if (enemiesRemaining <= 0)
         {

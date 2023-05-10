@@ -70,6 +70,8 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         UIUpdate();
         Respawn();
         controller.enabled = true;
+        float correctHeight = controller.center.y + controller.skinWidth;
+        controller.center = new Vector3(0, correctHeight, 0);
     }
 
     void Update()
@@ -343,7 +345,6 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
         {
-            Debug.Log("Scroll wheel = " + Input.GetAxis("Mouse ScrollWheel") + " selectedGun = " + selectedGun);
             selectedGun--;
             ChangeGun();
         }
