@@ -161,15 +161,6 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             controller.transform.Translate(Vector3.up * climbAmount);
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Pushable"))
-        {
-            TryGetComponent<Rigidbody>(out rb);
-            rb.AddForce(collision.transform.forward * pushForce);
-        }
-    }
     void Movement(bool _isOnLadder)
     {
 

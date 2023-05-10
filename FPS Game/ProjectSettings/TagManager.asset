@@ -14,6 +14,7 @@ TagManager:
   - RifleAmmo
   - SmgAmmo
   - Pickup
+  - Pushable
   layers:
   - Default
   - TransparentFX
