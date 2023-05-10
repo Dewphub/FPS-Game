@@ -71,8 +71,6 @@ public class GameManager : MonoBehaviour
             ammoPanelTMP.text = "";
         }
         HPBarColorHealthy = Color.green;
-
-        DefenderBossAI.Dying += BossHasDied;
     }
 
     void Update()
@@ -125,6 +123,7 @@ public class GameManager : MonoBehaviour
 
     void BossHasDied()
     {
+        DefenderBossAI.Dying -= BossHasDied;
         activeMenu = winMenu;
         activeMenu.SetActive(true);
         PauseState();
@@ -276,5 +275,10 @@ public class GameManager : MonoBehaviour
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         levelLoader.LoadNextScene(sceneIndex);
+    }
+
+    public void BossHasSpawned()
+    {
+        DefenderBossAI.Dying += BossHasDied;
     }
 }

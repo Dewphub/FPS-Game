@@ -67,6 +67,7 @@ public class DefenderBossAI : MonoBehaviour, IDamage
         spawnFX.Play();
         originalHP = HP;
         TakingDamageFromPlayer += OtherAI_TakingDamageFromPlayer;
+        GameManager.Instance.BossHasSpawned();
     }
 
     private void OtherAI_TakingDamageFromPlayer(object sender, EventArgs e)
