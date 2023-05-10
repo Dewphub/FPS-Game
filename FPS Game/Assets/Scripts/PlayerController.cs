@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         startY = transform.localScale.y;
         float correctHeight = controller.center.y + controller.skinWidth;
         controller.center = new Vector3(0, correctHeight, 0);
+        DataPersistenceManager.Instance.SaveGame();
     }
 
     void Update()
