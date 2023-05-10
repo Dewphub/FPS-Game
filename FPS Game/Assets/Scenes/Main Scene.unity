@@ -290,6 +290,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 410585307, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
+      propertyPath: fileName
+      value: saveData1.game
+      objectReference: {fileID: 0}
     - target: {fileID: 1704623793783580833, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
       propertyPath: m_Name
       value: UI
@@ -1335,7 +1339,7 @@ PrefabInstance:
     - target: {fileID: 5540635350293880811, guid: 62ea650fbeac6db45b28c2685cdf3447, type: 3}
       propertyPath: prefab
       value: 
-      objectReference: {fileID: 8476344485015250735, guid: 399eea2a9bdfbf24f91cd872143e7b23, type: 3}
+      objectReference: {fileID: 8476344485015250735, guid: ac1afcbb38a181641903264885f5cc77, type: 3}
     - target: {fileID: 5540635350293880811, guid: 62ea650fbeac6db45b28c2685cdf3447, type: 3}
       propertyPath: intervalTime
       value: 0
@@ -10574,7 +10578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6107710102751173166, guid: 56e21a635185c4143a25f5cd87800263, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.23
       objectReference: {fileID: 0}
     - target: {fileID: 6107710102751173166, guid: 56e21a635185c4143a25f5cd87800263, type: 3}
       propertyPath: m_LocalPosition.z
