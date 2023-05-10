@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08790dfb696e024d80a689c408caf3a, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  shootDamage: 8
+  shootDamage: 15
   shootRate: 0.8
   shootDist: 20
   recoilX: -50
