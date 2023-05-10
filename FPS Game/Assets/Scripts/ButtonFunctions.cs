@@ -17,8 +17,7 @@ public class ButtonFunctions : MonoBehaviour
 
     public void Continue()
     {
-        if(SceneManager.GetActiveScene().buildIndex+1 == SceneManager.sceneCountInBuildSettings)
-            GameManager.Instance.LoadNextLevelAsynchronously();
+        GameManager.Instance.LoadNextLevelAsynchronously();
     }
 
     public void Quit()
