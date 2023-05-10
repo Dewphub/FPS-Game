@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     public bool fadeOut;
    
     float TIME_SCALE_DEFAULT;
+
+    public static event Action PlayerHasDied;
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -172,6 +174,7 @@ public class GameManager : MonoBehaviour
 
     public void OnDead()
     {
+        PlayerHasDied?.Invoke();
         activeMenu = loseMenu;
         activeMenu.SetActive(true);
         PauseState();

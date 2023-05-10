@@ -19,6 +19,10 @@ public class DisappearingPlatform : MonoBehaviour
 
     bool isFlashing;
 
+    private void Awake()
+    {
+        GameManager.PlayerHasDied += PlayerDied;
+    }
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collision detected");
@@ -52,5 +56,10 @@ public class DisappearingPlatform : MonoBehaviour
                 mat.color = Color.white;
             }
         }
+    }
+
+    void PlayerDied()
+    {
+        mat.color = Color.white;
     }
 }
