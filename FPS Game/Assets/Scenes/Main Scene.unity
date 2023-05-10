@@ -582,6 +582,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5120915283377177277, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 2043304445}
+    - target: {fileID: 5120915283377177277, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2103148666}
     - target: {fileID: 7666449126644765975, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -10964,6 +10972,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2041048708}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!20 &2043304445 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8688068046938832167, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
+  m_PrefabInstance: {fileID: 7258861597651072622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2068996085 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6930625497967112546, guid: f5f214676ce37d54b9f3f29a260fbe1c, type: 3}
@@ -11150,6 +11163,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8264579750835374842, guid: 9980aa8c35127e34ca04f297830de2e4, type: 3}
   m_PrefabInstance: {fileID: 2093460102}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2103148666 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5411731646943978858, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
+  m_PrefabInstance: {fileID: 7258861597651072622}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2128677917 stripped
 Transform:
