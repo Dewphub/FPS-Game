@@ -4,29 +4,37 @@ using UnityEngine;
 
 public class Ice : MonoBehaviour
 {
-    [SerializeField] private float iceFriction;
-    [SerializeField] private float iceStopThreshold;
+    public PhysicMaterial ice; // The PhysicMaterial to use for ice physics
+    public float slidingForce = 100f; // The force applied to objects sliding on the ice
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy"))
+        Rigidbody rb = other.attachedRigidbody;
+        if (rb != null)
         {
-            Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
-
-            // Apply ice physics
-            rb.sharedMaterial.friction = iceFriction;
-
-            // Detect when object stopped moving
-            StartCoroutine(DetectStoppedMovement(rb));
+            // Apply ice physics to the object
+           // rb.material = ice;
         }
     }
 
-    private IEnumerator DetectStoppedMovement(Rigidbody2D rb)
+    private void OnTriggerStay(Collider other)
     {
-        while (rb.velocity.magnitude <= iceStopThreshold)
+        Rigidbody rb = other.attachedRigidbody;
+        if (rb != null)
         {
-            yield return null;
+            // Apply sliding force to objects on the ice
+            Vector3 slidingDirection = rb.velocity.normalized;
+            rb.AddForce(slidingDirection * slidingForce * Time.deltaTime);
         }
-        rb.sharedMaterial.friction = 0f;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Rigidbody rb = other.attachedRigidbody;
+        if (rb != null)
+        {
+            // Reset the PhysicMaterial to its default value
+           // rb.material = null;
+        }
     }
 }
