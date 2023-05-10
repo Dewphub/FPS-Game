@@ -65,10 +65,7 @@ public class TallyScore : MonoBehaviour, IDataPersistence
                 temp = number;
             text.text = temp.ToString();
             temp++;
-            if (number == 0)
-                yield return null;
-            else
-                yield return new WaitForSeconds(5/number);
+            yield return new WaitForSeconds(0.1f);
         }
         updating = false;
     }
@@ -82,7 +79,7 @@ public class TallyScore : MonoBehaviour, IDataPersistence
         int hours = 0;
         while (temp < timeSpent)
         {
-            //if (UnityEngine.Input.GetButtonDown("Continue"))
+            if (UnityEngine.Input.GetButtonDown("Continue"))
                 temp = timeSpent;
             seconds = temp % 60;
             minutes = ((temp - seconds) / 60) % 60;
@@ -90,7 +87,10 @@ public class TallyScore : MonoBehaviour, IDataPersistence
             if (hours < 24)
             {
                 TimeSpent.text = $"{hours.ToString()}:{minutes.ToString()}:{seconds.ToString()}";
-                temp += timeSpent / 3600;
+                if (timeSpent > 3600)
+                    temp += timeSpent / 3600;
+                else
+                    temp++;
                 yield return null;
             }
             else
