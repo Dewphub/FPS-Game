@@ -213,6 +213,7 @@ public class DefenderBossAI : MonoBehaviour, IDamage
 
     IEnumerator OnDead()
     {
+        GameManager.Instance.playerScript.SetShootenabled(false);
         yield return new WaitForSeconds(1f);
         Instantiate(loot[UnityEngine.Random.Range(0, loot.Length)], transform.position, Quaternion.identity);
         StartCoroutine(FadeDeath());
@@ -273,7 +274,7 @@ public class DefenderBossAI : MonoBehaviour, IDamage
     IEnumerator FadeDeath()
     {
         Dying?.Invoke();
-        yield return new WaitForSeconds(1);
-        this.gameObject.SetActive(false);
+        yield return new WaitForSeconds(3);
+        Destroy(gameObject);
     }
 }

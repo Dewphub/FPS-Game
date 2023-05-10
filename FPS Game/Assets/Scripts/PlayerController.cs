@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     bool isShooting;
     bool isOnLadder;
     bool isJumping;
+    bool shootingEnabled;
 
     Vector3 playerVelocity;
     Vector3 move;
@@ -89,6 +90,8 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         float correctHeight = controller.center.y + controller.skinWidth;
         controller.center = new Vector3(0, correctHeight, 0);
         DataPersistenceManager.Instance.SaveGame();
+
+        shootingEnabled = true;
     }
 
     void Update()
@@ -104,7 +107,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
             if (gunList.Count > 0 && !isShooting && Input.GetButton("Shoot"))
             {
-                StartCoroutine(Shoot());
+                if(shootingEnabled)
+                {
+                    StartCoroutine(Shoot());
+                }
             }
         }
         //Debugging GunList
@@ -511,5 +517,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     public bool GetIsOnLadder()
     {
         return isOnLadder;
+    }
+
+    public void SetShootenabled(bool _shootEnabled)
+    {
+        shootingEnabled = _shootEnabled;
     }
 }
