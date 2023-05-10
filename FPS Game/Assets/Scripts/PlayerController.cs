@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     [Range(1, 50)] [SerializeField] int HP;
     [Range(3, 8)][SerializeField] float playerSpeed;
     [Range(1.5f, 5)][SerializeField] float sprintMod;
-    [Range(8, 25)][SerializeField] float jumpHeight;
+    [Range(0, 25)][SerializeField] float jumpHeight;
     [Range(10, 50)][SerializeField] float gravityValue;
     [Range(1, 3)][SerializeField] int jumpsMax;
     [SerializeField] float maxJumpTime;

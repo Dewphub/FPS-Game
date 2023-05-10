@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class KillPlanes : MonoBehaviour
 {
-    public void OnCollisionEnter(Collision collision)
+
+    public void OnTriggerEnter(Collider other)
     {
-       
-        if (collision.collider.CompareTag("Player"))
+        if(other.CompareTag("Player"))
         {
-        
-            KillPlayer(collision.collider.gameObject);
+            KillPlayer(other.gameObject);
         }
     }
 
