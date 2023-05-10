@@ -17,6 +17,7 @@ public class ButtonFunctions : MonoBehaviour
 
     public void Continue()
     {
+        GameManager.Instance.ResumeState();
         GameManager.Instance.LoadNextLevelAsynchronously();
     }
 
