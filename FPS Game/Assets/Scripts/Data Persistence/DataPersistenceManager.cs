@@ -68,10 +68,10 @@ public class DataPersistenceManager : MonoBehaviour
         dataHandler.SaveLevel(SceneManager.GetActiveScene().buildIndex);
     }
 
-    private void OnApplicationQuit()
+    /*private void OnApplicationQuit()
     {
         SaveGame();
-    }
+    }*/
 
     private List<IDataPersistence> FindAllDataPersitenceObjects()
     {

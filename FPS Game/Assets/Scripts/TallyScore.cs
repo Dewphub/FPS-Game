@@ -117,4 +117,9 @@ public class TallyScore : MonoBehaviour, IDataPersistence
         data.secretsFound = secretsFound;
         data.deaths = deaths;
     }
+
+    private void OnApplicationQuit()
+    {
+        DataPersistenceManager.Instance.SaveGame();
+    }
 }
