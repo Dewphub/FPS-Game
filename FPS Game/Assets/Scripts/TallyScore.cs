@@ -79,24 +79,32 @@ public class TallyScore : MonoBehaviour, IDataPersistence
         int seconds = 0;
         int minutes = 0;
         int hours = 0;
-        while (temp <= timeSpent)
+        if (timeSpent <= 0)
         {
-            if (UnityEngine.Input.GetButtonDown("Continue"))
-                temp = timeSpent;
-            seconds = temp % 60;
-            minutes = ((temp - seconds) / 60) % 60;
-            hours = (((temp - seconds) / 60) - minutes) / 60;
-            if (hours < 24)
+            TimeSpent.text = "00:00:00";
+            yield return null;
+        }
+        else
+        {
+            while (temp <= timeSpent)
             {
-                TimeSpent.text = $"{hours.ToString()}:{minutes.ToString()}:{seconds.ToString()}";
-                temp += timeSpent / 3600;
-                yield return null;
-            }
-            else
-            {
-                TimeSpent.text = $"{((hours - hours % 24) / 24).ToString()} days" + (hours % 24 != 0 ? $" and {hours % 24} hours" : "");
-                temp += 3600;
-                yield return new WaitForSeconds(0.5f);
+                if (UnityEngine.Input.GetButtonDown("Continue"))
+                    temp = timeSpent;
+                seconds = temp % 60;
+                minutes = ((temp - seconds) / 60) % 60;
+                hours = (((temp - seconds) / 60) - minutes) / 60;
+                if (hours < 24)
+                {
+                    TimeSpent.text = $"{hours.ToString()}:{minutes.ToString()}:{seconds.ToString()}";
+                    temp += timeSpent / 3600;
+                    yield return null;
+                }
+                else
+                {
+                    TimeSpent.text = $"{((hours - hours % 24) / 24).ToString()} days" + (hours % 24 != 0 ? $" and {hours % 24} hours" : "");
+                    temp += 3600;
+                    yield return new WaitForSeconds(0.5f);
+                }
             }
         }
         updating = false;
