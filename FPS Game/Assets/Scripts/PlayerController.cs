@@ -317,6 +317,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
         if(HP <= 0) 
         {
+            DataPersistenceManager.Instance.LoadGame();
             playerDeaths++;
             DataPersistenceManager.Instance.SaveGame();
             GameManager.Instance.OnDead();
