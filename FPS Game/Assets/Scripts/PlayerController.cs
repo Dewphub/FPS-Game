@@ -54,6 +54,13 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     float climbAmount;
     float verticalInput;
 
+    [Header("---- Crouching ----")]
+    public float crouchSpeed;
+    public float crouchY;
+    private float startY;
+    public KeyCode CroutchKey = KeyCode.C;
+    public bool sliding;
+
 
     bool groundedPlayer;
     bool isSprinting;
@@ -64,12 +71,18 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     Vector3 playerVelocity;
     Vector3 move;
 
+    Rigidbody rb;
+
     private void Start()
     {
         HPOrig = HP;
         UIUpdate();
         Respawn();
         controller.enabled = true;
+
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
+        startY = transform.localScale.y;
     }
 
     void Update()
@@ -175,6 +188,26 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             playerVelocity.y = jumpHeight;
             jumpedTimes++;
         }
+<<<<<<< Updated upstream
+=======
+
+
+        // start crouch
+        if (Input.GetKeyDown(CroutchKey))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, crouchY, transform.localScale.z);
+            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        }
+
+        // stop crouch
+        if (Input.GetKeyUp(CroutchKey))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, startY, transform.localScale.z);
+        }
+
+        playerVelocity.y -= gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
+>>>>>>> Stashed changes
     }
 
     void Sprint()
