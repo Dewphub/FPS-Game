@@ -59,6 +59,7 @@ public class DefenderBossAI : MonoBehaviour, IDamage
     int originalHP;
 
     public static event EventHandler TakingDamageFromPlayer;
+    public static event Action Dying;
     void Start()
     {
         stoppingDistOrig = agent.stoppingDistance;
@@ -285,6 +286,7 @@ public class DefenderBossAI : MonoBehaviour, IDamage
                 _toFade = false;
             }
         }
+        Dying?.Invoke();
         Destroy(gameObject);
     }
 }
