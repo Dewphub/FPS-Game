@@ -13,6 +13,7 @@ TagManager:
   - ShotgunAmmo
   - RifleAmmo
   - SmgAmmo
+  - Pickup
   layers:
   - Default
   - TransparentFX
