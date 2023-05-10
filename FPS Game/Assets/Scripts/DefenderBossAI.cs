@@ -216,7 +216,7 @@ public class DefenderBossAI : MonoBehaviour, IDamage
     {
         yield return new WaitForSeconds(1f);
         Instantiate(loot[UnityEngine.Random.Range(0, loot.Length)], transform.position, Quaternion.identity);
-        StartCoroutine(FadeDeath(true));
+        StartCoroutine(FadeDeath());
     }
 
     IEnumerator Hide(Transform _player)
@@ -271,22 +271,10 @@ public class DefenderBossAI : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator FadeDeath(bool _toFade)
+    IEnumerator FadeDeath()
     {
-        Vector3 deathPosition = transform.position - new Vector3(0, 2, 0);
-        while (_toFade)
-        {
-            if (transform.position.y >= deathPosition.y)
-            {
-                transform.position -= new Vector3(0, 0.5f * Time.deltaTime, 0);
-                yield return null;
-            }
-            else
-            {
-                _toFade = false;
-            }
-        }
         Dying?.Invoke();
+        yield return new WaitForSeconds(1);
         this.gameObject.SetActive(false);
     }
 }
