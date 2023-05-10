@@ -21,6 +21,8 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, "saveData1.game");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
         if (dataHandler.LoadLevel() == -1)
         {
             Destroy(continueButton);
