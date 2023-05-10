@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     [Range(8, 25)][SerializeField] float jumpHeight;
     [Range(10, 50)][SerializeField] float gravityValue;
     [Range(1, 3)][SerializeField] int jumpsMax;
+    [SerializeField] float maxJumpTime;
     [Range(0, 1)][SerializeField] float aimSnap;
     [SerializeField] float climbSpeed;
 
@@ -53,6 +54,14 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     int secrets;
     float climbAmount;
     float verticalInput;
+    float jumpTime;
+
+    [Header("---- Crouching ----")]
+    public float crouchSpeed;
+    public float crouchY;
+    private float startY;
+    public KeyCode CroutchKey = KeyCode.C;
+    public bool sliding;
 
 
     bool groundedPlayer;
@@ -60,9 +69,12 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     bool isPlayingSteps;
     bool isShooting;
     bool isOnLadder;
+    bool isJumping;
 
     Vector3 playerVelocity;
     Vector3 move;
+
+    Rigidbody rb;
 
     private void Start()
     {
@@ -70,6 +82,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         UIUpdate();
         Respawn();
         controller.enabled = true;
+
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
+        startY = transform.localScale.y;
         float correctHeight = controller.center.y + controller.skinWidth;
         controller.center = new Vector3(0, correctHeight, 0);
     }
@@ -171,12 +187,48 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         }
 
         // Changes the height position of the player..
+        
         if (Input.GetButtonDown("Jump") && jumpedTimes < jumpsMax)
         {
             aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+            isJumping = true;
+            jumpTime = 0f;
             playerVelocity.y = jumpHeight;
             jumpedTimes++;
         }
+        else if (Input.GetButton("Jump") && isJumping)
+        {
+            if (jumpTime < maxJumpTime)
+            {
+                jumpTime += Time.deltaTime;
+                playerVelocity.y = jumpHeight - (jumpTime / maxJumpTime) * jumpHeight;
+            }
+            else
+            {
+                isJumping = false;
+            }
+        }
+        else
+        {
+            isJumping = false;
+        }
+
+
+        // start crouch
+        if (Input.GetKeyDown(CroutchKey))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, crouchY, transform.localScale.z);
+            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        }
+
+        // stop crouch
+        if (Input.GetKeyUp(CroutchKey))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, startY, transform.localScale.z);
+        }
+
+        playerVelocity.y -= gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
     }
 
     void Sprint()
