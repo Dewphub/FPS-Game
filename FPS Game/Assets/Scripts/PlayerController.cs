@@ -290,6 +290,12 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out RaycastHit hit, shootDist))
             {
                 IDamage damageable = hit.collider.GetComponent<IDamage>();
+                Collider collider = hit.collider;
+                if(collider.GetType() == typeof(SphereCollider))
+                {
+                    Debug.Log("Headshot");
+                    damageable?.TakeDamage(2 * shootDamage);
+                }
                 damageable?.TakeDamage(shootDamage);
             }
             //update remaining ammo on UI

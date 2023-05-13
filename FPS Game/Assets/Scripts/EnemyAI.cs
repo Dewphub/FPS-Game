@@ -70,7 +70,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         if (sender as GameObject != this)
         {
-            Debug.Log(sender);
             agent.SetDestination(GameManager.Instance.player.transform.position);
             agent.stoppingDistance = 0;
         }

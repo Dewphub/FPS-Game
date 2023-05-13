@@ -23,7 +23,7 @@ public class ArchwayDoorBlock : MonoBehaviour
             openTimeElapsed = 0;
             ProcessBlockPath();
         }
-        else if(transform.localPosition != doorPosOriginal && GameManager.Instance.GetEnemiesRemaining() == 0)
+        else if(transform.localPosition != doorPosOriginal && GameManager.Instance.GetEnemiesRemaining() <= 0)
         {
             blockTimeElapsed = 0;
             ProcessOpenPath();
