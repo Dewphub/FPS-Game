@@ -388,9 +388,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         }
         else
         {
-            Debug.Log("GunPickup Entered");
             gunList.Add(gunStat);
-            Debug.Log("gunList added");
             aud.PlayOneShot(gunPickupSFX, gunPickupSFXVolume);
 
             shootDamage = gunStat.shootDamage;
@@ -531,5 +529,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     public void SetShootenabled(bool _shootEnabled)
     {
         shootingEnabled = _shootEnabled;
+    }
+
+    public void ProcessReserveAmmoPickupSFX()
+    {
+        aud.PlayOneShot(gunPickupSFX, gunPickupSFXVolume);
     }
 }

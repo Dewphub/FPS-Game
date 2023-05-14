@@ -15,6 +15,13 @@ public class AmmoPickup : MonoBehaviour
                 GameManager.Instance.playerScript.AmmoPickUp(ammoType);
                 gameObject.SetActive(false);
             }
+            else
+            {
+                ammoType.gun.AddReserveAmmo(ammoType);
+                GameManager.Instance.playerScript.ProcessReserveAmmoPickupSFX();
+                gameObject.SetActive(false);
+                Debug.Log("Reserves = " +  ammoType.gun.GetReserves());
+            }
         }
     }
 }

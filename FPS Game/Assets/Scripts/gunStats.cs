@@ -26,6 +26,7 @@ public class gunStats : ScriptableObject
     int remainingClipAmount;
     int remainingAmmo;
     int ammoToBeReloaded;
+    int reserveAmmo;
     public int CalcMaxAmmo()
     {
     return clipSize * maxClips;
@@ -46,7 +47,14 @@ public class gunStats : ScriptableObject
     public void SetDefaultGunStats()
     {
         remainingClipAmount = clipSize;
-        remainingAmmo = clipSize;
+        if(clipSize + reserveAmmo < CalcMaxAmmo())
+        {
+            remainingAmmo = clipSize + reserveAmmo;
+        }
+        else
+        {
+            remainingAmmo = CalcMaxAmmo();
+        }
     }
 
     public void CalcReload()
@@ -97,5 +105,15 @@ public class gunStats : ScriptableObject
         {
             remainingAmmo = CalcMaxAmmo();
         }
+    }
+
+    public void AddReserveAmmo(AmmoStats ammo)
+    {
+        reserveAmmo += ammo.ammoAmount;
+    }
+
+    public int GetReserves()
+    {
+        return reserveAmmo;
     }
 }
