@@ -19,6 +19,8 @@ public class DefenderBossAI : MonoBehaviour, IDamage
     [SerializeField] SphereCollider coverChecker;
     [SerializeField] LayerMask hideLayer;
     [SerializeField] GameObject[] loot;
+    [SerializeField] Transform grenadePrefab;
+    [SerializeField] Transform grenadeLaunchPos;
 
     [Header("----- Enemy Stats -----")]
     [Range(100, 1000)][SerializeField] int HP;
@@ -37,6 +39,9 @@ public class DefenderBossAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [Tooltip("This stops the bullet from shooting under the player")]
     [SerializeField] Vector3 playerPosOffset;
+    [SerializeField, Range(0, 30)] int grenadeSpeed;
+    [SerializeField] float grenadeFiringAngle = 45f;
+    [SerializeField] float gravity = 9.8f;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] takeDamageSFX;
@@ -140,7 +145,7 @@ public class DefenderBossAI : MonoBehaviour, IDamage
                     if (Mathf.Abs(angleToPlayer) <= 5f)
                     {
                         if (!isShooting)
-                            StartCoroutine(Shoot());
+                            StartCoroutine(LaunchGrenade());
                     }
                 }
                 else if (takeCoverEnabled)
@@ -192,6 +197,34 @@ public class DefenderBossAI : MonoBehaviour, IDamage
             agent.SetDestination(hit.position);
             destinationChosen = false;
         }
+    }
+
+    IEnumerator LaunchGrenade()
+    {
+        isShooting = true;
+        Transform grenadeProjectileTransform = Instantiate(grenadePrefab, grenadeLaunchPos.position, Quaternion.identity);
+        GrenadeProjectile grenadeProjectile = grenadeProjectileTransform.GetComponent<GrenadeProjectile>();
+        grenadeProjectile.SetShooter(transform);
+        /*grenadeProjectileTransform.position = grenadeLaunchPos.position;*/
+        float targetDistance = Vector3.Distance(grenadeLaunchPos.position, GameManager.Instance.player.transform.position - new Vector3(0, 2, 0));
+        float projectileVelocity = targetDistance / (Mathf.Sin(2 * grenadeFiringAngle * Mathf.Deg2Rad) / gravity);
+        float Vx = Mathf.Sqrt(projectileVelocity) * Mathf.Cos(grenadeFiringAngle * Mathf.Deg2Rad);
+        float Vy = Mathf.Sqrt(projectileVelocity) * Mathf.Sin(grenadeFiringAngle * Mathf.Deg2Rad);
+        float flightDuration = targetDistance / Vx;
+        grenadeProjectileTransform.rotation = Quaternion.LookRotation(GameManager.Instance.player.transform.position - grenadeProjectileTransform.position);
+
+        float elapseTime = 0;
+
+        while(elapseTime < flightDuration && grenadeProjectileTransform != null)
+        {
+                grenadeProjectileTransform.transform.Translate(0, (Vy - (gravity * elapseTime)) * Time.deltaTime, Vx * Time.deltaTime);
+
+                elapseTime += Time.deltaTime;
+
+                yield return null;
+        }
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
     }
     IEnumerator Shoot()
     {

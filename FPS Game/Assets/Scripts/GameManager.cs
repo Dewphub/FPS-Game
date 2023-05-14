@@ -282,4 +282,9 @@ public class GameManager : MonoBehaviour
     {
         DefenderBossAI.Dying += BossHasDied;
     }
+
+    public Vector3 GetPlayerPosition()
+    {
+        return player.transform.position;
+    }
 }
