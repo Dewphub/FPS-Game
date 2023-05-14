@@ -157,19 +157,19 @@ public class GameManager : MonoBehaviour
 
     public void UpdateGameGoal(int amount)
     {
-        Debug.Log("Enemies = " + enemiesRemaining);
-        enemiesRemaining += amount;/*
+        enemiesRemaining += amount;
+        Debug.Log("Enemies = " + enemiesRemaining);/*
         if (amount < 0)
         {
             enemiesKilled -= amount;
         }*/
         //enemiesRemainingText.text = enemiesRemaining.ToString("F0");
-/*        if (enemiesRemaining <= 0)
-        {
-            activeMenu = winMenu;
-            activeMenu.SetActive(true);
-            PauseState();
-        }*/
+        /*        if (enemiesRemaining <= 0)
+                {
+                    activeMenu = winMenu;
+                    activeMenu.SetActive(true);
+                    PauseState();
+                }*/
     }
 
     public void OnDead()

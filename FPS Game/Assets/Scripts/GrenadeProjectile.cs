@@ -18,18 +18,23 @@ public class GrenadeProjectile : MonoBehaviour
     [Tooltip("How long after instantiating the projectile will it be in scene without collision")]
     [SerializeField] int timer;
 
-    [SerializeField] GameObject explosion;
-
+    [SerializeField] GameObject explosionFX;
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip explosionAudio;
     //This is used for the damage indicator
     Transform shooter;
     void OnTriggerEnter(Collider other)
     {
         IDamage damageable = other.GetComponent<IDamage>();
         damageable?.TakeDamage(directDamage);
+        if(!aud.isPlaying)
+        {
+            aud.PlayOneShot(explosionAudio);
+        }
         if (other.gameObject.CompareTag("Player"))
         {
             Register();
-            explosion.SetActive(true);
+            explosionFX.SetActive(true);
             ProcessDestruction(0.5f);
         }
         else if(!other.GetComponent<Collider>().CompareTag("Player"))
@@ -67,7 +72,7 @@ public class GrenadeProjectile : MonoBehaviour
 
     void ProcessDestruction(float delayTime)
     {
-        explosion.SetActive(true);
+        explosionFX.SetActive(true);
         Destroy(gameObject, delayTime);
     }
 }

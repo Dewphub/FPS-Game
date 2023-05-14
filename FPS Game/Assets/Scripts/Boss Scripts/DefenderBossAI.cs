@@ -145,7 +145,16 @@ public class DefenderBossAI : MonoBehaviour, IDamage
                     if (Mathf.Abs(angleToPlayer) <= 5f)
                     {
                         if (!isShooting)
-                            StartCoroutine(LaunchGrenade());
+                        {
+                            if (HP >= originalHP * 0.5f)
+                            {
+                                StartCoroutine(Shoot());
+                            }
+                            else
+                            {
+                                StartCoroutine(LaunchGrenade());
+                            }
+                        }
                     }
                 }
                 else if (takeCoverEnabled)
@@ -205,6 +214,7 @@ public class DefenderBossAI : MonoBehaviour, IDamage
         Transform grenadeProjectileTransform = Instantiate(grenadePrefab, grenadeLaunchPos.position, Quaternion.identity);
         GrenadeProjectile grenadeProjectile = grenadeProjectileTransform.GetComponent<GrenadeProjectile>();
         grenadeProjectile.SetShooter(transform);
+        audioSource.PlayOneShot(shootSFX, shootSFXVolume);
         /*grenadeProjectileTransform.position = grenadeLaunchPos.position;*/
         float targetDistance = Vector3.Distance(grenadeLaunchPos.position, GameManager.Instance.GetGrenadeTargetPos());
         float projectileVelocity = targetDistance / (Mathf.Sin(2 * grenadeFiringAngle * Mathf.Deg2Rad) / gravity);
