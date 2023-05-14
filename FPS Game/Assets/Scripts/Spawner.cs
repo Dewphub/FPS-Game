@@ -42,7 +42,6 @@ public class Spawner : MonoBehaviour
             GameObject prefabClone = Instantiate(prefab, spawnPos[i].position, prefab.transform.rotation);
             prefabList.Add(prefabClone);
             prefabsSpawnCount++;
-            GameManager.Instance.UpdateGameGoal(1);
         }
         yield return new WaitForSeconds(intervalTime);
         isSpawning = false;

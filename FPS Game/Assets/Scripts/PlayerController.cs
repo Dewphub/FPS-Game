@@ -291,12 +291,15 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             {
                 IDamage damageable = hit.collider.GetComponent<IDamage>();
                 Collider collider = hit.collider;
-                if(collider.GetType() == typeof(SphereCollider))
+                if (collider.GetType() == typeof(SphereCollider))
                 {
                     Debug.Log("Headshot");
                     damageable?.TakeDamage(2 * shootDamage);
                 }
-                damageable?.TakeDamage(shootDamage);
+                else
+                {
+                    damageable?.TakeDamage(shootDamage);
+                }
             }
             //update remaining ammo on UI
             GameManager.Instance.UpdateGunUI(selectedGun, GetSelectedGun());

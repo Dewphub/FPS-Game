@@ -64,6 +64,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         spawnFX.Play();
         originalHP = HP;
         TakingDamageFromPlayer += OtherAI_TakingDamageFromPlayer;
+        GameManager.Instance.UpdateGameGoal(1);
     }
 
     private void OtherAI_TakingDamageFromPlayer(object sender, EventArgs e)
@@ -156,7 +157,8 @@ public class EnemyAI : MonoBehaviour, IDamage
         StartCoroutine(FlashColor());
         if (HP <= 0)
         {
-            StopAllCoroutines();
+            //StopAllCoroutines();
+            Debug.Log("Enemy died");
             GameManager.Instance.UpdateGameGoal(-1);
             anim.SetBool("Dead", true);
             GetComponent<CapsuleCollider>().enabled = false;
