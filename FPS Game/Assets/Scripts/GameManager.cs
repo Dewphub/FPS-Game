@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public PlayerController playerScript;
     public GameObject playerSpawnPos;
     public Aim aim;
+    public GameObject grenadeTarget;
 
     [Header("----- UI Information -----")]
     public GameObject activeMenu;
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour
             ammoPanelTMP.text = "";
         }
         HPBarColorHealthy = Color.green;
+        grenadeTarget = GameObject.FindGameObjectWithTag("GrenadeTarget");
     }
 
     void Update()

@@ -6,8 +6,19 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class GrenadeProjectile : MonoBehaviour
 {
-    [SerializeField] int damage;
+    [Tooltip("This damage will be if the grenade directly hits the target")]
+    [SerializeField, Range(0, 20)] int directDamage;
+
+    [Tooltip("This damage reflects the splash damage associated with missing the target and hitting the terrain")]
+    [SerializeField, Range(0, 20)] int AOEDamageAmount;
+
+    [Tooltip("How far away from impact should the splash damage occur")]
+    [SerializeField] float AOEDamageArea;
+
+    [Tooltip("How long after instantiating the projectile will it be in scene without collision")]
     [SerializeField] int timer;
+
+    //This is used for the damage indicator
     Transform shooter;
     void Start()
     {
@@ -16,29 +27,32 @@ public class GrenadeProjectile : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         IDamage damageable = other.GetComponent<IDamage>();
-        damageable?.TakeDamage(damage);
+        damageable?.TakeDamage(directDamage);
         if (other.gameObject.CompareTag("Player"))
         {
             Register();
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
-    }
-
-    /*IEnumerator Flip()
-    {
-        isFlipping = true;  
-        Quaternion startRot = transform.localRotation;
-        Quaternion targetRot = startRot * Quaternion.Euler(-180, 0, 0);
-        float t = 0;
-        while(t < flipDuration)
+        else if(!other.GetComponent<Collider>().CompareTag("Player"))
         {
-            t += Time.deltaTime;
-            transform.localRotation = Quaternion.Slerp(startRot, targetRot, t/flipDuration);
-            yield return null;
+            SetShooter(transform);
+            IDamage AOEDamage;
+            Collider[] colliders = Physics.OverlapSphere(transform.position, AOEDamageArea);
+            foreach(Collider collider in colliders)
+            {
+                if(collider.GetComponent<IDamage>() != null)
+                {
+                    if(collider.CompareTag("Player"))
+                    {
+                        Register();
+                    }
+                    AOEDamage = collider.GetComponent<IDamage>();
+                    AOEDamage.TakeDamage(AOEDamageAmount);
+                    Destroy(gameObject);
+                }
+            }
         }
-        transform.localRotation = Quaternion.Slerp(startRot, targetRot, 1);
-        isFlipping = false;
-    }*/
+    }
     public void SetShooter(Transform _shooter)
     {
         this.shooter = _shooter;

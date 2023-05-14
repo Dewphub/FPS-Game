@@ -48,7 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5936dacfe2656ff42a28cc73a54f1361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  directDamage: 15
+  AOEDamageAmount: 5
+  AOEDamageArea: 10
   timer: 3
 --- !u!33 &3845980386527650628
 MeshFilter:

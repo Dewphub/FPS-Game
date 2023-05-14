@@ -16,6 +16,7 @@ TagManager:
   - Pickup
   - Pushable
   - ExplosingBarrel
+  - GrenadeTarget
   layers:
   - Default
   - TransparentFX
