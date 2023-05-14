@@ -206,12 +206,12 @@ public class DefenderBossAI : MonoBehaviour, IDamage
         GrenadeProjectile grenadeProjectile = grenadeProjectileTransform.GetComponent<GrenadeProjectile>();
         grenadeProjectile.SetShooter(transform);
         /*grenadeProjectileTransform.position = grenadeLaunchPos.position;*/
-        float targetDistance = Vector3.Distance(grenadeLaunchPos.position, GameManager.Instance.grenadeTarget.transform.position);
+        float targetDistance = Vector3.Distance(grenadeLaunchPos.position, GameManager.Instance.GetGrenadeTargetPos());
         float projectileVelocity = targetDistance / (Mathf.Sin(2 * grenadeFiringAngle * Mathf.Deg2Rad) / gravity);
         float Vx = Mathf.Sqrt(projectileVelocity) * Mathf.Cos(grenadeFiringAngle * Mathf.Deg2Rad);
         float Vy = Mathf.Sqrt(projectileVelocity) * Mathf.Sin(grenadeFiringAngle * Mathf.Deg2Rad);
         float flightDuration = targetDistance / Vx;
-        grenadeProjectileTransform.rotation = Quaternion.LookRotation(GameManager.Instance.grenadeTarget.transform.position - grenadeProjectileTransform.position);
+        grenadeProjectileTransform.rotation = Quaternion.LookRotation(GameManager.Instance.GetGrenadeTargetPos() - grenadeProjectileTransform.position);
 
         float elapseTime = 0;
 

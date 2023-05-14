@@ -18,12 +18,10 @@ public class GrenadeProjectile : MonoBehaviour
     [Tooltip("How long after instantiating the projectile will it be in scene without collision")]
     [SerializeField] int timer;
 
+    [SerializeField] GameObject explosion;
+
     //This is used for the damage indicator
     Transform shooter;
-    void Start()
-    {
-        Destroy(gameObject, timer);
-    }
     void OnTriggerEnter(Collider other)
     {
         IDamage damageable = other.GetComponent<IDamage>();
@@ -31,7 +29,8 @@ public class GrenadeProjectile : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Register();
-            Destroy(gameObject);
+            explosion.SetActive(true);
+            ProcessDestruction(0.5f);
         }
         else if(!other.GetComponent<Collider>().CompareTag("Player"))
         {
@@ -48,9 +47,9 @@ public class GrenadeProjectile : MonoBehaviour
                     }
                     AOEDamage = collider.GetComponent<IDamage>();
                     AOEDamage.TakeDamage(AOEDamageAmount);
-                    Destroy(gameObject);
                 }
             }
+            ProcessDestruction(0.5f);
         }
     }
     public void SetShooter(Transform _shooter)
@@ -64,5 +63,11 @@ public class GrenadeProjectile : MonoBehaviour
         {
             DamageIndicatorSystem.CreateIndicator(shooter);
         }
+    }
+
+    void ProcessDestruction(float delayTime)
+    {
+        explosion.SetActive(true);
+        Destroy(gameObject, delayTime);
     }
 }
