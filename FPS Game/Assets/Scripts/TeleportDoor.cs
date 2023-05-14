@@ -10,6 +10,8 @@ public class TeleportDoor : MonoBehaviour
     [SerializeField] GameObject trigger2;
     [SerializeField] GameObject teleportTrigger1;
     [SerializeField] GameObject teleportTrigger2;
+    [SerializeField] GameObject teleportFX1;
+    [SerializeField] GameObject teleportFX2;
     [SerializeField] float lerpDuration;
 
     [SerializeField] Vector3 localYOffset;
@@ -76,7 +78,8 @@ public class TeleportDoor : MonoBehaviour
     {
         Vector3 newDoor1Pos = door1PosOriginal + localYOffset;
         Vector3 newDoor2Pos = door2PosOriginal + localYOffset;
-
+        teleportFX1.SetActive(true);
+        teleportFX2.SetActive(true);
         if (openTimeElapsed < lerpDuration)
         {
             door1.transform.localPosition = Vector3.Lerp(door1.transform.localPosition, newDoor1Pos, openTimeElapsed / lerpDuration);
@@ -91,6 +94,8 @@ public class TeleportDoor : MonoBehaviour
 
     public void ProcessCloseDoors()
     {
+        teleportFX1.SetActive(false);
+        teleportFX2.SetActive(false);
         if (closeTimeElapsed < lerpDuration)
         {
             door1.transform.localPosition = Vector3.Lerp(door1.transform.localPosition, door1PosOriginal, closeTimeElapsed / lerpDuration);
