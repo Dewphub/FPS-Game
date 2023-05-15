@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.029087221, g: 0.029897578, b: 0.029896652, a: 1}
+  m_IndirectSpecularColor: {r: 0.029087221, g: 0.029897578, b: 0.029896645, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12187,7 +12187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8579f438beea8154ebd0a1bffb745169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ice: {fileID: 13400000, guid: a74addad81ae2204087f873ce4be4581, type: 2}
   slidingForce: 100
 --- !u!23 &1504434521
 MeshRenderer:
@@ -18375,6 +18374,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 913185782519814865, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -3008613724363630453, guid: ba434cdd289acf349ba5e451c2616994, type: 2}
     - target: {fileID: 2048955381676099139, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
       propertyPath: jumpHeight
       value: 8

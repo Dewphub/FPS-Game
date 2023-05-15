@@ -54,6 +54,11 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void Credits()
+    {
+        SceneManager.LoadScene(sceneName: "Credits");
+    }
+
     IEnumerator LoadSceneAsynchronously(int SceneIndex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(SceneIndex);
