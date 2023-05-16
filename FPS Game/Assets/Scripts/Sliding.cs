@@ -42,7 +42,7 @@ public class Sliding : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0))
+        if (Input.GetKeyDown(slideKey) && Input.GetKeyDown(KeyCode.W) && (horizontalInput != 0 || verticalInput != 0))
             StartSlide();
             SlidingMovement();
 
