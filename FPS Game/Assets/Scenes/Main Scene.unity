@@ -707,10 +707,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1173075250}
     - target: {fileID: 1704623794523953477, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1704623794523953477, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Target
       value: 
       objectReference: {fileID: 703912030725330646}
@@ -718,10 +714,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_Target
       value: 
       objectReference: {fileID: 1667194167746005170}
-    - target: {fileID: 1704623794523953477, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[8].m_Target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5120915283377177277, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
       propertyPath: camera
       value: 
@@ -14861,6 +14853,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 608056501}
     m_Modifications:
+    - target: {fileID: 8468835186949427201, guid: 94ee4aa5304421148821646dacc64760, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468835186949427201, guid: 94ee4aa5304421148821646dacc64760, type: 3}
+      propertyPath: m_Size.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468835186949427201, guid: 94ee4aa5304421148821646dacc64760, type: 3}
+      propertyPath: m_Center.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8468835186949427202, guid: 94ee4aa5304421148821646dacc64760, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -16199,6 +16203,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 608056501}
     m_Modifications:
+    - target: {fileID: 8468835186949427201, guid: 94ee4aa5304421148821646dacc64760, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468835186949427201, guid: 94ee4aa5304421148821646dacc64760, type: 3}
+      propertyPath: m_Size.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468835186949427201, guid: 94ee4aa5304421148821646dacc64760, type: 3}
+      propertyPath: m_Center.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8468835186949427202, guid: 94ee4aa5304421148821646dacc64760, type: 3}
       propertyPath: m_RootOrder
       value: 4
