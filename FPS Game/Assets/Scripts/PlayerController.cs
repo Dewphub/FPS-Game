@@ -461,7 +461,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             GameManager.Instance.playerSpawnPos.transform.localPosition = data.playerPos;
         transform.position = data.playerPos;
         if (gunList.Count > 0)
+        {
+            GunPickup(gunList[selectedGun]);
             ChangeGun();
+        }
     }
     private void UpdateMuzzleFlashLocation(gunStats gun)
     {
