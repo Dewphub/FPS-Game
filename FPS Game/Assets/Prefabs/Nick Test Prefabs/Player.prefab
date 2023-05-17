@@ -330,8 +330,8 @@ GameObject:
   - component: {fileID: 5411731646943978858}
   - component: {fileID: 7258861595634916076}
   - component: {fileID: 2048955381676099139}
-  - component: {fileID: 913185782519814865}
   - component: {fileID: 6448056798950921938}
+  - component: {fileID: 913185782519814865}
   - component: {fileID: 7258861595634916077}
   - component: {fileID: 2048955381676099136}
   m_Layer: 3
@@ -374,8 +374,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientation: {fileID: 7258861595750999166}
   playerObj: {fileID: 7258861595858522946}
-  rb: {fileID: 0}
-  controller: {fileID: 0}
+  rb: {fileID: 7258861595634916077}
+  controller: {fileID: 2048955381676099139}
   maxSlideTime: 0.75
   slideForce: 200
   slideYScale: 0.5
@@ -446,6 +446,24 @@ MonoBehaviour:
   crouchY: 0
   CroutchKey: 99
   sliding: 0
+--- !u!143 &6448056798950921938
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6273576086061788643}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2.89
+  m_Radius: 1
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &913185782519814865
 AudioSource:
   m_ObjectHideFlags: 0
@@ -542,24 +560,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!143 &6448056798950921938
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6273576086061788643}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2.89
-  m_Radius: 1
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7258861595634916077
 Rigidbody:
   m_ObjectHideFlags: 0
