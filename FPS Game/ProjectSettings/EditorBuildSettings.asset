@@ -22,7 +22,7 @@ EditorBuildSettings:
     guid: 596c5acea52a687489e1db3acabadcb1
   - enabled: 1
     path: Assets/Scenes/Cutscenes/Ending Cutscene.unity
-    guid: 69ebbb6f3a782e44b8c6ae1e6e662011
+    guid: 4c84347ef84fbb8489c0b1ce8a56ad46
   - enabled: 1
     path: Assets/Scenes/Cutscenes/Credits.unity
     guid: e541c7f4c1f666a45829b257ef2d33cf
