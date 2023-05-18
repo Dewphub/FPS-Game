@@ -45,7 +45,7 @@ public class TallyScore : MonoBehaviour, IDataPersistence
             else 
             {
                 ContinueText.SetActive(true);
-                ContinueText.transform.localPosition = new Vector3(0,Mathf.Sin(Time.time * 5),0) * 10;
+                ContinueText.transform.localPosition = new Vector3(0,Mathf.Sin(Time.time * 5)+18,0) * 10;
                 if (UnityEngine.Input.GetButtonUp("Continue"))
                     GameManager.Instance.LoadNextLevelAsynchronously();
             }
