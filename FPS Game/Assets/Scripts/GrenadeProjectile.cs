@@ -23,6 +23,10 @@ public class GrenadeProjectile : MonoBehaviour
     [SerializeField] AudioClip explosionAudio;
     //This is used for the damage indicator
     Transform shooter;
+    private void Start()
+    {
+        Invoke("ProcessDestruction", 3f);
+    }
     void OnTriggerEnter(Collider other)
     {
         IDamage damageable = other.GetComponent<IDamage>();
