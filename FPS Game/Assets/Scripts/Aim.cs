@@ -23,7 +23,6 @@ public class Aim : MonoBehaviour
     bool canAim;
     bool isAiming;
     Transform gunPos;
-    GameObject reticle;
     float originalFOV;
 
     private void Start()
@@ -33,7 +32,6 @@ public class Aim : MonoBehaviour
         gunHipRot = gunHipPosTransform.localRotation;
         gunAimRot = gunAimPosTransform.localRotation;
         gunPos = transform;
-        reticle = GameManager.Instance.GetReticle();
         originalFOV = cam.fieldOfView;
 
     }
@@ -42,7 +40,6 @@ public class Aim : MonoBehaviour
         if(Input.GetMouseButton(1) && controller.gunList.Count > 0 && canAim)
         {
             resetTimeElapsed = 0;
-            reticle.SetActive(true);
             controller.GetAimPos();
             gunStats activeGun = controller.GetSelectedGun();
             GunPosAim();
@@ -51,7 +48,6 @@ public class Aim : MonoBehaviour
         else if(controller.gunList.Count > 0)
         {
             aimTimeElapsed = 0;
-            reticle.SetActive(false);
             GunPosReset();
             SetFieldOfView(Mathf.Lerp(cam.fieldOfView, originalFOV, camAnimationSpeed * Time.deltaTime));
         }

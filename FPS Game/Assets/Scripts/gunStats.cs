@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,7 @@ public class gunStats : ScriptableObject
     int remainingAmmo;
     int ammoToBeReloaded;
     int reserveAmmo;
+
     public int CalcMaxAmmo()
     {
     return clipSize * maxClips;

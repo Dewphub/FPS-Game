@@ -223,56 +223,56 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
 
     IEnumerator Hide(Transform _player)
-     {
-         if(!destinationChosen)
-         {
-             int hits = Physics.OverlapSphereNonAlloc(agent.transform.position, coverChecker.radius, colliders, hideLayer);
+    {
+        if (!destinationChosen)
+        {
+            int hits = Physics.OverlapSphereNonAlloc(agent.transform.position, coverChecker.radius, colliders, hideLayer);
 
-             for(int i = 0; i < hits; i++)
-             {
-                 if (NavMesh.SamplePosition(colliders[i].transform.position, out NavMeshHit hit, 2f, agent.areaMask))
-                 {
-                     if(!NavMesh.FindClosestEdge(hit.position, out hit, agent.areaMask))
-                     {
-                         Debug.LogError("Unable to find edge close to " + hit.position);
-                     }
-                     if (Vector3.Dot(hit.normal, (GameManager.Instance.player.transform.position - hit.position).normalized) <= 0f)
-                     {
-                         destinationChosen = true;
-                         agent.stoppingDistance = 1f;
-                         animTransSpeed += 10f;
-                         agent.SetDestination(hit.position);
-                         yield return new WaitForSeconds(3);
-                         coverTaken = true;
-                         Quaternion.LookRotation(playerDir);
-                         destinationChosen = false;
-                     }
-                     else
-                     {
-                         if (NavMesh.SamplePosition(colliders[i].transform.position - (GameManager.Instance.player.transform.position - hit.position).normalized * 2f,
-                             out NavMeshHit hit2, 2f, agent.areaMask))
-                         {
-                             if(!NavMesh.FindClosestEdge(hit2.position, out hit2, agent.areaMask))
-                             {
-                                 Debug.LogError("Unable to find edge close to " + hit2.position + " (second attempt)");
-                             }
-                             if (Vector3.Dot(hit2.normal, (GameManager.Instance.player.transform.position - hit2.position).normalized) <= 0f)
-                             {
-                                 destinationChosen = true;
-                                 agent.stoppingDistance = 1f;
-                                 animTransSpeed += 10f;
-                                 agent.SetDestination(hit2.position);
-                                 yield return new WaitForSeconds(3f);
-                                 Quaternion.LookRotation(playerDir);
-                                 coverTaken = true;
-                                 destinationChosen = false;
-                             }
-                         }
-                     }
-                 }
-             }
-         }
-     }
+            for (int i = 0; i < hits; i++)
+            {
+                if (NavMesh.SamplePosition(colliders[i].transform.position, out NavMeshHit hit, 2f, agent.areaMask))
+                {
+                    if (!NavMesh.FindClosestEdge(hit.position, out hit, agent.areaMask))
+                    {
+                        Debug.LogError("Unable to find edge close to " + hit.position);
+                    }
+                    if (Vector3.Dot(hit.normal, (GameManager.Instance.player.transform.position - hit.position).normalized) <= 0f)
+                    {
+                        destinationChosen = true;
+                        agent.stoppingDistance = 1f;
+                        animTransSpeed += 10f;
+                        agent.SetDestination(hit.position);
+                        yield return new WaitForSeconds(3);
+                        coverTaken = true;
+                        Quaternion.LookRotation(playerDir);
+                        destinationChosen = false;
+                    }
+                    else
+                    {
+                        if (NavMesh.SamplePosition(colliders[i].transform.position - (GameManager.Instance.player.transform.position - hit.position).normalized * 2f,
+                            out NavMeshHit hit2, 2f, agent.areaMask))
+                        {
+                            if (!NavMesh.FindClosestEdge(hit2.position, out hit2, agent.areaMask))
+                            {
+                                Debug.LogError("Unable to find edge close to " + hit2.position + " (second attempt)");
+                            }
+                            if (Vector3.Dot(hit2.normal, (GameManager.Instance.player.transform.position - hit2.position).normalized) <= 0f)
+                            {
+                                destinationChosen = true;
+                                agent.stoppingDistance = 1f;
+                                animTransSpeed += 10f;
+                                agent.SetDestination(hit2.position);
+                                yield return new WaitForSeconds(3f);
+                                Quaternion.LookRotation(playerDir);
+                                coverTaken = true;
+                                destinationChosen = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     IEnumerator FadeDeath(bool _toFade)
     {
         Vector3 deathPosition = transform.position - new Vector3(0, 2, 0);
