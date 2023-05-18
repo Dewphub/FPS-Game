@@ -2,8 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretAI : MonoBehaviour, IDamage
+public class TurretAI : MonoBehaviour, IDamage, IDataPersistence
 {
+    [Header("Turret ID")]
+    [SerializeField] private string id;
+
+    [ContextMenu("Generate guid for id")]
+    private void GenerateGuid()
+    {
+        id = System.Guid.NewGuid().ToString();
+    }
+
     [Header("Turret Stats")]
     [SerializeField, Range(1f, 50f)] float attackDistance;
     [SerializeField, Range(10f, 60f)] float bulletSpeed;
@@ -24,10 +33,12 @@ public class TurretAI : MonoBehaviour, IDamage
     Transform playerTransform;
     bool isShooting;
     bool isExploding;
+    bool isDead;
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerTransform = player.transform;
+        isDead = false;
     }
     void Update() 
     { 
@@ -85,6 +96,25 @@ public class TurretAI : MonoBehaviour, IDamage
             yield return new WaitForSeconds(0.5f);
             isExploding = false;
         }
-        Destroy(gameObject);
+        isDead = true;
+        this.gameObject.SetActive(false);
+    }
+
+    public void LoadData(GameData data)
+    {
+        data.turretsDestroyed.TryGetValue(id, out isDead);
+        if (isDead)
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        if (data.turretsDestroyed.ContainsKey(id))
+        {
+            data.turretsDestroyed.Remove(id);
+        }
+        data.turretsDestroyed.Add(id, isDead);
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.029087221, g: 0.029897578, b: 0.029896652, a: 1}
+  m_IndirectSpecularColor: {r: 0.029087221, g: 0.029897578, b: 0.029896645, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4941,6 +4941,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 407261876}
     m_Modifications:
+    - target: {fileID: 3901444080472738505, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
+      propertyPath: id
+      value: 5a1b87fb-0595-459c-8e2d-44876efa8e80
+      objectReference: {fileID: 0}
     - target: {fileID: 3901444080472738509, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
       propertyPath: m_Name
       value: TurretContainer
@@ -8958,6 +8962,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 407261876}
     m_Modifications:
+    - target: {fileID: 3901444080472738505, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
+      propertyPath: id
+      value: 60579d8f-c03e-4c61-b4ca-342694fcfa10
+      objectReference: {fileID: 0}
     - target: {fileID: 3901444080472738509, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
       propertyPath: m_Name
       value: TurretContainer (1)
@@ -9148,6 +9156,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1884400251}
     m_Modifications:
+    - target: {fileID: 3901444080472738505, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
+      propertyPath: id
+      value: 2e7f1c37-6947-4780-a892-c424a1d39b79
+      objectReference: {fileID: 0}
     - target: {fileID: 3901444080472738509, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
       propertyPath: m_Name
       value: TurretContainer (1)
@@ -11874,6 +11886,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297236206}
     m_Modifications:
+    - target: {fileID: 3901444080472738505, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
+      propertyPath: id
+      value: ba315eb6-f49f-4536-9768-5cdbfd4b2414
+      objectReference: {fileID: 0}
     - target: {fileID: 3901444080472738509, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
       propertyPath: m_Name
       value: TurretContainer (1)
@@ -12267,6 +12283,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297236206}
     m_Modifications:
+    - target: {fileID: 3901444080472738505, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
+      propertyPath: id
+      value: a405582d-21c3-4b99-90b8-107002e768f8
+      objectReference: {fileID: 0}
     - target: {fileID: 3901444080472738509, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
       propertyPath: m_Name
       value: TurretContainer
@@ -13419,6 +13439,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 407261876}
     m_Modifications:
+    - target: {fileID: 3901444080472738505, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
+      propertyPath: id
+      value: 8c694760-4781-4388-92d6-6b4782a27240
+      objectReference: {fileID: 0}
     - target: {fileID: 3901444080472738509, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
       propertyPath: m_Name
       value: TurretContainer (2)
@@ -13767,6 +13791,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1884400251}
     m_Modifications:
+    - target: {fileID: 3901444080472738505, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
+      propertyPath: id
+      value: feecdef9-f82f-442c-bbce-e532084a184d
+      objectReference: {fileID: 0}
     - target: {fileID: 3901444080472738509, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
       propertyPath: m_Name
       value: TurretContainer (2)
@@ -16574,6 +16602,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 407261876}
     m_Modifications:
+    - target: {fileID: 3901444080472738505, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
+      propertyPath: id
+      value: 96dadd5e-5423-460d-9883-bc6d7dde62ed
+      objectReference: {fileID: 0}
     - target: {fileID: 3901444080472738509, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
       propertyPath: m_Name
       value: TurretContainer (3)
@@ -17110,6 +17142,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1884400251}
     m_Modifications:
+    - target: {fileID: 3901444080472738505, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
+      propertyPath: id
+      value: 0a0122fe-30da-430d-beb3-e517a6bbc679
+      objectReference: {fileID: 0}
     - target: {fileID: 3901444080472738509, guid: 31404383a224ca1409a298dea24eeb15, type: 3}
       propertyPath: m_Name
       value: TurretContainer

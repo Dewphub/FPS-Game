@@ -8,7 +8,7 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] GameObject triggerEffect;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && GameManager.Instance.playerSpawnPos.transform.position != transform.position)
+        if (other.CompareTag("Player"))
         {
             GameManager.Instance.playerSpawnPos.transform.position = transform.position;
             DataPersistenceManager.Instance.SaveGame();
