@@ -65,6 +65,7 @@ public class DefenderBossAI : MonoBehaviour, IDamage
 
     public static event EventHandler TakingDamageFromPlayer;
     public static event Action Dying;
+    public static event Action Spawned;
     void Start()
     {
         stoppingDistOrig = agent.stoppingDistance;
@@ -73,6 +74,7 @@ public class DefenderBossAI : MonoBehaviour, IDamage
         originalHP = HP;
         TakingDamageFromPlayer += OtherAI_TakingDamageFromPlayer;
         GameManager.Instance.BossHasSpawned();
+        Spawned?.Invoke();
     }
 
     private void OtherAI_TakingDamageFromPlayer(object sender, EventArgs e)
