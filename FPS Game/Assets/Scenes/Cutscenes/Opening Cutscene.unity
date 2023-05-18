@@ -2786,7 +2786,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: They've revolutionized telportation technology, and intel says they're
+  m_text: They've revolutionized teleportation technology, and intel says they're
     working on a super-mech weapon that they plan to telport to all major cities.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
