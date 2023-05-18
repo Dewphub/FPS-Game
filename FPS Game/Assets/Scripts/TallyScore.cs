@@ -45,7 +45,7 @@ public class TallyScore : MonoBehaviour, IDataPersistence
             else 
             {
                 ContinueText.SetActive(true);
-                ContinueText.transform.localPosition = new Vector3(0,Mathf.Sin(Time.time * 5),0) * 10;
+                ContinueText.transform.localPosition = new Vector3(0,Mathf.Sin(Time.time * 5)+18,0) * 10;
                 if (UnityEngine.Input.GetButtonUp("Continue"))
                     GameManager.Instance.LoadNextLevelAsynchronously();
             }
@@ -86,7 +86,7 @@ public class TallyScore : MonoBehaviour, IDataPersistence
             hours = (((temp - seconds) / 60) - minutes) / 60;
             if (hours < 24)
             {
-                TimeSpent.text = $"{hours.ToString()}:{minutes.ToString()}:{seconds.ToString()}";
+                TimeSpent.text = (hours < 10 ? "0" : "") + hours.ToString() + ":" + (minutes < 10 ? "0" : "") + minutes.ToString() + ":" + (seconds < 10 ? "0" : "") + seconds.ToString();
                 if (timeSpent > 3600)
                     temp += timeSpent / 3600;
                 else

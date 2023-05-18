@@ -29,9 +29,12 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void playSound(float volume)
+    public void playSound(int soundIndex)
     {
-        aud.PlayOneShot(menuAud[Random.Range(0, menuAud.Length)], volume);
+        if (soundIndex < 0)
+            aud.PlayOneShot(menuAud[Random.Range(0, menuAud.Length)], 1);
+        else
+            aud.PlayOneShot(menuAud[soundIndex], 1);
     }
 
     public void NewGame(int sceneIndex)
@@ -49,6 +52,11 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void Credits()
+    {
+        SceneManager.LoadScene(sceneName: "Credits");
     }
 
     IEnumerator LoadSceneAsynchronously(int SceneIndex)

@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     [SerializeField] Recoil recoil;
     [SerializeField] Aim newAimPos;
     [SerializeField] GameObject muzzleFlashObject;
+    Rigidbody rb;
+    [SerializeField] Transform orientation;
+    [SerializeField] Transform playerObj;
 
     [Header("----- Player Stats -----")]
     [Range(1, 50)] [SerializeField] int HP;
@@ -25,6 +28,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     [Range(0, 1)][SerializeField] float aimSnap;
     [SerializeField] float climbSpeed;
     [SerializeField] float pushForce;
+   
 
     [Header("----- Gun Stats -----")]
     public List<gunStats> gunList = new List<gunStats>();
@@ -61,12 +65,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     public float crouchSpeed;
     public float crouchY;
     private float startY;
-    public KeyCode CroutchKey = KeyCode.C;
-    public bool sliding;
-
-
+    
     bool groundedPlayer;
     bool isSprinting;
+   
     bool isPlayingSteps;
     bool isShooting;
     bool isOnLadder;
@@ -76,7 +78,6 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     Vector3 playerVelocity;
     Vector3 move;
 
-    Rigidbody rb;
 
     private void Start()
     {
@@ -135,7 +136,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             }
         }
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         String triggerTag = other.tag;
@@ -226,17 +227,19 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
 
         // start crouch
-        if (Input.GetKeyDown(CroutchKey))
+        if (Input.GetButtonDown("Crouch"))
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchY, transform.localScale.z);
             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+
         }
 
         // stop crouch
-        if (Input.GetKeyUp(CroutchKey))
+        if (Input.GetButtonUp("Crouch"))
         {
             transform.localScale = new Vector3(transform.localScale.x, startY, transform.localScale.z);
         }
+
         if(!isOnLadder)
         {
             playerVelocity.y -= gravityValue * Time.deltaTime;
@@ -458,7 +461,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             GameManager.Instance.playerSpawnPos.transform.localPosition = data.playerPos;
         transform.position = data.playerPos;
         if (gunList.Count > 0)
+        {
+            GunPickup(gunList[selectedGun]);
             ChangeGun();
+        }
     }
     private void UpdateMuzzleFlashLocation(gunStats gun)
     {
