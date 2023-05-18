@@ -22,5 +22,9 @@ public class GameData
         playerPos = Vector3.zero;
         gunsPickedUp = new SerializableDictionary<string, bool>();
         aimPos = Vector3.zero;
+        enemiesKilled = 0;
+        time = 0;
+        secretsFound = 0;
+        deaths = 0;
     }
 }

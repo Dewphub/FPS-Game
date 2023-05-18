@@ -449,7 +449,8 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     public void LoadData(GameData data)
     {
         secrets = data.secretsFound;
-        time = data.time;
+        if (time < data.time)
+            time = data.time;
         playerDeaths = data.deaths;
         GameManager.Instance.enemiesKilled = data.enemiesKilled;
         gunList = data.gunList;
