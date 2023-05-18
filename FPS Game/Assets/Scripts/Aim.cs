@@ -35,7 +35,7 @@ public class Aim : MonoBehaviour
         originalFOV = cam.fieldOfView;
 
     }
-    private void LateUpdate()
+    private void Update()
     {
         if(Input.GetMouseButton(1) && controller.gunList.Count > 0 && canAim)
         {

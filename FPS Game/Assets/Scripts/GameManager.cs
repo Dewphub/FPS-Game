@@ -149,6 +149,8 @@ public class GameManager : MonoBehaviour
 
     public void ResumeState()
     {
+
+        aim.enabled = true;
         Time.timeScale = TIME_SCALE_DEFAULT;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
