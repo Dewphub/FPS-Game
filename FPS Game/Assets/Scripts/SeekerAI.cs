@@ -12,6 +12,7 @@ public class SeekerAI : MonoBehaviour, IDamage
     [SerializeField] GameObject[] particles;
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip explosion;
+    [SerializeField] int damage;
 
     GameObject player;
     Transform playerTransform;
@@ -57,7 +58,7 @@ public class SeekerAI : MonoBehaviour, IDamage
         {
             Register();
             IDamage damageable = collision.gameObject.GetComponent<IDamage>();
-            damageable?.TakeDamage(5);
+            damageable?.TakeDamage(damage);
             StartCoroutine(ProcessHitExplosion());
         }
     }
