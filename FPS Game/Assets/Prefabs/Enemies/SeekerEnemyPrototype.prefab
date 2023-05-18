@@ -144,6 +144,7 @@ MonoBehaviour:
   - {fileID: 2476834693277274572}
   aud: {fileID: -1691724099923572342}
   explosion: {fileID: 8300000, guid: 9970386351ab753458f2842463182dba, type: 3}
+  damage: 0
 --- !u!136 &5353310497892749153
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -179,6 +180,7 @@ MonoBehaviour:
   - {fileID: 2476834693277274572}
   aud: {fileID: -1691724099923572342}
   explosion: {fileID: 8300000, guid: 9970386351ab753458f2842463182dba, type: 3}
+  damage: 1
 --- !u!82 &-1691724099923572342
 AudioSource:
   m_ObjectHideFlags: 0
