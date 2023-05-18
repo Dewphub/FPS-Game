@@ -86,7 +86,7 @@ public class TallyScore : MonoBehaviour, IDataPersistence
             hours = (((temp - seconds) / 60) - minutes) / 60;
             if (hours < 24)
             {
-                TimeSpent.text = $"{hours.ToString()}:{minutes.ToString()}:{seconds.ToString()}";
+                TimeSpent.text = (hours < 10 ? "0" : "") + hours.ToString() + ":" + (minutes < 10 ? "0" : "") + minutes.ToString() + ":" + (seconds < 10 ? "0" : "") + seconds.ToString();
                 if (timeSpent > 3600)
                     temp += timeSpent / 3600;
                 else
