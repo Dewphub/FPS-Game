@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     int HPOrig;
     float time;
     int playerDeaths;
-    int secrets;
+    public int secrets;
     float climbAmount;
     float verticalInput;
     float jumpTime;
@@ -409,7 +409,6 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             recoil.UpdateGun(gunStat);
             GameManager.Instance.UpdateGunUI(selectedGun, gunStat);
         }
-        secrets++;
     }
 
     void SelectGun()
