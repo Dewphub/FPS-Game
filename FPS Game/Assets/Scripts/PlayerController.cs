@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     int HPOrig;
     float time;
     int playerDeaths;
-    int secrets;
+    public int secrets;
     float climbAmount;
     float verticalInput;
     float jumpTime;
@@ -409,7 +409,6 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             recoil.UpdateGun(gunStat);
             GameManager.Instance.UpdateGunUI(selectedGun, gunStat);
         }
-        secrets++;
     }
 
     void SelectGun()
@@ -462,6 +461,8 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         transform.position = data.playerPos;
         if (gunList.Count > 0)
         {
+            //gunModel.mesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
+            //gunMaterial.material = gunList[selectedGun].model.GetComponent<MeshRenderer>().sharedMaterial;
             GunPickup(gunList[selectedGun]);
             ChangeGun();
         }
