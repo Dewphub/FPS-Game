@@ -297,7 +297,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
                 if (collider.GetType() == typeof(SphereCollider))
                 {
                     Debug.Log("Headshot");
-                    damageable?.TakeDamage(2 * shootDamage);
+                    damageable?.TakeDamage(3 * shootDamage);
                 }
                 else
                 {

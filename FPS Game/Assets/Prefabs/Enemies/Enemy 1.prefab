@@ -284,7 +284,7 @@ MonoBehaviour:
   - {fileID: 1402643857825159705, guid: c1a6b350a6a6cea4987241248ffde0e0, type: 3}
   - {fileID: 1972479406941287409, guid: 10d84e8cf104d3d49b352b79da5732a5, type: 3}
   - {fileID: 6030592366141475662, guid: 45b76562d70e8cb459e92925bf21feeb, type: 3}
-  HP: 10
+  HP: 3
   playerFaceSpeed: 5
   sightAngle: 179
   roamPauseTime: 5
