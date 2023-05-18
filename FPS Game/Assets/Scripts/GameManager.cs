@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Passthrough Objects")]
     public LevelLoader levelLoader;
+    public AudioSource curMusic;
 
     public bool isPaused;
     public bool playerIsAiming;
@@ -280,6 +281,7 @@ public class GameManager : MonoBehaviour
 
     public void BossHasSpawned()
     {
+        curMusic.mute = true;
         DefenderBossAI.Dying += BossHasDied;
     }
 
