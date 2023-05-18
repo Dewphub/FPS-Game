@@ -728,6 +728,7 @@ MonoBehaviour:
   blankGun: {fileID: 2800000, guid: 8856b0845affc5e4f966d3ea3df42af0, type: 3}
   ammoPanelTMP: {fileID: 1627034865589454347}
   levelLoader: {fileID: 1547780739}
+  curMusic: {fileID: 0}
   isPaused: 0
   playerIsAiming: 0
   enemiesRemaining: 0
