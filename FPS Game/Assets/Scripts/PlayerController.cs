@@ -461,6 +461,8 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         transform.position = data.playerPos;
         if (gunList.Count > 0)
         {
+            //gunModel.mesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
+            //gunMaterial.material = gunList[selectedGun].model.GetComponent<MeshRenderer>().sharedMaterial;
             GunPickup(gunList[selectedGun]);
             ChangeGun();
         }
