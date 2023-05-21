@@ -454,18 +454,18 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     {
         if (time < data.time)
             time = data.time;
-        gunList = data.gunList;
-        selectedGun = data.selectedGun;
         if (data.aimPos != Vector3.zero)
             newAimPos.transform.position = data.aimPos;
         if (data.playerPos != Vector3.zero) 
             GameManager.Instance.playerSpawnPos.transform.localPosition = data.playerPos;
         transform.position = data.playerPos;
-        if (gunList.Count > 0)
+        if (data.gunList.Count > 0)
         {
-            //gunModel.mesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
-            //gunMaterial.material = gunList[selectedGun].model.GetComponent<MeshRenderer>().sharedMaterial;
-            GunPickup(gunList[selectedGun]);
+            for (int i = 0; i < data.gunList.Count; i++)
+            {
+                GunPickup(data.gunList[i]);
+            }
+            selectedGun = data.selectedGun;
             ChangeGun();
         }
     }
