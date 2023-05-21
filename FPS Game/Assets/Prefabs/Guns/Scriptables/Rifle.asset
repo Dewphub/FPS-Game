@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rifle
   m_EditorClassIdentifier: 
   shootDamage: 10
-  shootRate: 0.85
+  shootRate: 1.5
   shootDist: 500
   recoilX: -20
   recoilY: 0.05
