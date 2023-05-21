@@ -21,26 +21,27 @@ public class TallyScore : MonoBehaviour, IDataPersistence
     int secretsFound;
     int deaths;
     int temp;
+    float waitForTransition = 0;
     bool updating;
     bool playingSound = false;
 
     private void Update()
     {
-        if (!updating)
+        if (!updating && (waitForTransition += Time.deltaTime) >= 1)
         {
             if (EnemiesKilled.text != enemiesKilled.ToString())
             {
                 StartCoroutine(countText(EnemiesKilled, enemiesKilled));
             }
-            else if (TimeSpent.text == "")
+            else if (TimeSpent.text == "00:00:00" && timeSpent > 0)
             {
                 StartCoroutine(countTime());
             }
-            else if (SecretsFound.text == "")
+            else if (SecretsFound.text != secretsFound.ToString())
             {
                 StartCoroutine(countText(SecretsFound, secretsFound));
             }
-            else if (Deaths.text == "")
+            else if (Deaths.text != deaths.ToString())
             {
                 StartCoroutine(countText(Deaths, deaths));
             }

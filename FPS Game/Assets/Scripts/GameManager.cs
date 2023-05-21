@@ -124,9 +124,11 @@ public class GameManager : MonoBehaviour
     void BossHasDied()
     {
         DefenderBossAI.Dying -= BossHasDied;
-        activeMenu = winMenu;
+        /*activeMenu = winMenu;
         activeMenu.SetActive(true);
-        PauseState();
+        PauseState();*/
+        LoadNextLevelAsynchronously();
+        DataPersistenceManager.Instance.SaveGame();
     }
 
     private void HideDyingIndicator()

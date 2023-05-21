@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static System.TimeZoneInfo;
 
 public class MainMenu : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Slider loadingBar;
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip[] menuAud;
+    [SerializeField] Animator transition;
+    
+    float transitionTime = 1f;
 
     private void Start()
     {
@@ -61,10 +65,14 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator LoadSceneAsynchronously(int SceneIndex)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneIndex);
-        startMenu.SetActive(false);
+        // Play Transition Animation
+        transition.SetTrigger("Start");
+        // Wait
+        yield return new WaitForSeconds(transitionTime);
+        // Load Scene
+        AsyncOperation operation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(SceneIndex);
         loadingScreen.SetActive(true);
-        while(!operation.isDone)
+        while (!operation.isDone)
         {
             loadingBar.value = operation.progress;
             yield return null;
