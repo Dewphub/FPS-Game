@@ -180,6 +180,7 @@ public class GameManager : MonoBehaviour
     public void OnDead()
     {
         PlayerHasDied?.Invoke();
+        DataPersistenceManager.Instance.ModifyDeaths(1);
         activeMenu = loseMenu;
         activeMenu.SetActive(true);
         PauseState();
