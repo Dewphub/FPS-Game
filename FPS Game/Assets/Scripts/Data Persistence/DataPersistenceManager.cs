@@ -70,7 +70,9 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void ModifyDeaths(int modifier, bool overwrite = false)
     {
+        float tempTime = this.gameData.time;
         this.gameData = dataHandler.Load();
+        this.gameData.time = tempTime;
         if (!overwrite)
             this.gameData.deaths += modifier;
         else
