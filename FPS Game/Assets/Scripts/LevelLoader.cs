@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -14,12 +15,15 @@ public class LevelLoader : MonoBehaviour
     }
     IEnumerator LoadSceneAsynchronously(int sceneIndex)
     {
-        // Play Transition Animation
-        transition.SetTrigger("Start");
-        // Wait
-        yield return new WaitForSeconds(transitionTime);
+        if (sceneIndex != SceneManager.GetActiveScene().buildIndex)
+        {
+            // Play Transition Animation
+            transition.SetTrigger("Start");
+            // Wait
+            yield return new WaitForSeconds(transitionTime);
+        }
         // Load Scene
-        AsyncOperation operation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneIndex);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
         loadingScreen.SetActive(true);
         while(!operation.isDone)
         {
