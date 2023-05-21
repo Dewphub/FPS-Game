@@ -306,6 +306,13 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             }
             //update remaining ammo on UI
             GameManager.Instance.UpdateGunUI(selectedGun, GetSelectedGun());
+            // If rifle, then reload
+            if (gunList[selectedGun].GetInstanceID() == 27636)
+            {
+                GetSelectedGun().CalcReload();
+                yield return new WaitForSeconds(shootRate);
+                GameManager.Instance.UpdateGunUI(selectedGun, GetSelectedGun()); //update the UI with current gun ammo situation
+            }
         }
         else if (GetSelectedGun().GetRemainingAmmo() > 0)
         {
