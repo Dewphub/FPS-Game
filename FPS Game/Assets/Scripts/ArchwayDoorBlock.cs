@@ -5,6 +5,7 @@ using UnityEngine;
 public class ArchwayDoorBlock : MonoBehaviour
 {
     [SerializeField] float lerpDuration;
+    [SerializeField] GameObject invisibleBlocker;
 
     Vector3 doorBlockOffset;
     Vector3 doorPosOriginal;
@@ -20,11 +21,13 @@ public class ArchwayDoorBlock : MonoBehaviour
     {
         if(GameManager.Instance.GetEnemiesRemaining() > 0)
         {
+            invisibleBlocker.SetActive(true);
             openTimeElapsed = 0;
             ProcessBlockPath();
         }
         else if(transform.localPosition != doorPosOriginal && GameManager.Instance.GetEnemiesRemaining() <= 0)
         {
+            invisibleBlocker.SetActive(false);
             blockTimeElapsed = 0;
             ProcessOpenPath();
         }

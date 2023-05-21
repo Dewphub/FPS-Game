@@ -179,7 +179,6 @@ public class DefenderBossAI : MonoBehaviour, IDamage
             StopAllCoroutines();
             anim.SetBool("Dead", true);
             GetComponent<CapsuleCollider>().enabled = false;
-            agent.enabled = false;
             StartCoroutine(OnDead());
         }
         else
@@ -260,8 +259,8 @@ public class DefenderBossAI : MonoBehaviour, IDamage
     IEnumerator OnDead()
     {
         GameManager.Instance.playerScript.SetShootenabled(false);
-        yield return new WaitForSeconds(1f);
-        Instantiate(loot[UnityEngine.Random.Range(0, loot.Length)], transform.position, Quaternion.identity);
+        agent.enabled = false;
+        yield return new WaitForSeconds(5f);
         StartCoroutine(FadeDeath());
     }
 
@@ -320,7 +319,7 @@ public class DefenderBossAI : MonoBehaviour, IDamage
     IEnumerator FadeDeath()
     {
         Dying?.Invoke();
-        yield return new WaitForSeconds(3);
+        yield return null;
         Destroy(gameObject);
     }
 }

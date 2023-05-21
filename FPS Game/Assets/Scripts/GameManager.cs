@@ -1,6 +1,5 @@
 using System;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -39,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     public bool isPaused;
     public bool playerIsAiming;
-    public int enemiesRemaining;
+    public int enemiesRemaining = 0;
     public int enemiesKilled;
 
     public bool fadeIn;
@@ -142,6 +141,7 @@ public class GameManager : MonoBehaviour
 
     public void PauseState()
     {
+        reticle.SetActive(false);
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
 
     public void ResumeState()
     {
-
+        reticle.SetActive(true);
         aim.enabled = true;
         Time.timeScale = TIME_SCALE_DEFAULT;
         Cursor.visible = false;

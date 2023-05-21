@@ -1,10 +1,9 @@
 //using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+[RequireComponent(typeof(Rigidbody))]
 public class EnemyAI : MonoBehaviour, IDamage
 {
     [Header("----- Components -----")]
@@ -19,6 +18,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] SphereCollider coverChecker;
     [SerializeField] LayerMask hideLayer;
     [SerializeField] GameObject[] loot;
+    [SerializeField] Rigidbody rb;
 
     [Header("----- Enemy Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
@@ -51,6 +51,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     bool isShooting;
     bool destinationChosen;
     bool coverTaken;
+    bool isDead;
     float angleToPlayer;
     float stoppingDistOrig;
     float speed;
@@ -65,6 +66,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         originalHP = HP;
         TakingDamageFromPlayer += OtherAI_TakingDamageFromPlayer;
         GameManager.Instance.UpdateGameGoal(1);
+        rb = gameObject.GetComponent<Rigidbody>();
     }
 
     private void OtherAI_TakingDamageFromPlayer(object sender, EventArgs e)
@@ -151,14 +153,20 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
     public void TakeDamage(int amount)
     {
+        if(!isDead)
+        {
         HP -= amount;
         audioSource.PlayOneShot(takeDamageSFX[UnityEngine.Random.Range(0, takeDamageSFX.Length)], takeDamageSFXVolume);
         bloodFX.Play();
         StartCoroutine(FlashColor());
+        }
         if (HP <= 0)
         {
-            //StopAllCoroutines();
-            Debug.Log("Enemy died");
+            isDead = true;
+            agent.isStopped = true;
+            TakingDamageFromPlayer -= OtherAI_TakingDamageFromPlayer;
+            StopAllCoroutines();
+            Debug.Log("Enemy ID: " + gameObject.name + " died");
             GameManager.Instance.UpdateGameGoal(-1);
             anim.SetBool("Dead", true);
             GetComponent<CapsuleCollider>().enabled = false;
@@ -175,7 +183,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
     IEnumerator Roam()
     {
-        if (!destinationChosen && agent.remainingDistance < 0.05f)
+        if (!destinationChosen && !isDead && agent.remainingDistance < 0.05f)
         {
             destinationChosen = true;
             agent.stoppingDistance = 0;
@@ -187,9 +195,11 @@ public class EnemyAI : MonoBehaviour, IDamage
 
             NavMeshHit hit;
             NavMesh.SamplePosition(ranPos, out hit, roamDist, 1);
-
-            agent.SetDestination(hit.position);
-            destinationChosen = false;
+            if(!isDead)
+            {
+                agent.SetDestination(hit.position);
+                destinationChosen = false;
+            }
         }
     }
     IEnumerator Shoot()
@@ -213,59 +223,60 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     IEnumerator OnDead()
     {
-        if(takeCoverEnabled)
-        {
-            TakingDamageFromPlayer -= OtherAI_TakingDamageFromPlayer;
-        }
+        agent.enabled = false;
+        rb.Sleep();
         yield return new WaitForSeconds(1f);
-        Instantiate(loot[UnityEngine.Random.Range(0, loot.Length)], transform.position, Quaternion.identity);
+        GameObject lootDrop = Instantiate(loot[UnityEngine.Random.Range(0, loot.Length)], transform.position + new Vector3(0f, 0.75f, 0f), Quaternion.identity);
         StartCoroutine(FadeDeath(true));
     }
 
     IEnumerator Hide(Transform _player)
     {
-        if (!destinationChosen)
+        if (!isDead)
         {
-            int hits = Physics.OverlapSphereNonAlloc(agent.transform.position, coverChecker.radius, colliders, hideLayer);
-
-            for (int i = 0; i < hits; i++)
+            if (!destinationChosen)
             {
-                if (NavMesh.SamplePosition(colliders[i].transform.position, out NavMeshHit hit, 2f, agent.areaMask))
+                int hits = Physics.OverlapSphereNonAlloc(agent.transform.position, coverChecker.radius, colliders, hideLayer);
+
+                for (int i = 0; i < hits; i++)
                 {
-                    if (!NavMesh.FindClosestEdge(hit.position, out hit, agent.areaMask))
+                    if (NavMesh.SamplePosition(colliders[i].transform.position, out NavMeshHit hit, 2f, agent.areaMask))
                     {
-                        Debug.LogError("Unable to find edge close to " + hit.position);
-                    }
-                    if (Vector3.Dot(hit.normal, (GameManager.Instance.player.transform.position - hit.position).normalized) <= 0f)
-                    {
-                        destinationChosen = true;
-                        agent.stoppingDistance = 1f;
-                        animTransSpeed += 10f;
-                        agent.SetDestination(hit.position);
-                        yield return new WaitForSeconds(3);
-                        coverTaken = true;
-                        Quaternion.LookRotation(playerDir);
-                        destinationChosen = false;
-                    }
-                    else
-                    {
-                        if (NavMesh.SamplePosition(colliders[i].transform.position - (GameManager.Instance.player.transform.position - hit.position).normalized * 2f,
-                            out NavMeshHit hit2, 2f, agent.areaMask))
+                        if (!NavMesh.FindClosestEdge(hit.position, out hit, agent.areaMask))
                         {
-                            if (!NavMesh.FindClosestEdge(hit2.position, out hit2, agent.areaMask))
+                            Debug.LogError("Unable to find edge close to " + hit.position);
+                        }
+                        if (Vector3.Dot(hit.normal, (GameManager.Instance.player.transform.position - hit.position).normalized) <= 0f)
+                        {
+                            destinationChosen = true;
+                            agent.stoppingDistance = 1f;
+                            animTransSpeed += 10f;
+                            agent.SetDestination(hit.position);
+                            yield return new WaitForSeconds(3);
+                            coverTaken = true;
+                            Quaternion.LookRotation(playerDir);
+                            destinationChosen = false;
+                        }
+                        else
+                        {
+                            if (NavMesh.SamplePosition(colliders[i].transform.position - (GameManager.Instance.player.transform.position - hit.position).normalized * 2f,
+                                out NavMeshHit hit2, 2f, agent.areaMask))
                             {
-                                Debug.LogError("Unable to find edge close to " + hit2.position + " (second attempt)");
-                            }
-                            if (Vector3.Dot(hit2.normal, (GameManager.Instance.player.transform.position - hit2.position).normalized) <= 0f)
-                            {
-                                destinationChosen = true;
-                                agent.stoppingDistance = 1f;
-                                animTransSpeed += 10f;
-                                agent.SetDestination(hit2.position);
-                                yield return new WaitForSeconds(3f);
-                                Quaternion.LookRotation(playerDir);
-                                coverTaken = true;
-                                destinationChosen = false;
+                                if (!NavMesh.FindClosestEdge(hit2.position, out hit2, agent.areaMask))
+                                {
+                                    Debug.LogError("Unable to find edge close to " + hit2.position + " (second attempt)");
+                                }
+                                if (Vector3.Dot(hit2.normal, (GameManager.Instance.player.transform.position - hit2.position).normalized) <= 0f)
+                                {
+                                    destinationChosen = true;
+                                    agent.stoppingDistance = 1f;
+                                    animTransSpeed += 10f;
+                                    agent.SetDestination(hit2.position);
+                                    yield return new WaitForSeconds(3f);
+                                    Quaternion.LookRotation(playerDir);
+                                    coverTaken = true;
+                                    destinationChosen = false;
+                                }
                             }
                         }
                     }
