@@ -168,6 +168,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             StopAllCoroutines();
             Debug.Log("Enemy ID: " + gameObject.name + " died");
             GameManager.Instance.UpdateGameGoal(-1);
+            DataPersistenceManager.Instance.ModifyEnemiesKilled(1);
             anim.SetBool("Dead", true);
             GetComponent<CapsuleCollider>().enabled = false;
             agent.enabled = false;

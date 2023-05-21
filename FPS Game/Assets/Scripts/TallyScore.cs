@@ -13,7 +13,8 @@ public class TallyScore : MonoBehaviour, IDataPersistence
     [SerializeField] TMP_Text TimeSpent;
     [SerializeField] TMP_Text SecretsFound;
     [SerializeField] TMP_Text Deaths;
-    [SerializeField] GameObject SceneLoader;
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip[] audCounter;
     [SerializeField] GameObject ContinueText;
     int enemiesKilled;
     int timeSpent;
@@ -21,6 +22,7 @@ public class TallyScore : MonoBehaviour, IDataPersistence
     int deaths;
     int temp;
     bool updating;
+    bool playingSound = false;
 
     private void Update()
     {
@@ -65,9 +67,21 @@ public class TallyScore : MonoBehaviour, IDataPersistence
                 temp = number;
             text.text = temp.ToString();
             temp++;
-            yield return new WaitForSeconds(0.1f);
+            if (number == enemiesKilled)
+                yield return new WaitForSeconds(0.05f);
+            else
+                yield return new WaitForSeconds(0.1f);
+            StartCoroutine(playCounterSound(0));
         }
         updating = false;
+    }
+
+    IEnumerator playCounterSound(float seconds, int index = 0)
+    {
+        playingSound = true;
+        yield return new WaitForSeconds(seconds);
+        aud.PlayOneShot(audCounter[index], 0.5f);
+        playingSound = false;
     }
 
     IEnumerator countTime()
@@ -92,12 +106,15 @@ public class TallyScore : MonoBehaviour, IDataPersistence
                 else
                     temp++;
                 yield return null;
+                if (!playingSound)
+                    StartCoroutine(playCounterSound(0.04f));
             }
             else
             {
                 TimeSpent.text = $"{((hours - hours % 24) / 24).ToString()} days" + (hours % 24 != 0 ? $" and {hours % 24} hours" : "");
                 temp += 3600;
                 yield return new WaitForSeconds(0.5f);
+                StartCoroutine(playCounterSound(0));
             }
         }
         updating = false;

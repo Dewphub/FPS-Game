@@ -31,6 +31,7 @@ public class GunPickup : MonoBehaviour, IDataPersistence
             GameManager.Instance.playerScript.GunPickup(gun);
             GameManager.Instance.playerScript.secrets++;
             isPickedUp = true;
+            DataPersistenceManager.Instance.ModifySecrets(1);
             this.gameObject.SetActive(false);
         }
     }

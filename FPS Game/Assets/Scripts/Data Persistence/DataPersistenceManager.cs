@@ -68,6 +68,30 @@ public class DataPersistenceManager : MonoBehaviour
         dataHandler.SaveLevel(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void ModifyDeaths(int modifier, bool overwrite = false)
+    {
+        this.gameData = dataHandler.Load();
+        if (!overwrite)
+            this.gameData.deaths += modifier;
+        else
+            this.gameData.deaths = modifier;
+        dataHandler.Save(gameData);
+    }
+    public void ModifySecrets(int modifier, bool overwrite = false)
+    {
+        if (!overwrite)
+            this.gameData.secretsFound += modifier;
+        else
+            this.gameData.secretsFound = modifier;
+    }
+    public void ModifyEnemiesKilled(int modifier, bool overwrite = false)
+    {
+        if (!overwrite)
+            this.gameData.enemiesKilled += modifier;
+        else
+            this.gameData.enemiesKilled = modifier;
+    }
+
     /*private void OnApplicationQuit()
     {
         SaveGame();
