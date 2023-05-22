@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     [Range(0.5f, 5)][SerializeField] float shootRate;
     [Range(1, 100)][SerializeField] int shootDist;
     [Range(0, 0.5f)][SerializeField] float muzzleFlashFX;
+    [SerializeField] gunStats rifle;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audSteps;
@@ -307,7 +308,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             //update remaining ammo on UI
             GameManager.Instance.UpdateGunUI(selectedGun, GetSelectedGun());
             // If rifle, then reload
-            if (gunList[selectedGun].GetInstanceID() == 27636)
+            if (gunList[selectedGun] == rifle)
             {
                 GetSelectedGun().CalcReload();
                 yield return new WaitForSeconds(shootRate);
