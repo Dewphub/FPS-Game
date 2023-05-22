@@ -67,7 +67,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         spawnFX.Play();
         originalHP = HP;
         TakingDamageFromPlayer += OtherAI_TakingDamageFromPlayer;
-        GameManager.Instance.UpdateGameGoal(1);
+        //GameManager.Instance.UpdateGameGoal(1);
         rb = gameObject.GetComponent<Rigidbody>();
     }
 

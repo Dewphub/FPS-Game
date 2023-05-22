@@ -40,6 +40,7 @@ public class Spawner : MonoBehaviour
     IEnumerator Spawn()
     {
         isSpawning = true;
+        GameManager.Instance.UpdateGameGoal(spawnPos.Length);
         if (playOnActivate)
             playOnActivate.Play();
         for (int i = 0; i < spawnFX.Length; i++)
