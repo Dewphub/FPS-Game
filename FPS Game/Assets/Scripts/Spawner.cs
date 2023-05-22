@@ -8,6 +8,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] int intervalTime;
     [SerializeField] Transform[] spawnPos;
     [SerializeField] int prefabMaxNum;
+    [SerializeField] int spawnInterval;
+    [SerializeField] ParticleSystem[] spawnFX;
 
     public List<GameObject> prefabList = new List<GameObject>();
 
@@ -37,8 +39,14 @@ public class Spawner : MonoBehaviour
     IEnumerator Spawn()
     {
         isSpawning = true;
-        for(int i = 0; i < spawnPos.Length; i++)
+        for (int i = 0; i < spawnFX.Length; i++)
         {
+            spawnFX[i].Play();
+        }
+        yield return new WaitForSeconds(spawnInterval);
+        for (int i = 0; i < spawnPos.Length; i++)
+        {
+            spawnFX[i].Stop();
             GameObject prefabClone = Instantiate(prefab, spawnPos[i].position, prefab.transform.rotation);
             prefabList.Add(prefabClone);
             prefabsSpawnCount++;
