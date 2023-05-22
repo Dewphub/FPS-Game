@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] int prefabMaxNum;
     [SerializeField] int spawnInterval;
     [SerializeField] ParticleSystem[] spawnFX;
+    [SerializeField] AudioSource playOnActivate;
 
     public List<GameObject> prefabList = new List<GameObject>();
 
@@ -39,6 +40,8 @@ public class Spawner : MonoBehaviour
     IEnumerator Spawn()
     {
         isSpawning = true;
+        if (playOnActivate)
+            playOnActivate.Play();
         for (int i = 0; i < spawnFX.Length; i++)
         {
             spawnFX[i].Play();
