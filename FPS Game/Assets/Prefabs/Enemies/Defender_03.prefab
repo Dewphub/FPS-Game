@@ -913,7 +913,7 @@ MonoBehaviour:
   - {fileID: 6030592366141475662, guid: 45b76562d70e8cb459e92925bf21feeb, type: 3}
   grenadePrefab: {fileID: 1953994588686537771, guid: 2700beaecef65e34a938752247dfadac, type: 3}
   grenadeLaunchPos: {fileID: 4923731200172527187}
-  HP: 200
+  HP: 1
   playerFaceSpeed: 10
   sightAngle: 179
   roamPauseTime: 2

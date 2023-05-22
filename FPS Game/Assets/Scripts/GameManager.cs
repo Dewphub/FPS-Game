@@ -1,8 +1,10 @@
 using System;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -124,6 +126,7 @@ public class GameManager : MonoBehaviour
     void BossHasDied()
     {
         DefenderBossAI.Dying -= BossHasDied;
+        
         /*activeMenu = winMenu;
         activeMenu.SetActive(true);
         PauseState();*/

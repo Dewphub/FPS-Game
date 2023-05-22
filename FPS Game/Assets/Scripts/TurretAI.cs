@@ -21,6 +21,7 @@ public class TurretAI : MonoBehaviour, IDamage, IDataPersistence
     [SerializeField] int HP;
 
     [Header("Components")]
+    [SerializeField] Transform shootPosParent;
     [SerializeField] Animator animator;
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
@@ -63,7 +64,7 @@ public class TurretAI : MonoBehaviour, IDamage, IDataPersistence
         animator.SetBool("isShooting", true);
         yield return new WaitForSeconds(shootRate);
         GameObject bulletClone = Instantiate(bullet, shootPos.position, bullet.transform.rotation);
-        bulletClone.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
+        bulletClone.GetComponent<Rigidbody>().velocity = shootPosParent.forward * bulletSpeed;
         Bullet bulletInfo = bulletClone.GetComponent<Bullet>();
         bulletInfo.SetShooter(transform);
         isShooting = false;

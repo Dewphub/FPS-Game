@@ -23,7 +23,7 @@ public class DefenderBossAI : MonoBehaviour, IDamage
     [SerializeField] Transform grenadeLaunchPos;
 
     [Header("----- Enemy Stats -----")]
-    [Range(100, 1000)][SerializeField] int HP;
+    [Range(0, 1000)][SerializeField] int HP;
     [Range(1, 10)][SerializeField] int playerFaceSpeed;
     [Range(0, 179)][SerializeField] int sightAngle;
     [SerializeField] int roamPauseTime;
