@@ -19,6 +19,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] LayerMask hideLayer;
     [SerializeField] GameObject[] loot;
     [SerializeField] Rigidbody rb;
+    [SerializeField] CapsuleCollider capsuleCollider;
+    [SerializeField] SphereCollider headshotCollider;
 
     [Header("----- Enemy Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
@@ -224,6 +226,9 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     IEnumerator OnDead()
     {
+        headshotCollider.enabled = false;
+        capsuleCollider.enabled = false;
+        agent.GetComponent<Collider>().enabled = false;
         agent.enabled = false;
         rb.Sleep();
         yield return new WaitForSeconds(1f);
