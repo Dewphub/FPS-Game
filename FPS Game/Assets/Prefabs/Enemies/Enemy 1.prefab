@@ -287,7 +287,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   capsuleCollider: {fileID: 8476344485024657230}
   headshotCollider: {fileID: 624810529203256893}
-  HP: 3
+  HP: 4
   playerFaceSpeed: 5
   sightAngle: 179
   roamPauseTime: 5
