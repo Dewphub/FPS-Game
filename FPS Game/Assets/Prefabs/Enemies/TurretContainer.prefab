@@ -9862,6 +9862,7 @@ MonoBehaviour:
   - {fileID: 6495814691251676443}
   aud: {fileID: -2586927805991636439}
   explosion: {fileID: 8300000, guid: 9970386351ab753458f2842463182dba, type: 3}
+  shootAudio: {fileID: 8300000, guid: 7f384cd4ce4038f46952637943c39ed9, type: 3}
 --- !u!82 &-2586927805991636439
 AudioSource:
   m_ObjectHideFlags: 0

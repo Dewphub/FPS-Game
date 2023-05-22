@@ -28,6 +28,7 @@ public class TurretAI : MonoBehaviour, IDamage, IDataPersistence
     [SerializeField] GameObject[] particles;
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip explosion;
+    [SerializeField] AudioClip shootAudio;
 
 
     GameObject player;
@@ -65,6 +66,7 @@ public class TurretAI : MonoBehaviour, IDamage, IDataPersistence
         yield return new WaitForSeconds(shootRate);
         GameObject bulletClone = Instantiate(bullet, shootPos.position, bullet.transform.rotation);
         bulletClone.GetComponent<Rigidbody>().velocity = shootPosParent.forward * bulletSpeed;
+        aud.PlayOneShot(shootAudio);
         Bullet bulletInfo = bulletClone.GetComponent<Bullet>();
         bulletInfo.SetShooter(transform);
         isShooting = false;
