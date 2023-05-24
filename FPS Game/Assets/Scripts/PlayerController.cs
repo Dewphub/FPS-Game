@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     [Range(1, 100)][SerializeField] int shootDist;
     [Range(0, 0.5f)][SerializeField] float muzzleFlashFX;
     [SerializeField] gunStats rifle;
+    [SerializeField, Range(0, 2)] int reloadRate;
+    [Tooltip("Larger number means slower reload speeed")][SerializeField, Range(0f, 3f)] float reloadSpeed;
+    [Tooltip("Larger number means slower gun change speeed")][SerializeField, Range(0f, 1f)] float changeGunSpeed;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audSteps;
@@ -69,7 +72,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     
     bool groundedPlayer;
     bool isSprinting;
-   
+    bool isReloading;
     bool isPlayingSteps;
     bool isShooting;
     bool isOnLadder;
@@ -280,7 +283,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     {
         isShooting = true;
         //Check to see if player has any ammo left in the clip
-        if (GetSelectedGun().GetRemainingClipAmount() > 0)
+        if (GetSelectedGun().GetRemainingClipAmount() > 0 && !isReloading)
         {
             //Use the ammo
             GetSelectedGun().UseAmmo();
@@ -320,14 +323,22 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             //TODO create reload Coroutine
 
             //Player didn't have any ammo in the clip, but has leftover ammo
-
-            GetSelectedGun().CalcReload(); //fill the clip and subtract ammo used
-            GameManager.Instance.UpdateGunUI(selectedGun, GetSelectedGun()); //update the UI with current gun ammo situation
+            StartCoroutine(ProcessReload());
         }
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
+    IEnumerator ProcessReload()
+    {
+        isReloading = true;
+        StartCoroutine(RestrictAiming(reloadSpeed));
+        aud.PlayOneShot(gunPickupSFX);
+        GetSelectedGun().CalcReload(); //fill the clip and subtract ammo used
+        GameManager.Instance.UpdateGunUI(selectedGun, GetSelectedGun()); //update the UI with current gun ammo situation
+        yield return new WaitForSeconds(reloadRate);
+        isReloading = false;
+    }
     IEnumerator MuzzleFlash()
     {
         muzzleFlashObject.SetActive(true);
@@ -408,7 +419,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
             selectedGun = gunList.Count - 1;
             gunStat.SetDefaultGunStats();
-            StartCoroutine(RestrictAiming());
+            StartCoroutine(RestrictAiming(changeGunSpeed));
             UpdateMuzzleFlashLocation(gunStat);
             newAimPos.SetGunAimPos(gunStat.gunAimPos);
             recoil.UpdateGun(gunStat);
@@ -433,7 +444,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
     void ChangeGun()
     {
-        StartCoroutine(RestrictAiming());
+        StartCoroutine(RestrictAiming(changeGunSpeed));
         isShooting = false;
         StopCoroutine(Shoot());
 
@@ -503,10 +514,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     {
         return gunList[selectedGun].gunAimPos;
     }
-    IEnumerator RestrictAiming()
+    IEnumerator RestrictAiming(float _delayTime)
     {
         newAimPos.SetCanAim(false);
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(_delayTime);
         newAimPos.SetCanAim(true);
     }
     

@@ -376,15 +376,15 @@ MonoBehaviour:
   recoil: {fileID: 3342457909506542097}
   newAimPos: {fileID: 3624364368957531052}
   muzzleFlashObject: {fileID: 8689350490224883700}
-  orientation: {fileID: 0}
-  playerObj: {fileID: 0}
+  orientation: {fileID: 7258861595750999166}
+  playerObj: {fileID: 5411731646943978858}
   HP: 50
-  playerSpeed: 5
+  playerSpeed: 6
   sprintMod: 3
   jumpHeight: 8
-  gravityValue: 25
+  gravityValue: 20
   jumpsMax: 1
-  maxJumpTime: 1
+  maxJumpTime: 0.5
   aimSnap: 0.01
   climbSpeed: 2
   pushForce: 1000
@@ -395,6 +395,8 @@ MonoBehaviour:
   shootRate: 0.5
   shootDist: 1
   muzzleFlashFX: 0.05
+  rifle: {fileID: 11400000, guid: 52c45006acb9a06448505496f6c7f9a1, type: 2}
+  reloadRate: 2
   audSteps:
   - {fileID: 8300000, guid: a33305fa6e6a4b640ad7c2ec2c7a5bec, type: 3}
   - {fileID: 8300000, guid: 5f79e8346f1c4a34e9be8ecbd06a8acf, type: 3}

@@ -66,7 +66,7 @@ public class TurretAI : MonoBehaviour, IDamage, IDataPersistence
         yield return new WaitForSeconds(shootRate);
         GameObject bulletClone = Instantiate(bullet, shootPos.position, bullet.transform.rotation);
         bulletClone.GetComponent<Rigidbody>().velocity = shootPosParent.forward * bulletSpeed;
-        aud.PlayOneShot(shootAudio);
+        aud.PlayOneShot(shootAudio, 0.5f);
         Bullet bulletInfo = bulletClone.GetComponent<Bullet>();
         bulletInfo.SetShooter(transform);
         isShooting = false;
