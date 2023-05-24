@@ -19,6 +19,9 @@ public class movingPlatform : MonoBehaviour
 
     float distancetoWaypoint;
     float elapsedPrecent;
+
+     Vector3 gunRelativePosition;
+     Quaternion gunRelativeRotation;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +61,10 @@ public class movingPlatform : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             other.transform.SetParent(transform);
+            gunRelativePosition = other.transform.Find("GunPos").localPosition;
+            gunRelativeRotation = other.transform.Find("GunPos").localRotation;
+
+            
         }
     }
 
@@ -66,6 +73,10 @@ public class movingPlatform : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             other.transform.SetParent(null);
+            other.transform.Find("GunPos").localPosition = gunRelativePosition;
+            other.transform.Find("GunPos").localRotation = gunRelativeRotation;
+
+            
         }
     }
 }
