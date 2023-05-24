@@ -34,8 +34,12 @@ public class ButtonFunctions : MonoBehaviour
     public void Quit()
     {
         Debug.Log("Quit is being called");
-        DataPersistenceManager.Instance.ModifyDeaths(0);
         Application.Quit();
+    }
+    public void ReturnToMenu()
+    {
+        GameManager.Instance.ResumeState();
+        GameManager.Instance.LoadPreviousLevelAsynchronously();
     }
 
     public void RespawnPlayer()

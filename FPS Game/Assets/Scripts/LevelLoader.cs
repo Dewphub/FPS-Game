@@ -16,7 +16,7 @@ public class LevelLoader : MonoBehaviour
     }
     IEnumerator LoadSceneAsynchronously(int sceneIndex)
     {
-        if (sceneIndex != SceneManager.GetActiveScene().buildIndex)
+        if (sceneIndex == SceneManager.GetActiveScene().buildIndex+1)
         {
             // Play Transition Animation
             transition.SetTrigger("Start");
