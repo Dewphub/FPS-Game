@@ -132,11 +132,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         }
         if(Input.GetKeyUp(KeyCode.R))
         {
-            if(gunList.Count > 0)
+            if(gunList.Count > 0 && !isReloading)
             {
                 //TODO create reload Coroutine
-                GetSelectedGun().CalcReload();
-                GameManager.Instance.UpdateGunUI(selectedGun, GetSelectedGun());
+                StartCoroutine(ProcessReload());
             }
         }
     }
@@ -323,7 +322,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             //TODO create reload Coroutine
 
             //Player didn't have any ammo in the clip, but has leftover ammo
-            StartCoroutine(ProcessReload());
+            if(!isReloading)
+            {
+                StartCoroutine(ProcessReload());
+            }
         }
         yield return new WaitForSeconds(shootRate);
         isShooting = false;

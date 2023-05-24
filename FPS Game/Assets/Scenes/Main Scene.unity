@@ -10109,11 +10109,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6030592366141475669, guid: 45b76562d70e8cb459e92925bf21feeb, type: 3}
   m_PrefabInstance: {fileID: 1083725774}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1111884280 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7258861595750999166, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
-  m_PrefabInstance: {fileID: 7258861597651072622}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1115505737 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9214782885762600549, guid: 93ebb61ac633ff245a4a23f897e7f5d8, type: 3}
@@ -20917,45 +20912,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 913185782519814865, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: -3008613724363630453, guid: ba434cdd289acf349ba5e451c2616994, type: 2}
     - target: {fileID: 2048955381676099139, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
-      propertyPath: rifle
-      value: 
-      objectReference: {fileID: 11400000, guid: 52c45006acb9a06448505496f6c7f9a1, type: 2}
-    - target: {fileID: 2048955381676099139, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
-      propertyPath: slideF
-      value: 100
+      propertyPath: reloadSpeed
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2048955381676099139, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
-      propertyPath: maxSlide
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2048955381676099139, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
-      propertyPath: playerObj
-      value: 
-      objectReference: {fileID: 2103148666}
-    - target: {fileID: 2048955381676099139, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
-      propertyPath: jumpHeight
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2048955381676099139, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
-      propertyPath: maxJumpTime
+      propertyPath: changeGunSpeed
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2048955381676099139, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
-      propertyPath: orientation
-      value: 
-      objectReference: {fileID: 1111884280}
-    - target: {fileID: 2048955381676099139, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
-      propertyPath: playerSpeed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2048955381676099139, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
-      propertyPath: gravityValue
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5411731646943978858, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
       propertyPath: m_RootOrder
@@ -21005,12 +20968,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7258861595634916076, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
-      propertyPath: controller
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7258861595634916076, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
 --- !u!82 &7258861597651072623 stripped
 AudioSource:
