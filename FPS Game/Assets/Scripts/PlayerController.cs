@@ -89,7 +89,6 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         UIUpdate();
         Respawn();
         controller.enabled = true;
-
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         startY = transform.localScale.y;
@@ -121,7 +120,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         }
         //Debugging GunList
         //Will require start game playmode over immediately after use
-        if(Input.GetKeyDown(KeyCode.M))
+/*        if(Input.GetKeyDown(KeyCode.M))
         {
             gunList.Clear();
             GameManager.Instance.ClearCurrentGun();
@@ -129,7 +128,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             GameManager.Instance.ClearPrevGun();
             gunMaterial = null;
             gunModel = null;
-        }
+        }*/
         if(Input.GetKeyUp(KeyCode.R))
         {
             if(gunList.Count > 0 && !isReloading)

@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 5337363576003967009}
   - component: {fileID: 3342457909506542097}
   - component: {fileID: 3624364368957531052}
-  - component: {fileID: 7258861596946602112}
   m_Layer: 10
   m_Name: GunPos
   m_TagString: Untagged
@@ -196,54 +195,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 2048955381676099139}
-  noClip: {fileID: 7258861596946602112}
+  noClip: {fileID: 0}
   gunHipPosTransform: {fileID: 7258861595867932621}
   gunAimPosTransform: {fileID: 7258861597484948804}
   aimSnap: 0.075
   cam: {fileID: 8688068046938832167}
   weaponCam: {fileID: 5831110055467741256}
   camAnimationSpeed: 20
---- !u!114 &7258861596946602112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3342457909506542096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f13bd23bb651b2649a56870c5c61e1d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 3.25
-  radius: 0.125
-  offsetCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 3.5
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  clippingLayerMask:
-    serializedVersion: 2
-    m_Bits: 513
 --- !u!1 &4546306743451213270
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,6 +355,8 @@ MonoBehaviour:
   muzzleFlashFX: 0.05
   rifle: {fileID: 11400000, guid: 52c45006acb9a06448505496f6c7f9a1, type: 2}
   reloadRate: 2
+  reloadSpeed: 1.5
+  changeGunSpeed: 0.5
   audSteps:
   - {fileID: 8300000, guid: a33305fa6e6a4b640ad7c2ec2c7a5bec, type: 3}
   - {fileID: 8300000, guid: 5f79e8346f1c4a34e9be8ecbd06a8acf, type: 3}
