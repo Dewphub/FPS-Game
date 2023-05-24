@@ -20684,7 +20684,7 @@ MonoBehaviour:
   - {fileID: 5540635349661971626}
   - {fileID: 5540635349367369998}
   - {fileID: 5540635348778068595}
-  prefabMaxNum: 10
+  prefabMaxNum: 4
   spawnInterval: 1
   spawnFX:
   - {fileID: 294928724}
