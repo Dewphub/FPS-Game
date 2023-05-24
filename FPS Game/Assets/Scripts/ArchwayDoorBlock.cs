@@ -15,6 +15,7 @@ public class ArchwayDoorBlock : MonoBehaviour
     {
         doorBlockOffset = new Vector3(0, -2f, 0);
         doorPosOriginal = transform.localPosition;
+        invisibleBlocker.SetActive(false);
     }
 
     private void Update()
