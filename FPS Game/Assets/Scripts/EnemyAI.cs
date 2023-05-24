@@ -1,6 +1,7 @@
 //using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using System;
 using System.Collections;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
@@ -47,7 +48,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] bool takeCoverEnabled;
 
     Vector3 playerDir;
+    Vector3 playerHeadDir;
     Vector3 startingPos;
+    Vector3 courseCorrectionDir;
     public Collider[] colliders = new Collider[10];
     bool playerInRange;
     bool isShooting;
@@ -69,7 +72,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         TakingDamageFromPlayer += OtherAI_TakingDamageFromPlayer;
         //GameManager.Instance.UpdateGameGoal(1);
         rb = gameObject.GetComponent<Rigidbody>();
-        shootRate = UnityEngine.Random.Range(0.5f, shootRate);
+        shootRate = UnityEngine.Random.Range(0.5f, 2f);
     }
 
     private void OtherAI_TakingDamageFromPlayer(object sender, EventArgs e)
@@ -121,36 +124,40 @@ public class EnemyAI : MonoBehaviour, IDamage
     bool CanSeePlayer()
     {
         playerDir = (GameManager.Instance.player.transform.position - headPos.position).normalized;
+        playerHeadDir = (GameManager.Instance.playerHead.transform.position - headPos.position).normalized;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
         Debug.DrawRay(headPos.position, playerDir);
 
         RaycastHit hit;
-
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer <= sightAngle)
             {
-                if((float)HP / originalHP >= 0.5f || coverTaken || !takeCoverEnabled)
+                if ((float)HP / originalHP >= 0.5f || coverTaken || !takeCoverEnabled)
                 {
                     agent.stoppingDistance = stoppingDistOrig;
                     agent.SetDestination(GameManager.Instance.player.transform.position);
 
                     if (agent.remainingDistance < agent.stoppingDistance)
-                    { FacePlayer(); }
-
+                    {
+                        FacePlayer();
+                    }
                     if (Mathf.Abs(angleToPlayer) <= 5f)
                     {
                         if (!isShooting)
+                        {
                             StartCoroutine(Shoot());
+                        }
                     }
                 }
-                else if(takeCoverEnabled)
+                else if (takeCoverEnabled)
                 {
                     StartCoroutine(Hide(GameManager.Instance.player.transform));
                 }
                 return true;
             }
+
         }
         return false;
     }
@@ -307,5 +314,10 @@ public class EnemyAI : MonoBehaviour, IDamage
             }
         }
         Destroy(gameObject);
+    }
+
+    public NavMeshAgent GetAgent()
+    {
+        return agent;
     }
 }

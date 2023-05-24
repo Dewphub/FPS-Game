@@ -57,9 +57,17 @@ public class Aim : MonoBehaviour
         if (aimTimeElapsed < aimSnap)
         {
             isAiming = true;
-            gunPos.localPosition = Vector3.Lerp(gunHipPos, gunAimPos, (aimTimeElapsed / aimSnap));
-            gunPos.localRotation = Quaternion.Slerp(gunHipRot, gunAimRot, (aimTimeElapsed / aimSnap));
+            gunPos.SetLocalPositionAndRotation(Vector3.Lerp(
+                gunHipPos, 
+                gunAimPos, 
+                (aimTimeElapsed / aimSnap)), 
+                Quaternion.Slerp(gunHipRot, 
+                gunAimRot, 
+                (aimTimeElapsed / aimSnap))
+                );
+
             aimTimeElapsed += Time.deltaTime;
+
         }
     }
 

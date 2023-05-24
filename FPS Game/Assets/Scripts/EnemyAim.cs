@@ -8,7 +8,7 @@ public class EnemyAim : MonoBehaviour
 
     private void Start()
     {
-        playerDir = GameObject.FindGameObjectWithTag("Player");
+        playerDir = GameObject.FindGameObjectWithTag("PlayerHead");
     }
 
     private void Update()

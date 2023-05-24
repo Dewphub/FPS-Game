@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     [Header("----- Player Information -----")]
     public GameObject player;
+    public GameObject playerHead;
     public PlayerController playerScript;
     public GameObject playerSpawnPos;
     public Aim aim;
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
         }
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        playerHead = GameObject.FindGameObjectWithTag("PlayerHead");
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         TIME_SCALE_DEFAULT = Time.timeScale;
         aim = player.GetComponentInChildren<Aim>();
