@@ -69,6 +69,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         TakingDamageFromPlayer += OtherAI_TakingDamageFromPlayer;
         //GameManager.Instance.UpdateGameGoal(1);
         rb = gameObject.GetComponent<Rigidbody>();
+        shootRate = UnityEngine.Random.Range(0.5f, shootRate);
     }
 
     private void OtherAI_TakingDamageFromPlayer(object sender, EventArgs e)

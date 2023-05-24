@@ -1377,19 +1377,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
       propertyPath: m_Size.x
-      value: 0.46273085
+      value: 0.5450258
       objectReference: {fileID: 0}
     - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
       propertyPath: m_Size.y
-      value: 4.338949
+      value: 4.3389497
       objectReference: {fileID: 0}
     - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
       propertyPath: m_Size.z
-      value: 0.99403435
+      value: 0.994032
       objectReference: {fileID: 0}
     - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
       propertyPath: m_Center.x
-      value: -0.37726083
+      value: -0.33611298
       objectReference: {fileID: 0}
     - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
       propertyPath: m_Center.y
@@ -1397,7 +1397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
       propertyPath: m_Center.z
-      value: -0.9895585
+      value: -0.989541
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad490e2defa750244aad488a55f28eba, type: 3}
@@ -5150,6 +5150,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.379
       objectReference: {fileID: 0}
+    - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
+      propertyPath: m_Size.x
+      value: 1.0842748
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
+      propertyPath: m_Size.y
+      value: 4.33895
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
+      propertyPath: m_Size.z
+      value: 0.99403894
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
+      propertyPath: m_Center.x
+      value: 0.042137437
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
+      propertyPath: m_Center.y
+      value: 1.6694732
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
+      propertyPath: m_Center.z
+      value: -0.9895876
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad490e2defa750244aad488a55f28eba, type: 3}
 --- !u!1001 &505375968
@@ -6696,6 +6720,11 @@ Transform:
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 9141245037596263267, guid: 5518086f30cc2d6468c291ebdf589fe2, type: 3}
   m_PrefabInstance: {fileID: 1837955407}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &635106157 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3342457909506542096, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
+  m_PrefabInstance: {fileID: 7258861597651072622}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &652832371
 GameObject:
@@ -10870,6 +10899,22 @@ PrefabInstance:
     - target: {fileID: 1749630824583356751, guid: ad490e2defa750244aad488a55f28eba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
+      propertyPath: m_Size.x
+      value: 1.0472317
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
+      propertyPath: m_Size.z
+      value: 0.9940366
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
+      propertyPath: m_Center.x
+      value: 0.02361571
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963695428525384417, guid: ad490e2defa750244aad488a55f28eba, type: 3}
+      propertyPath: m_Center.z
+      value: -0.9895811
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad490e2defa750244aad488a55f28eba, type: 3}
@@ -21008,6 +21053,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2048955381676099139, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
+      propertyPath: gunPos
+      value: 
+      objectReference: {fileID: 635106157}
     - target: {fileID: 5411731646943978858, guid: 24fe3bc85b25d6d48845b331024e95c2, type: 3}
       propertyPath: m_RootOrder
       value: 5
