@@ -5725,7 +5725,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3110715426537795146, guid: 93ebb61ac633ff245a4a23f897e7f5d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.27
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 3110715426537795146, guid: 93ebb61ac633ff245a4a23f897e7f5d8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19050,8 +19050,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 40
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 36.18077
+  m_Center: {x: -3.8192294, y: 0, z: -0.000000062528756}
 --- !u!1 &703912030725330645
 GameObject:
   m_ObjectHideFlags: 0
@@ -19716,8 +19716,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 40
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 36.657963
+  m_Center: {x: -1.8722041, y: 0, z: 1.4698335}
 --- !u!1 &1667194167746005169
 GameObject:
   m_ObjectHideFlags: 0
