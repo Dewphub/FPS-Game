@@ -183,11 +183,21 @@ public class DefenderBossAI : MonoBehaviour, IDamage
         }
         else
         {
-            TakingDamageFromPlayer?.Invoke(this, EventArgs.Empty);
-            anim.SetTrigger("Damage");
-            agent.SetDestination(GameManager.Instance.player.transform.position);
-            agent.stoppingDistance = 0;
+            StopAllCoroutines();
+            StartCoroutine(ProcessDamage());
         }
+    }
+
+    IEnumerator ProcessDamage()
+    {
+        isShooting = true;
+        TakingDamageFromPlayer?.Invoke(this, EventArgs.Empty);
+        anim.SetTrigger("Damage");
+        agent.SetDestination(GameManager.Instance.player.transform.position);
+        agent.stoppingDistance = 0;
+        yield return new WaitForSeconds(2f);
+        isShooting = false;
+
     }
     IEnumerator Roam()
     {
