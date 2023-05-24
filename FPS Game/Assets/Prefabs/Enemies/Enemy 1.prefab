@@ -430,11 +430,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Bip001 Spine'\n\tTransform 'Bip001 Pelvis'\n\tTransform
-    'Bip001 Spine'\n\tTransform 'Bip001 Pelvis'\n\tTransform 'Bip001 Spine'\n\tTransform
-    'Bip001 Pelvis'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -679,7 +675,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.29
-  m_Center: {x: 0, y: 2.37, z: 0}
+  m_Center: {x: 0, y: 2.37, z: 0.09}
 --- !u!114 &2375963130334639713
 MonoBehaviour:
   m_ObjectHideFlags: 0
