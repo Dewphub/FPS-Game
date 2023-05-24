@@ -176,6 +176,8 @@ public class DefenderBossAI : MonoBehaviour, IDamage
         StartCoroutine(FlashColor());
         if (HP <= 0)
         {
+            anim.enabled = false;
+            anim.enabled = true;
             StopAllCoroutines();
             anim.SetBool("Dead", true);
             GetComponent<CapsuleCollider>().enabled = false;
@@ -183,21 +185,11 @@ public class DefenderBossAI : MonoBehaviour, IDamage
         }
         else
         {
-            StopAllCoroutines();
-            StartCoroutine(ProcessDamage());
+            TakingDamageFromPlayer?.Invoke(this, EventArgs.Empty);
+            anim.SetTrigger("Damage");
+            agent.SetDestination(GameManager.Instance.player.transform.position);
+            agent.stoppingDistance = 0;
         }
-    }
-
-    IEnumerator ProcessDamage()
-    {
-        isShooting = true;
-        TakingDamageFromPlayer?.Invoke(this, EventArgs.Empty);
-        anim.SetTrigger("Damage");
-        agent.SetDestination(GameManager.Instance.player.transform.position);
-        agent.stoppingDistance = 0;
-        yield return new WaitForSeconds(2f);
-        isShooting = false;
-
     }
     IEnumerator Roam()
     {

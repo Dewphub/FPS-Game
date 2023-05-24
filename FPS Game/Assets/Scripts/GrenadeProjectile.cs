@@ -25,7 +25,7 @@ public class GrenadeProjectile : MonoBehaviour
     Transform shooter;
     private void Start()
     {
-        Invoke("ProcessDestruction", 3f);
+        StartCoroutine(ProcessDefaultDestruction());
     }
     void OnTriggerEnter(Collider other)
     {
@@ -76,7 +76,14 @@ public class GrenadeProjectile : MonoBehaviour
 
     void ProcessDestruction(float delayTime)
     {
+        StopAllCoroutines();
         explosionFX.SetActive(true);
         Destroy(gameObject, delayTime);
+    }
+    IEnumerator ProcessDefaultDestruction(float delayTime = 1.5f)
+    {
+        yield return new WaitForSeconds(delayTime);
+        explosionFX.SetActive(true);
+        Destroy(gameObject);
     }
 }
