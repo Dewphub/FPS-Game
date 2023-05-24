@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     Rigidbody rb;
     [SerializeField] Transform orientation;
     [SerializeField] Transform playerObj;
+    [SerializeField] GameObject gunPos;
 
     [Header("----- Player Stats -----")]
     [Range(1, 50)] [SerializeField] int HP;
@@ -333,12 +334,14 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     IEnumerator ProcessReload()
     {
         isReloading = true;
+        gunPos.SetActive(!isReloading);
         StartCoroutine(RestrictAiming(reloadSpeed));
         aud.PlayOneShot(gunPickupSFX);
         GetSelectedGun().CalcReload(); //fill the clip and subtract ammo used
         GameManager.Instance.UpdateGunUI(selectedGun, GetSelectedGun()); //update the UI with current gun ammo situation
         yield return new WaitForSeconds(reloadRate);
         isReloading = false;
+        gunPos.SetActive(!isReloading);
     }
     IEnumerator MuzzleFlash()
     {
