@@ -355,6 +355,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
         if(HP <= 0) 
         {
+            StopAllCoroutines();
             GameManager.Instance.OnDead();
         }
     }
