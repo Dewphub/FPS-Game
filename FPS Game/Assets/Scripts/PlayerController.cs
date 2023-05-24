@@ -365,6 +365,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         if(HP > (float)HPOrig/2)
         {
             GameManager.Instance.HPBar.color = GameManager.Instance.HPBarColorHealthy;
+            HideDyingIndicator();
         }
         else if(HP > (float)HPOrig/4 && HP <= (float)HPOrig / 2)
         {
@@ -379,6 +380,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     public void ShowDyingIndicator()
     {
         GameManager.Instance.ShowDyingIndicator();
+    }
+    public void HideDyingIndicator()
+    {
+        GameManager.Instance.HideDyingIndicator();
     }
     public void Respawn()
     {

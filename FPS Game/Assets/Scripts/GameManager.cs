@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour
         DataPersistenceManager.Instance.SaveGame();
     }
 
-    private void HideDyingIndicator()
+    public void HideDyingIndicator()
     {
         fadeOut = true;
     }
