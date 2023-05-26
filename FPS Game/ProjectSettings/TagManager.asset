@@ -18,6 +18,8 @@ TagManager:
   - ExplosingBarrel
   - GrenadeTarget
   - Looker
+  - PlayerHead
+  - Cover
   layers:
   - Default
   - TransparentFX

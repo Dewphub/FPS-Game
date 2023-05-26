@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
     [SerializeField] AudioSource aud;
+    [SerializeField] AudioMixerGroup SFXmixerGroup;
     [SerializeField] Recoil recoil;
     [SerializeField] Aim newAimPos;
     [SerializeField] GameObject muzzleFlashObject;
