@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
     public bool BossIsAlive
     {
         get { return bossIsAlive; }
-        private set { bossIsAlive = BossIsAlive; }
     }
     float TIME_SCALE_DEFAULT;
 
@@ -305,6 +304,7 @@ public class GameManager : MonoBehaviour
 
     public void BossHasSpawned()
     {
+        bossIsAlive = true;
         curMusic.mute = true;
         DefenderBossAI.Dying += BossHasDied;
     }
