@@ -20,8 +20,9 @@ public class movingPlatform : MonoBehaviour
     float distancetoWaypoint;
     float elapsedPrecent;
 
-     Vector3 gunRelativePosition;
-     Quaternion gunRelativeRotation;
+    Vector3 gunRelativePosition;
+    Quaternion gunRelativeRotation;
+    Quaternion camHolderRelativeRotation;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,11 +61,13 @@ public class movingPlatform : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            other.transform.SetParent(transform);
-            gunRelativePosition = other.transform.Find("GunPos").localPosition;
-            gunRelativeRotation = other.transform.Find("GunPos").localRotation;
 
-            
+            other.transform.SetParent(transform);
+            gunRelativePosition = other.transform.Find("CamHolder").Find("Main Camera").Find("GunPos").transform.localPosition;
+            camHolderRelativeRotation = other.transform.Find("CamHolder").transform.localRotation;
+            gunRelativeRotation = other.transform.Find("CamHolder").Find("Main Camera").Find("GunPos").transform.localRotation;
+
+
         }
     }
 
@@ -72,11 +75,11 @@ public class movingPlatform : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            other.transform.Find("CamHolder").Find("Main Camera").Find("GunPos").transform.localPosition = gunRelativePosition;
+            other.transform.Find("CamHolder").Find("Main Camera").Find("GunPos").transform.localRotation = gunRelativeRotation;
+            camHolderRelativeRotation = other.transform.Find("CamHolder").transform.localRotation = camHolderRelativeRotation;
             other.transform.SetParent(null);
-            other.transform.Find("GunPos").localPosition = gunRelativePosition;
-            other.transform.Find("GunPos").localRotation = gunRelativeRotation;
-
-            
+            other.transform.localScale = new(1, 1, 1);
         }
     }
 }
