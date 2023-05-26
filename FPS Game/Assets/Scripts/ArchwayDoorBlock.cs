@@ -20,7 +20,7 @@ public class ArchwayDoorBlock : MonoBehaviour
 
     private void Update()
     {
-        if(GameManager.Instance.GetEnemiesRemaining() > 0)
+        if(GameManager.Instance.GetEnemiesRemaining() > 0 || GameManager.Instance.BossIsAlive)
         {
             invisibleBlocker.SetActive(true);
             openTimeElapsed = 0;

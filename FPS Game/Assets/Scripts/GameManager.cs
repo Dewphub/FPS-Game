@@ -46,7 +46,13 @@ public class GameManager : MonoBehaviour
 
     public bool fadeIn;
     public bool fadeOut;
-   
+
+    bool bossIsAlive;
+    public bool BossIsAlive
+    {
+        get { return bossIsAlive; }
+        private set { bossIsAlive = BossIsAlive; }
+    }
     float TIME_SCALE_DEFAULT;
 
     public static event Action PlayerHasDied;
