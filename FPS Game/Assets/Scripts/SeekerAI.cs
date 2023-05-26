@@ -18,6 +18,7 @@ public class SeekerAI : MonoBehaviour, IDamage
     Transform playerTransform;
     float elapsedTime;
     bool isExploding;
+    bool isDead;
 
     bool isAttacking;
     void Start()
@@ -79,7 +80,10 @@ public class SeekerAI : MonoBehaviour, IDamage
             yield return new WaitForSeconds(0.5f);
             isExploding = false;
         }
-        Destroy(gameObject);
+        if (!isDead)
+        {
+            Die();
+        }
     }
     IEnumerator ProcessHitExplosion()
     {
@@ -97,7 +101,10 @@ public class SeekerAI : MonoBehaviour, IDamage
             yield return new WaitForSeconds(0.01f);
             isExploding = false;
         }
-        Destroy(gameObject);
+        if(!isDead)
+        {
+            Die();
+        }
     }
 
     void Register()
@@ -106,5 +113,12 @@ public class SeekerAI : MonoBehaviour, IDamage
         {
             DamageIndicatorSystem.CreateIndicator(transform);
         }
+    }
+
+    void Die()
+    {
+        isDead = true;
+        GameManager.Instance.UpdateGameGoal(-1);
+        Destroy(gameObject);
     }
 }
