@@ -170,7 +170,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         bloodFX.Play();
         StartCoroutine(FlashColor());
         }
-        if (HP <= 0)
+        if (HP <= 0 && !isDead)
         {
             isDead = true;
             agent.isStopped = true;

@@ -84,7 +84,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
 
     Vector3 playerVelocity;
     Vector3 move;
-
+    private void Awake()
+    {
+        transform.localScale = new(1, 1, 1);
+    }
 
     private void Start()
     {
