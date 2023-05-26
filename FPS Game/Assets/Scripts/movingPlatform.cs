@@ -61,8 +61,8 @@ public class movingPlatform : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             other.transform.SetParent(transform);
-            gunRelativePosition = other.transform.Find("CamHolder").transform.Find("Main Camera").transform.Find("GunPos").transform.localPosition;
-            gunRelativeRotation = other.transform.Find("CamHolder").transform.Find("Main Camera").transform.Find("GunPos").transform.localRotation;
+            gunRelativePosition = other.transform.Find("GunPos").localPosition;
+            gunRelativeRotation = other.transform.Find("GunPos").localRotation;
 
             
         }
@@ -73,8 +73,8 @@ public class movingPlatform : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             other.transform.SetParent(null);
-            other.transform.Find("CamHolder").transform.Find("Main Camera").transform.Find("GunPos").transform.localPosition = gunRelativePosition;
-            other.transform.Find("CamHolder").transform.Find("Main Camera").transform.Find("GunPos").transform.localRotation = gunRelativeRotation;
+            other.transform.Find("GunPos").localPosition = gunRelativePosition;
+            other.transform.Find("GunPos").localRotation = gunRelativeRotation;
 
             
         }
