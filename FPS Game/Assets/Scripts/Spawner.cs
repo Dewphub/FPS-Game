@@ -66,15 +66,4 @@ public class Spawner : MonoBehaviour
             playerInRange = false;
         }
     }
-
-    public void ResetSpawner()
-    {
-        for (int i = 0; i < prefabList.Count; i++)
-        {
-            Destroy(prefabList[i]);
-            prefabsSpawnCount--;
-            GameManager.Instance.UpdateGameGoal(-1);
-        }
-        prefabList.Clear();
-    }
 }
