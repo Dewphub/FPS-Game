@@ -18,6 +18,8 @@ public class SeekerAI : MonoBehaviour, IDamage
     Transform playerTransform;
     float elapsedTime;
     bool isExploding;
+
+    bool isAttacking;
     bool isDead;
     void Start()
     {
