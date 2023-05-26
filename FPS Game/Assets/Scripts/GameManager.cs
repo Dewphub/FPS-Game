@@ -101,14 +101,14 @@ public class GameManager : MonoBehaviour
             if (dyingIndicator.color.a < 1)
             {
                 dyingIndicator.color += new Color(0f, 0f, 0f, 0.7f) * Time.deltaTime;
-                if (dyingIndicator.color.a >= 1)
+                if (dyingIndicator.color.a >= 0.99)
                 {
                     fadeIn = false;
                     HideDyingIndicator();
                 }
             }
         }
-        if (fadeOut)
+        if (fadeOut || (HPBar.fillAmount > 0.25f && dyingIndicator.color.a >= 0))
         {
             if (dyingIndicator.color.a >= 0)
             {

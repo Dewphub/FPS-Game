@@ -159,6 +159,11 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
             aud.PlayOneShot(replenishHP, replenishHPVol);
             HP = HPOrig;
             UIUpdate();
+            if(GameManager.Instance.fadeIn)
+            {
+                GameManager.Instance.fadeIn = false;
+            }
+            GameManager.Instance.HideDyingIndicator();
             Destroy(other.gameObject);
                 break;
         }
@@ -371,6 +376,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     public void UIUpdate()
     {
         GameManager.Instance.HPBar.fillAmount = (float) HP / (float)HPOrig;
+
         if(HP > (float)HPOrig/2)
         {
             GameManager.Instance.HPBar.color = GameManager.Instance.HPBarColorHealthy;
@@ -383,7 +389,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
         else if (HP > 0 &&  HP <= (float)HPOrig/4)
         {
             GameManager.Instance.HPBar.color = Color.red;
-            Invoke("ShowDyingIndicator", 0.05f);
+            ShowDyingIndicator();
         }
     }
     public void ShowDyingIndicator()
@@ -392,7 +398,7 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     }
     public void HideDyingIndicator()
     {
-        GameManager.Instance.HideDyingIndicator();
+        GameManager.Instance.fadeOut = true;
     }
     public void Respawn()
     {
@@ -567,5 +573,10 @@ public class PlayerController : MonoBehaviour, IDamage, IDataPersistence
     public void ProcessReserveAmmoPickupSFX()
     {
         aud.PlayOneShot(gunPickupSFX, gunPickupSFXVolume);
+    }
+
+    public int GetHP()
+    {
+        return HP;
     }
 }
