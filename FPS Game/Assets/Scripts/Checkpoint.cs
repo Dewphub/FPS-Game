@@ -8,7 +8,7 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] GameObject triggerEffect;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && GameManager.Instance.playerSpawnPos.transform.position != transform.position)
         {
             GameManager.Instance.playerSpawnPos.transform.position = transform.position;
             DataPersistenceManager.Instance.SaveGame();
@@ -22,10 +22,11 @@ public class Checkpoint : MonoBehaviour
 
     IEnumerator flashColor()
     {
-        model.material.color = Color.red;
+        //model.material.color = Color.red;
         GameManager.Instance.checkpointMenu.SetActive(true);
-        yield return new WaitForSeconds(0.3f);
-        model.material.color = Color.white;
+        yield return new WaitForSeconds(1f);
+        //model.material.color = Color.white;
         GameManager.Instance.checkpointMenu.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 }

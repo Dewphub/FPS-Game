@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.029087221, g: 0.029897578, b: 0.029896652, a: 1}
+  m_IndirectSpecularColor: {r: 0.029087221, g: 0.029897578, b: 0.029896645, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -730,6 +730,10 @@ PrefabInstance:
       propertyPath: curMusic
       value: 
       objectReference: {fileID: 7258861597651072623}
+    - target: {fileID: 1704623793520679004, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
+      propertyPath: checkpointMenu
+      value: 
+      objectReference: {fileID: 877271726}
     - target: {fileID: 1704623793783580833, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
       propertyPath: m_Name
       value: UI
@@ -8803,6 +8807,11 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &877271726 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 877271726, guid: 4c54fab9e944a7b48935be5f13939fd0, type: 3}
+  m_PrefabInstance: {fileID: 61114903}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &887358908
 PrefabInstance:
   m_ObjectHideFlags: 0
